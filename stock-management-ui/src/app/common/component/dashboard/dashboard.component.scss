@@ -1,0 +1,13 @@
+@media (min-width: 768px) {
+    #dashboard-page:not(.sidebar-mini-md) {
+      .content-wrapper,
+      .main-footer,
+      .main-header {
+        transition: margin-left 0.3s ease-in-out;
+        margin-left: 250px;
+      }
+    }
+  }
+.content-wrapper{
+  margin-left: 250px;
+}
