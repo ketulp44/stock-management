@@ -3,13 +3,13 @@
   margin-left: -250px;
 }
 .main-sidebar {
-  height: inherit;
+  height: auto;
   min-height: 100%;
   position: absolute;
   top: 0;
 }
 .sidebar {
-  height: calc(100% - 4rem);
+  height: auto;
   overflow-y: auto;
   padding-bottom: 0;
   padding-left: 0.5rem;

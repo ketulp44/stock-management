@@ -1,3 +1,4 @@
+@import './../../../../scss/color.scss';
 @media (min-width: 768px) {
     #dashboard-page:not(.sidebar-mini-md) {
       .content-wrapper,
@@ -8,6 +9,11 @@
       }
     }
   }
-.content-wrapper{
+.hide-sidebar{
   margin-left: 250px;
+}
+.content-wrapper{
+  height: inherit;
+  min-height: 100%;
+  background-color: $light-background;
 }

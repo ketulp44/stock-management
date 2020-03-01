@@ -1,12 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './common/component/dashboard/dashboard.component';
-import { SidebarComponent } from './common/component/sidebar/sidebar.component';
-import { HeaderComponent } from './common/component/header/header.component';
 import { LoginComponent } from './login/login.component';
+import { ContactValidatorDirective } from './common/directive/contact-validator.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +13,8 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

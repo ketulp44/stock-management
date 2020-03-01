@@ -13,9 +13,5 @@ const routes: Routes = [
 })
 export class CustomersRoutingModule { 
   constructor(){
-    
-    console.log('customer module');
-    console.log(routes);
-    
   }
 }

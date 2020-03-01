@@ -1,5 +1,5 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
-<div class="" [ngClass]="{'content-wrapper' : isMenuOpen}">
+<div class="content-wrapper" [ngClass]="{'hide-sidebar' : isMenuOpen}">
     <router-outlet></router-outlet>
 </div>

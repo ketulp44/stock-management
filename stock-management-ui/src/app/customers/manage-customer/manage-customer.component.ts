@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-customer.component.scss']
 })
 export class ManageCustomerComponent implements OnInit {
-
+  supplier:any={};
   constructor() { }
-
+  
   ngOnInit() {
   }
-
+  onSaveOrUpdate(){
+    
+    console.log(this.supplier);
+    
+        
+  }
 }

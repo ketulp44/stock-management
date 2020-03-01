@@ -11,8 +11,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.toggleService.isMenuOpenObservable.subscribe((val)=> {
-      console.log(val);
-      
       this.isMenuOpen = val;
     });
   }
