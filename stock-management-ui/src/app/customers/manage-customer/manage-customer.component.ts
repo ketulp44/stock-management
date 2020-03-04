@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../service/customer.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCustomerComponent } from '../add-customer/add-customer.component';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-manage-customer',
@@ -7,22 +11,39 @@ import { CustomerService } from '../service/customer.service';
   styleUrls: ['./manage-customer.component.scss']
 })
 export class ManageCustomerComponent implements OnInit {
-  supplier:any={};
-  
-  constructor(private customerService : CustomerService) { }
-  
+  suppliers: any[] = [];
+  searchString="";
+  constructor(
+    private customerService: CustomerService, 
+    private dialog: MatDialog,
+    private toastr: ToastrService
+    ) { }
+
   ngOnInit() {
+    this.fetchSuppliers();
   }
-  onSaveOrUpdate(){
-    
-    console.log(this.supplier);
-    this.customerService.saveOrUpdateSupplier(this.supplier).subscribe((data)=>{
-      console.log('success');
+  fetchSuppliers() {
+    this.customerService.getSuppliers().subscribe((data) => {
+      console.log(data);
       
-    },(error)=>{
-      console.log(error);
-      
-    })
-        
+      this.suppliers = data;
+     
+    }, (err) => {
+      this.toastr.error(err,'Error')
+    });
+  }
+  onClickAddSuplier() {
+    console.log('on click add ');
+
+    let dialogRef = this.dialog.open(AddCustomerComponent, {
+      height: '600',
+      width: '800px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`); // Pizza!
+    });
+  }
+  onSaveOrUpdate() {
+
   }
 }
