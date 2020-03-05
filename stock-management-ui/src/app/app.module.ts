@@ -5,19 +5,40 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddCustomerComponent } from './customers/add-customer/add-customer.component';
+import { ContactValidatorDirective } from './common/directive/contact-validator.directive';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoaderComponent } from './common/component/loader/loader.component';
+import {OverlayModule} from '@angular/cdk/overlay';
+import { ToastrModule } from 'ngx-toastr';
+import { SearchPipe } from './common/pipes/search.pipe';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    AddCustomerComponent,
+    ContactValidatorDirective,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    OverlayModule,
+    ToastrModule.forRoot({
+      timeOut: 2000
+    })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[AddCustomerComponent,LoaderComponent]
 })
 export class AppModule { }

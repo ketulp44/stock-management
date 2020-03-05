@@ -10,11 +10,13 @@
 }
 .sidebar {
   height: auto;
+  
   overflow-y: auto;
   padding-bottom: 0;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-top: 0;
+  
 }
 .elevation-4 {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
@@ -29,6 +31,7 @@ aside {
 }
 [class*="sidebar-dark-"] {
   background-color: #343a40;
+  min-height: 100%;
 }
 .brand-link {
   display: block;

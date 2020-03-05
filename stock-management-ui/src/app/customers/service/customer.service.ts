@@ -11,6 +11,9 @@ export class CustomerService {
   
   constructor(private http: HttpClient) { }
    saveOrUpdateSupplier(supplier:any):Observable<any>{
-      return this.http.post(`${BASE_URL}supplier`,supplier);
+      return this.http.post(`${BASE_URL}suppliers`,supplier);
+   }
+   getSuppliers():Observable<any []>{
+      return this.http.get<any []>(`${BASE_URL}suppliers`);
    }
 }
