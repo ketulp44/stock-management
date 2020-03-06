@@ -16,4 +16,7 @@ export class CustomerService {
    getSuppliers():Observable<any []>{
       return this.http.get<any []>(`${BASE_URL}suppliers`);
    }
+   getSupplier(id:number):Observable<any []>{
+      return this.http.get<any []>(`${BASE_URL}suppliers/findById/${id}`);
+   }
 }

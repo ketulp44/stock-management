@@ -13,11 +13,14 @@ export class SuppliersService {
     }
 
     public async getSuppliers() {
-        return await this.SupplierRepository.find();
+        return await this.SupplierRepository.find({where:{IsActive: true}});
+    }
+    public async getSupplier(id:number) {
+        return await this.SupplierRepository.findOne(id);
     }
 
     public async createNewSupplier(supplier:SupplierDTO) {
-        return await this.SupplierRepository.insert(supplier);
+        return await this.SupplierRepository.save(supplier);
 
     }
 
