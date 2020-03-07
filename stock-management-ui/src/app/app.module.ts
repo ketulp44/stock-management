@@ -15,6 +15,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { ToastrModule } from 'ngx-toastr';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { SearchPipe } from './common/pipes/search.pipe';
+import { DeleteAlertComponent } from './common/component/delete-alert/delete-alert.component';
+import { SharedModule } from './common/shared.module';
 
 
 @NgModule({
@@ -37,10 +39,11 @@ import { SearchPipe } from './common/pipes/search.pipe';
     ToastrModule.forRoot({
       timeOut: 2000
     }),
-    MatPaginatorModule
+    MatPaginatorModule,
+    SharedModule
   ],
-  providers: [SearchPipe],
+  providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddCustomerComponent,LoaderComponent]
+  entryComponents:[AddCustomerComponent,LoaderComponent,DeleteAlertComponent]
 })
 export class AppModule { }

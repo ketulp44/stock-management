@@ -28,3 +28,11 @@ input::-webkit-inner-spin-button {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.scroll-dialog{
+  overflow-y: auto;
+  height: 365px;
+}
+.mat-dialog-container {
+  padding: 0px !important;
+  overflow: initial !important;
+}

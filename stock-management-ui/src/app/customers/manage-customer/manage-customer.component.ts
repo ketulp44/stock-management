@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { ToastrService } from 'ngx-toastr';
 import { SearchPipe } from './../../common/pipes/search.pipe';
+import { DeleteAlertComponent } from 'src/app/common/component/delete-alert/delete-alert.component';
 
 
 @Component({
@@ -23,8 +24,7 @@ export class ManageCustomerComponent implements OnInit {
     private customerService: CustomerService,
     private dialog: MatDialog,
     private toastr: ToastrService,
-    private searchPipe: SearchPipe,
-    displayProgressSpinner: boolean = false
+    private searchPipe: SearchPipe
   ) { }
 
   ngOnInit() {
@@ -32,7 +32,6 @@ export class ManageCustomerComponent implements OnInit {
   }
   fetchSuppliers() {
     this.customerService.getSuppliers().subscribe((data) => {
-      console.log(data);
       this.allSupplier = data;
       this.suppliers = this.allSupplier.slice(0, this.pageSize);
       this.totalLength = this.allSupplier.length;
@@ -43,11 +42,9 @@ export class ManageCustomerComponent implements OnInit {
     });
   }
   onClickAddSuplier(id?:number) {
-    console.log('on click add ',id);
-  
     let dialogRef = this.dialog.open(AddCustomerComponent, {
-      height: '600',
-      width: '800px',
+      height: '500px',
+      width: '600px',
       data: {
         dataKey: id
       }
@@ -60,9 +57,22 @@ export class ManageCustomerComponent implements OnInit {
 
   }
   onClickRemoveSupplier(id:number) {
-    console.log(id);
-    
-  
+    let dialogRef = this.dialog.open(DeleteAlertComponent, {
+      height: '300px',
+      width: '600px',
+      data: {
+        header: 'Delete Alert',
+        message: 'Are you sure want to delete Supplier?' 
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isConfirm == true){
+        this.customerService.deleteSupplier(id).subscribe(()=>{
+          this.fetchSuppliers();
+        });        
+      }
+      
+    });
 
   }
   changePage(suppliers) {
@@ -73,12 +83,9 @@ export class ManageCustomerComponent implements OnInit {
     this.suppliers = suppliers.slice(start, end);
   }
   onFilter() {
-    console.log('filter');
     this.changePage(this.searchPipe.transform(this.allSupplier, this.searchString));
   }
   pageEvent(event) {
-    console.log(event);
-
     this.pageObj = event
     this.onFilter();
 

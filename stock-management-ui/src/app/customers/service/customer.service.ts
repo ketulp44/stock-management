@@ -19,4 +19,7 @@ export class CustomerService {
    getSupplier(id:number):Observable<any []>{
       return this.http.get<any []>(`${BASE_URL}suppliers/findById/${id}`);
    }
+   deleteSupplier(id:number):Observable<any>{
+      return this.http.get<any>(`${BASE_URL}suppliers/deleteById${id}`);
+   }
 }
