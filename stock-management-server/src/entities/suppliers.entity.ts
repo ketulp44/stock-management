@@ -26,8 +26,8 @@ export class Suppliers {
   @Column()
   SAddr: string;
 
-  @Column({ default: true })
-  IsActive:boolean
+  @Column({ default: 1 })
+  IsActive:number
 
   @Column()
   CreateDt:Date
@@ -36,7 +36,7 @@ export class Suppliers {
   CreatedBy:string;
 
   @Column()
-  ModiDt:string;
+  ModiDt:Date;
 
   @Column()
   ModiBy:Date;

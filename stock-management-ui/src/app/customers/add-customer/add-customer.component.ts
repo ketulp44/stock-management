@@ -3,6 +3,9 @@ import { CustomerService } from '../service/customer.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LoaderService } from 'src/app/common/service/loader.service';
 import { ToastrService } from 'ngx-toastr';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { Inject } from '@angular/core';
+
 
 @Component({
   selector: 'app-add-customer',
@@ -14,16 +17,22 @@ export class AddCustomerComponent implements OnInit {
   displayProgressSpinner: boolean = false;
   constructor(private customerService: CustomerService,
     public dialogRef: MatDialogRef<AddCustomerComponent>,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    @Inject(MAT_DIALOG_DATA) public supplierId: any
    ) { }
 
   ngOnInit() {
-    
-    
+  
+    if(this.supplierId.dataKey) {
+      this.customerService.getSupplier(this.supplierId.dataKey).subscribe((data) => {
+      this.supplier = data;
+      }, (error) => {
+        this.toastr.error(error,'Error')
+      })
+    }
   }
 
   onSaveOrUpdate() {
-    console.log(this.supplier);
     this.showLoader()
     this.customerService.saveOrUpdateSupplier(this.supplier).subscribe((data) => {
       this.hideLoader();
