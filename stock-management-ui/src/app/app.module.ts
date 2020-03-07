@@ -13,7 +13,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoaderComponent } from './common/component/loader/loader.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { ToastrModule } from 'ngx-toastr';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import { SearchPipe } from './common/pipes/search.pipe';
 
 
@@ -36,10 +35,9 @@ import { SearchPipe } from './common/pipes/search.pipe';
     OverlayModule,
     ToastrModule.forRoot({
       timeOut: 2000
-    }),
-    MatPaginatorModule
+    })
   ],
-  providers: [SearchPipe],
+  providers: [],
   bootstrap: [AppComponent],
   entryComponents:[AddCustomerComponent,LoaderComponent]
 })

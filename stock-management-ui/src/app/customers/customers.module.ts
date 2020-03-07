@@ -4,7 +4,6 @@ import { CustomersRoutingModule } from './customers-routing.module';
 import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../common/pipes/search.pipe';
-import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -12,8 +11,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
   imports: [
     CommonModule,
     CustomersRoutingModule,
-    FormsModule,
-    MatPaginatorModule
+    FormsModule
   ],
   entryComponents: [],
   exports: []
