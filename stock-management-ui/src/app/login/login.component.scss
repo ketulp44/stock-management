@@ -1,15 +1,15 @@
-#login .container #login-row #login-column #login-box {
-    margin-top: 120px;
-    max-width: 600px;
-    height: 320px;
-    border: 1px solid #9C9C9C;
-    background-color: #EAEAEA;
+.custom-input{
+    border-radius: 0px;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: lavender;
 }
-
-#login .container #login-row #login-column #login-box #login-form {
-    padding: 20px;
+.login-btn{
+    width: 100%;
+    border-radius: 22px;
 }
-
-#login .container #login-row #login-column #login-box #login-form #register-link {
-    margin-top: -85px;
+.card-body{
+    padding:2.5rem;
+    margin-top: 1 rem;
 }
