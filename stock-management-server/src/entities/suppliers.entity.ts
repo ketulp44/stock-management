@@ -1,43 +1,17 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('suppliermst')
+@Entity('suppliers')
 export class Suppliers {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 's_id' })
   SID: number;
 
-  @Column()
+  @Column({ name: 's_name' })
   SFname: string;
 
-  @Column()
-  SMname: string;
+  @Column({ name: 'created_dt_time' })
+  CreateDt: Date
 
-  @Column()
-  SLName: string;
+  @Column({ name: 'updated_dt_time' })
+  ModiDt: Date;
 
-  @Column()
-  SFirm: string;
-
-  @Column()
-  SEmailID: string;
-
-  @Column()
-  SConNo: string;
-
-  @Column()
-  SAddr: string;
-
-  @Column({ default: 1 })
-  IsActive:number
-
-  @Column()
-  CreateDt:Date
-
-  @Column()
-  CreatedBy:string;
-
-  @Column()
-  ModiDt:Date;
-
-  @Column()
-  ModiBy:Date;
 }

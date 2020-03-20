@@ -1,7 +1,9 @@
+import { AuthorizationGuard } from './../authentication & authorization/authorization.guard';
 import { SuppliersService } from './suppliers.service';
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { SupplierDTO } from 'src/dtos/supplier.dto';
+import { Controller, Get, Post, Body, UseGuards, Param } from '@nestjs/common';
+import { SupplierDTO } from '../dtos/supplier.dto';
 
+//@UseGuards(AuthorizationGuard)
 @Controller('suppliers')
 export class SuppliersController {
 
@@ -14,7 +16,6 @@ export class SuppliersController {
     } 
     @Get()
     public async getSuppliers(){
-        console.log(process.env.TYPEORM_CONNECTION);
         return await this.suppliersService.getSuppliers();
     } 
     @Post()
