@@ -3,7 +3,7 @@ import { SuppliersService } from './suppliers.service';
 import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { SupplierDTO } from '../dtos/supplier.dto';
 
-@UseGuards(AuthorizationGuard)
+//@UseGuards(AuthorizationGuard)
 @Controller('suppliers')
 export class SuppliersController {
 
