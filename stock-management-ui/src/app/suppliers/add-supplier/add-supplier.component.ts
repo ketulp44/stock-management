@@ -9,14 +9,14 @@ import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-add-customer',
-  templateUrl: './add-customer.component.html',
-  styleUrls: ['./add-customer.component.scss']
+  templateUrl: './add-supplier.component.html',
+  styleUrls: ['./add-supplier.component.scss']
 })
-export class AddCustomerComponent implements OnInit {
+export class AddSupplierComponent implements OnInit {
   supplier: any = {};
   displayProgressSpinner: boolean = false;
   constructor(private customerService: CustomerService,
-    public dialogRef: MatDialogRef<AddCustomerComponent>,
+    public dialogRef: MatDialogRef<AddSupplierComponent>,
     private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public supplierId: any
    ) { }

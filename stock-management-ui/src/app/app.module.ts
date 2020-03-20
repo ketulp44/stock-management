@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
-import { AddCustomerComponent } from './customers/add-customer/add-customer.component';
+import { AddSupplierComponent } from './suppliers/add-supplier/add-supplier.component';
 import { ContactValidatorDirective } from './common/directive/contact-validator.directive';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoaderComponent } from './common/component/loader/loader.component';
@@ -17,15 +17,19 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { SearchPipe } from './common/pipes/search.pipe';
 import { DeleteAlertComponent } from './common/component/delete-alert/delete-alert.component';
 import { SharedModule } from './common/shared.module';
-
-
+import {MatTableModule} from '@angular/material/table'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AddCustomerComponent,
+    AddSupplierComponent,
     ContactValidatorDirective,
-    LoaderComponent
+    LoaderComponent,
+    AddCustomerComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +44,14 @@ import { SharedModule } from './common/shared.module';
       timeOut: 2000
     }),
     MatPaginatorModule,
-    SharedModule
+    SharedModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddCustomerComponent,LoaderComponent,DeleteAlertComponent]
+  entryComponents:[AddSupplierComponent,AddCustomerComponent,LoaderComponent,DeleteAlertComponent]
 })
 export class AppModule { }

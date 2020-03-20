@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from '../service/customer.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddCustomerComponent } from '../add-customer/add-customer.component';
+import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
 import { ToastrService } from 'ngx-toastr';
-import { SearchPipe } from './../../common/pipes/search.pipe';
+import { SearchPipe } from '../../common/pipes/search.pipe';
 import { DeleteAlertComponent } from 'src/app/common/component/delete-alert/delete-alert.component';
 
 
@@ -42,7 +42,7 @@ export class ManageCustomerComponent implements OnInit {
     });
   }
   onClickAddSuplier(id?:number) {
-    let dialogRef = this.dialog.open(AddCustomerComponent, {
+    let dialogRef = this.dialog.open(AddSupplierComponent, {
       height: '500px',
       width: '600px',
       data: {

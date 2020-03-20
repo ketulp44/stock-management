@@ -1,6 +1,6 @@
 @import '~@angular/material/theming';
 @include mat-core();
-$forest-app-primary: mat-palette($mat-brown, 800);       // Brown  <-- CUSTOM COLOR HERE!
+$forest-app-primary: mat-palette($mat-indigo, 800);       // Brown  <-- CUSTOM COLOR HERE!
 $forest-app-accent:  mat-palette($mat-green, A400);      // Green  <-- CUSTOM COLOR HERE!
 $forest-app-warn:    mat-palette($mat-deep-orange, 500); // Orange <-- CUSTOM COLOR HERE!
 $forest-app-theme: mat-light-theme($forest-app-primary, $forest-app-accent, $forest-app-warn);
