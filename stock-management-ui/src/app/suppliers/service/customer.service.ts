@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment} from './../../../environments/environment';
+import { environment} from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -20,6 +20,6 @@ export class CustomerService {
       return this.http.get<any []>(`${BASE_URL}suppliers/findById/${id}`);
    }
    deleteSupplier(id:number):Observable<any>{
-      return this.http.get<any>(`${BASE_URL}suppliers/deleteById${id}`);
+      return this.http.get<any>(`${BASE_URL}suppliers/deleteById/${id}`);
    }
 }
