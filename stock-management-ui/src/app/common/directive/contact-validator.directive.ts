@@ -11,8 +11,6 @@ import { NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@an
 })
 export class ContactValidatorDirective implements Validator {
   constructor() { 
-    console.log('validator constructor');
-    
   }
   validate(control: AbstractControl): { [key: string]: any } | null {
     if(control.value){
