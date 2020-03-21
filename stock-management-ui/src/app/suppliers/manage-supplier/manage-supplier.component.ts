@@ -1,94 +1,89 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CustomerService } from '../service/customer.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import { SupplierService } from '../service/supplier.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
 import { ToastrService } from 'ngx-toastr';
 import { SearchPipe } from '../../common/pipes/search.pipe';
 import { DeleteAlertComponent } from 'src/app/common/component/delete-alert/delete-alert.component';
-
+export interface Supplier {
+  id: string;
+  SupplierName: string;
+  ContactNo: string;
+}
 
 @Component({
   selector: 'app-manage-supplier',
   templateUrl: './manage-supplier.component.html',
   styleUrls: ['./manage-supplier.component.scss']
 })
-export class ManageCustomerComponent implements OnInit {
-  suppliers: any[] = [];
-  searchString = "";
-  totalLength: number = 0;
-  allSupplier: any[] = [];
-  pageObj: any = {};
-  pageSize: number = 5;
-  index: number = 5;
-  constructor(
-    private customerService: CustomerService,
-    private dialog: MatDialog,
-    private toastr: ToastrService,
-    private searchPipe: SearchPipe
-  ) { }
+export class ManageSupplierComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'name', 'contctno','color'];
+  dataSource: MatTableDataSource<Supplier>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  constructor(private dialog: MatDialog,
+    private toastr: ToastrService, private SupplierService: SupplierService) {
+    // Assign the data to the data source for the table to render
+   }
 
-  ngOnInit() {
-    this.fetchSuppliers();
+   ngOnInit() {
+      this.fetchSuppliers();
   }
-  fetchSuppliers() {
-    this.customerService.getSuppliers().subscribe((data) => {
-      this.allSupplier = data;
-      this.suppliers = this.allSupplier.slice(0, this.pageSize);
-      this.totalLength = this.allSupplier.length;
+   fetchSuppliers() {
+      this.SupplierService.getSuppliers().subscribe((data) => {
+      
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+      }, (err) => {
+        console.log(err);
+        this.toastr.error(err, 'Error')
+      });
+    }
+    onClickRemoveSupplier(id:number) {
+        let dialogRef = this.dialog.open(DeleteAlertComponent, {
+          height: '300px',
+          width: '600px',
+          data: {
+            header: 'Delete Alert',
+            message: 'Are you sure want to delete Supplier?' 
+          }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if(result.isConfirm == true){
+            this.SupplierService.deleteSupplier(id).subscribe(()=>{
+              this.fetchSuppliers();
+            });        
+          }
+          
+        });
 
-
-    }, (err) => {
-      this.toastr.error(err, 'Error')
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Supplier Deleted successfully')
     });
   }
   onClickAddSuplier(id?:number) {
-    let dialogRef = this.dialog.open(AddSupplierComponent, {
-      height: '500px',
-      width: '600px',
-      data: {
-        dataKey: id
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.fetchSuppliers();
-    });
-  }
-  onSaveOrUpdate() {
+      let dialogRef = this.dialog.open(AddSupplierComponent, {
+        height: '500px',
+        width: '600px',
+        data: {
+          dataKey: id
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.fetchSuppliers();
+      });
+    }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  }
-  onClickRemoveSupplier(id:number) {
-    let dialogRef = this.dialog.open(DeleteAlertComponent, {
-      height: '300px',
-      width: '600px',
-      data: {
-        header: 'Delete Alert',
-        message: 'Are you sure want to delete Supplier?' 
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result.isConfirm == true){
-        this.customerService.deleteSupplier(id).subscribe(()=>{
-          this.fetchSuppliers();
-        });        
-      }
-      
-    });
-
-  }
-  changePage(suppliers) {
-    this.totalLength=suppliers.length;
-    let start = this.pageObj.pageIndex * this.pageObj.pageSize;
-    let calEnd = this.pageObj.pageIndex * this.pageObj.pageSize + this.pageObj.pageSize;
-    let end = (calEnd > this.pageObj.length) ? this.pageObj.length : calEnd;
-    this.suppliers = suppliers.slice(start, end);
-  }
-  onFilter() {
-    this.changePage(this.searchPipe.transform(this.allSupplier, this.searchString));
-  }
-  pageEvent(event) {
-    this.pageObj = event
-    this.onFilter();
-
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   
 }
