@@ -8,9 +8,9 @@ import { DeleteAlertComponent } from 'src/app/common/component/delete-alert/dele
 
 
 @Component({
-  selector: 'app-manage-customer',
-  templateUrl: './manage-customer.component.html',
-  styleUrls: ['./manage-customer.component.scss']
+  selector: 'app-manage-supplier',
+  templateUrl: './manage-supplier.component.html',
+  styleUrls: ['./manage-supplier.component.scss']
 })
 export class ManageCustomerComponent implements OnInit {
   suppliers: any[] = [];

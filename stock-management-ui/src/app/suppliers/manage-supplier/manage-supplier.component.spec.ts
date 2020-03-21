@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManageCustomerComponent } from './manage-customer.component';
+import { ManageCustomerComponent } from './manage-supplier.component';
 
 describe('ManageCustomerComponent', () => {
   let component: ManageCustomerComponent;

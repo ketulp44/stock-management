@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomersRoutingModule } from './customers-routing.module';
-import { ManageCustomerComponent } from './manage-customer/manage-customer.component';
+import { SuppliersRoutingModule } from './suppliers-routing.module';
+import { ManageCustomerComponent } from './manage-supplier/manage-supplier.component';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../common/pipes/search.pipe';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -13,7 +13,7 @@ import { DeleteAlertComponent } from '../common/component/delete-alert/delete-al
   declarations: [ManageCustomerComponent,SearchPipe],
   imports: [
     CommonModule,
-    CustomersRoutingModule,
+    SuppliersRoutingModule,
     FormsModule,
     MatPaginatorModule,
     SharedModule
@@ -22,4 +22,4 @@ import { DeleteAlertComponent } from '../common/component/delete-alert/delete-al
   exports: [],
   providers:[SearchPipe]
 })
-export class CustomersModule { }
+export class SuppliersModule { }
