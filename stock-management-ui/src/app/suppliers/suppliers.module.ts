@@ -10,7 +10,7 @@ import { DeleteAlertComponent } from '../common/component/delete-alert/delete-al
 
 
 @NgModule({
-  declarations: [ManageCustomerComponent,SearchPipe],
+  declarations: [ManageCustomerComponent],
   imports: [
     CommonModule,
     SuppliersRoutingModule,
