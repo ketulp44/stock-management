@@ -6,13 +6,19 @@ import { SuppliersModule } from './suppliers/suppliers.module';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import { AuthenticationModule } from './authentication & authorization/authentication.module';
 import { UsersModule } from './users/users.module';
+import { CustomerModule } from './customer/customer.module';
+import { CommodityModule } from './commodity/commodity.module';
+import { SubCommodityModule } from './sub-commodity/sub-commodity.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
     SuppliersModule,
   AuthenticationModule,
-  UsersModule],
+  UsersModule,
+  CustomerModule,
+  CommodityModule,
+  SubCommodityModule],
   controllers: [AppController],
   providers: [AppService],
 })
