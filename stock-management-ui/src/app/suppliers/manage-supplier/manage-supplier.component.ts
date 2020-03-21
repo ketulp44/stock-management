@@ -20,7 +20,7 @@ export interface Supplier {
   styleUrls: ['./manage-supplier.component.scss']
 })
 export class ManageSupplierComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'contctno','color'];
+  displayedColumns: string[] = ['id', 'SupplierName', 'ContactNumber','color'];
   dataSource: MatTableDataSource<Supplier>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

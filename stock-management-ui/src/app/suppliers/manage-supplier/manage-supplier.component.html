@@ -13,25 +13,25 @@
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <th mat-header-cell *matHeaderCellDef> ID </th>
                 <td mat-cell *matCellDef="let row;let i = index"> {{paginator.pageIndex * paginator.pageSize + i + 1}}  </td>
             </ng-container>
 
             <!-- Name Column -->
-            <ng-container matColumnDef="name">
+            <ng-container matColumnDef="SupplierName">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
                 <td mat-cell *matCellDef="let row"> {{row.SupplierName}} </td>
             </ng-container>
 
             <!-- ContactNo Column -->
-            <ng-container matColumnDef="contctno">
+            <ng-container matColumnDef="ContactNumber">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> ContactNo </th>
                 <td mat-cell *matCellDef="let row"> {{row.ContactNumber}} </td>
             </ng-container>
 
             <!-- Color Column -->
             <ng-container matColumnDef="color">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let row">
                     <i class="fa fa-edit mx-2" (click)="onClickAddSuplier(row.SupplierID)"></i>
                     <i class="fa fa-trash mx-2" (click)="onClickRemoveSupplier(row.SupplierID)"></i>

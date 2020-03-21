@@ -1,7 +1,7 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
@@ -20,18 +20,18 @@ export interface Customer {
   styleUrls: ['./customer-list.component.scss']
 })
 export class CustomerListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'contctno','color'];
+  displayedColumns: string[] = ['id', 'CustomerName', 'ContactNumber', 'color'];
   dataSource: MatTableDataSource<Customer>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor(private dialog: MatDialog,
-    private toastr: ToastrService,private CustomerService: CustomerService) {
-      }
+    private toastr: ToastrService, private CustomerService: CustomerService) {
+  }
 
   ngOnInit() {
     this.fetchCustomers();
   }
-  onClickAddCustomer(id?:number){
+  onClickAddCustomer(id?: number) {
     let dialogRef = this.dialog.open(AddCustomerComponent, {
       height: '500px',
       width: '600px',
@@ -43,35 +43,35 @@ export class CustomerListComponent implements OnInit {
       this.fetchCustomers();
     });
   }
-  onClickRemoveCustomer(id:number) {
+  onClickRemoveCustomer(id: number) {
     let dialogRef = this.dialog.open(DeleteAlertComponent, {
       height: '300px',
       width: '600px',
       data: {
         header: 'Delete Alert',
-        message: 'Are you sure want to delete Customer?' 
+        message: 'Are you sure want to delete Customer?'
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result.isConfirm == true){
-        this.CustomerService.deleteCustomer(id).subscribe(()=>{
+      if (result.isConfirm == true) {
+        this.CustomerService.deleteCustomer(id).subscribe(() => {
           this.fetchCustomers();
-        });        
+        });
       }
-      
+
     });
 
-dialogRef.afterClosed().subscribe(result => {
-});
-}
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
   fetchCustomers() {
     this.CustomerService.getCustomers().subscribe((data) => {
-    
-  this.dataSource = new MatTableDataSource(data);
-  this.dataSource.paginator = this.paginator;
-  this.dataSource.sort = this.sort;
+
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }, (err) => {
-      this.toastr.error(err, 'Error')
+      this.toastr.error(err.error.error, 'Error');
     });
   }
   applyFilter(event: Event) {
