@@ -1,25 +1,30 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SuppliersRoutingModule } from './suppliers-routing.module';
-import { ManageCustomerComponent } from './manage-supplier/manage-supplier.component';
-import { FormsModule } from '@angular/forms';
-import { SearchPipe } from '../common/pipes/search.pipe';
+import { ManageSupplierComponent } from './manage-supplier/manage-supplier.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { SharedModule } from '../common/shared.module';
 import { DeleteAlertComponent } from '../common/component/delete-alert/delete-alert.component';
+import {MatTableModule} from '@angular/material/table'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
-  declarations: [ManageCustomerComponent,SearchPipe],
+  declarations: [ManageSupplierComponent],
   imports: [
     CommonModule,
     SuppliersRoutingModule,
-    FormsModule,
+    SharedModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
     MatPaginatorModule,
-    SharedModule
+    MatButtonModule
   ],
   entryComponents: [],
   exports: [],
-  providers:[SearchPipe]
+  providers:[]
 })
 export class SuppliersModule { }

@@ -7,46 +7,21 @@
 <div class="modal-body scroll-dialog">
     <form class="col mt-2" #supplierForm="ngForm">
         <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" [(ngModel)]="supplier.SFname" #firstName="ngModel" name="firstName" class="form-control"
-                id="firstName" placeholder="First Name" maxlength="50" required />
-            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
-                <small *ngIf="firstName.errors.required" class="form-text text-muted">First Name is
+            <label for="name">Name</label>
+            <input type="text" [(ngModel)]="supplier.SupplierName" #supplierName="ngModel" name="supplierName" class="form-control"
+                id="supplierName" placeholder="Supplier Name" maxlength="50" required />
+            <div *ngIf="supplierName.invalid && (supplierName.dirty || supplierName.touched)" class="alert alert-danger">
+                <small *ngIf="supplierName.errors.required" class="form-text text-muted">SupplierName Name is
                     required.</small>
-                <small *ngIf="firstName.errors.maxlength" class="form-text text-muted">First Name must be at
+                <small *ngIf="firstName.errors.maxlength" class="form-text text-muted">Supplier Name must be at
                     most 50
                     characters long.</small>
             </div>
         </div>
-        <div class="form-group">
-            <label for="middleName">Middle Name</label>
-            <input type="text" [(ngModel)]="supplier.SMname" name="middleName" class="form-control" id="middleName"
-                placeholder="Middle Name" maxlength="50" #middleName="ngModel" required />
-            <div *ngIf="middleName.invalid && (middleName.dirty || middleName.touched)" class="alert alert-danger">
-                <small *ngIf="middleName.errors.required" class="form-text text-muted">Middle Name is
-                    required.</small>
-                <small *ngIf="middleName.errors.maxlength" class="form-text text-muted">Middle Name must be
-                    at
-                    most 50
-                    characters long.</small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" [(ngModel)]="supplier.SLName" name="lastName" class="form-control" id="lastName"
-                placeholder="Last Name" maxlength="50" #lastName="ngModel" required />
-            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
-                <small *ngIf="lastName.errors.required" class="form-text text-muted">Last Name is
-                    required.</small>
-                <small *ngIf="lastName.errors.maxlength" class="form-text text-muted">Last Name must be at
-                    most
-                    50
-                    characters long.</small>
-            </div>
-        </div>
+        
         <div class="form-group">
             <label for="contact">Contact Number</label>
-            <input type="number" appContactValidator [(ngModel)]="supplier.SConNo" name="contact" class="form-control"
+            <input type="number" appContactValidator [(ngModel)]="supplier.ContactNumber" name="contact" class="form-control"
                 id="contact" placeholder="Contact Number" #contact="ngModel" required />
 
             <div *ngIf="contact.invalid && (contact.dirty || contact.touched)" class="alert alert-danger">
@@ -56,21 +31,6 @@
                     must be of 10
                     digit</small>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" [(ngModel)]="supplier.SEmailID" name="email" class="form-control"
-                id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="100" #email="ngModel" />
-            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-                <small *ngIf="email.errors.pattern" class="form-text text-muted">Please enter valid
-                    email</small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="address">Address</label>
-            <textarea class="form-control" [(ngModel)]="supplier.SAddr" name="address" id="address"
-                placeholder="Address" #firstName="ngModel"> </textarea>
         </div>
 
     </form>
