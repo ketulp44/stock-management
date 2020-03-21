@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManageSupplierComponent } from './manage-supplier.component';
+import { InwardFormComponent } from './inward-form.component';
 
-describe('ManageSupplierComponent', () => {
-  let component: ManageSupplierComponent;
-  let fixture: ComponentFixture<ManageSupplierComponent>;
+describe('InwardFormComponent', () => {
+  let component: InwardFormComponent;
+  let fixture: ComponentFixture<InwardFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManageSupplierComponent ]
+      declarations: [ InwardFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManageSupplierComponent);
+    fixture = TestBed.createComponent(InwardFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

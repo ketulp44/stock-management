@@ -5,21 +5,14 @@ import {MatTableDataSource} from '@angular/material/table';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { CustomerService } from '../service/customer.service';
+import { DeleteAlertComponent } from 'src/app/common/component/delete-alert/delete-alert.component';
 
 export interface Customer {
   id: string;
-  name: string;
-  progress: string;
-  color: string;
+  CustomerName: string;
+  ContactNo: string;
 }
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
 
 @Component({
   selector: 'app-customer-list',
@@ -27,71 +20,18 @@ const NAMES: string[] = [
   styleUrls: ['./customer-list.component.scss']
 })
 export class CustomerListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+  displayedColumns: string[] = ['id', 'name', 'contctno','color'];
   dataSource: MatTableDataSource<Customer>;
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(private dialog: MatDialog,
-    private toastr: ToastrService,) {
-    const users:Customer []= [{
-      id: '1',
-      color:'yellow',
-      name:'ketul',
-      progress:'10'
-    },
-    {
-      id: '2',
-      color:'yellow',
-      name:'harsh',
-      progress:'10'
-    },
-    {
-      id: '3',
-      color:'yellow',
-      name:'kadam',
-      progress:'10'
-    },
-    {
-      id: '4',
-      color:'yellow',
-      name:'dhruv',
-      progress:'10'
-    },
-    {
-      id: '5',
-      color:'yellow',
-      name:'rohan',
-      progress:'10'
-    },
-    {
-      id: '6',
-      color:'yellow',
-      name:'raj',
-      progress:'10'
-    },
-    {
-      id: '7',
-      color:'yellow',
-      name:'narendra',
-      progress:'10'
-    },
-    {
-      id: '8',
-      color:'yellow',
-      name:'mohan',
-      progress:'10'
-    }];
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
-   }
+    private toastr: ToastrService,private CustomerService: CustomerService) {
+      }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.fetchCustomers();
   }
-  onClickAdd(id?:number){
-    console.log('add called');
+  onClickAddCustomer(id?:number){
     let dialogRef = this.dialog.open(AddCustomerComponent, {
       height: '500px',
       width: '600px',
@@ -100,7 +40,38 @@ export class CustomerListComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('customer added successfully')
+      this.fetchCustomers();
+    });
+  }
+  onClickRemoveCustomer(id:number) {
+    let dialogRef = this.dialog.open(DeleteAlertComponent, {
+      height: '300px',
+      width: '600px',
+      data: {
+        header: 'Delete Alert',
+        message: 'Are you sure want to delete Customer?' 
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isConfirm == true){
+        this.CustomerService.deleteCustomer(id).subscribe(()=>{
+          this.fetchCustomers();
+        });        
+      }
+      
+    });
+
+dialogRef.afterClosed().subscribe(result => {
+});
+}
+  fetchCustomers() {
+    this.CustomerService.getCustomers().subscribe((data) => {
+    
+  this.dataSource = new MatTableDataSource(data);
+  this.dataSource.paginator = this.paginator;
+  this.dataSource.sort = this.sort;
+    }, (err) => {
+      this.toastr.error(err, 'Error')
     });
   }
   applyFilter(event: Event) {

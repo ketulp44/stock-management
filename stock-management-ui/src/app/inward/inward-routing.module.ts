@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ManageSupplierComponent } from './manage-supplier/manage-supplier.component';
+import { InwardFormComponent } from './inward-form/inward-form.component';
 
 
 const routes: Routes = [
-  { path: '', component: ManageSupplierComponent }
+  { path: '', component: InwardFormComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SuppliersRoutingModule { 
-  constructor(){
-  }
-}
+export class InwardRoutingModule { }
