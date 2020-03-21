@@ -24,6 +24,7 @@
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "ngx-mat-select-search": "^2.1.2",
     "ngx-toastr": "^11.3.3",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

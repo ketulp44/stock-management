@@ -25,6 +25,15 @@ const routes: Routes = [
 
   },
   {
+    path: 'inward',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./../../../inward/inward.module').then(m => m.InwardModule)
+    }]
+
+  },
+  {
     path: '',
     redirectTo: 'customers',
     pathMatch: 'full'
