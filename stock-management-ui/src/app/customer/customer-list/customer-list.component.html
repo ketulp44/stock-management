@@ -28,10 +28,14 @@
 
             <!-- Color Column -->
             <ng-container matColumnDef="color">
-                <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td mat-cell *matCellDef="let row">
-                    <i class="fa fa-edit mx-2" (click)="onClickAddCustomer(row.CustomerID)"></i>
-                    <i class="fa fa-trash mx-2" (click)="onClickRemoveCustomer(row.CustomerID)"></i>
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>
+                <td mat-cell *matCellDef="let row" class="text-center">
+                   <button mat-icon-button matTooltip="Edit" (click)="onClickAddCustomer(row.CustomerID)">
+                        <i class="material-icons">edit</i>
+                  </button>
+                  <button mat-icon-button matTooltip="Edit" (click)="onClickRemoveCustomer(row.CustomerID)">
+                        <i class="material-icons">delete</i>
+                  </button>
                 </td>
             </ng-container>
 
