@@ -1,15 +1,15 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('suppliers')
-export class Suppliers {
-  @PrimaryGeneratedColumn({ name: 's_id' })
-  SupplierID: number;
+@Entity('sub_commodity')
+export class SubCommodity {
+  @PrimaryGeneratedColumn({ name: 'sc_id' })
+  SubCommodityID: number;
 
-  @Column({ name: 's_name' })
-  SupplierName: string;
+  @Column({ name: 'sc_name' })
+  SubCommodityName: string;
 
-  @Column({ name: 'contact_number' })
-  ContactNumber: string;
+  @Column({ name: 'com_id' })
+  CommodityId: string;
 
   @Column({ name: 'is_active' })
   IsActive: number;
@@ -19,5 +19,5 @@ export class Suppliers {
 
   @Column({ name: 'updated_dt_time', default: new Date() })
   UpdateDateTime: Date;
-
+  
 }
