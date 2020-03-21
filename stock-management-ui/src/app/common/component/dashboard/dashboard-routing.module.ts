@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
+import { LoginComponent } from 'src/app/login/login.component';
 
 
 const routes: Routes = [
 
   {
+    path: 'suppliers',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('../../../suppliers/customers.module').then(m => m.CustomersModule)
+    }]
+
+  },
+  {
     path: 'customers',
     component: DashboardComponent,
     children: [{
       path: '',
-      loadChildren: () => import('./../../../customers/customers.module').then(m => m.CustomersModule)
+      loadChildren: () => import('./../../../customer/customer.module').then(m => m.CustomerModule)
     }]
 
   },

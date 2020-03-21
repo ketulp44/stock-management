@@ -7,7 +7,7 @@ export class SupplierDTO {
     SEmailID: string;
     SConNo: string;
     SAddr: string;
-    IsActive:boolean
+    IsActive:number
     CreateDt:Date
     CreatedBy:string;
     ModiDt:string;
