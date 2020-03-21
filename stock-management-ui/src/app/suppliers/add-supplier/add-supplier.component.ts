@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../service/customer.service';
+import { SupplierService } from '../service/supplier.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LoaderService } from 'src/app/common/service/loader.service';
 import { ToastrService } from 'ngx-toastr';
@@ -15,7 +15,7 @@ import { Inject } from '@angular/core';
 export class AddSupplierComponent implements OnInit {
   supplier: any = {};
   displayProgressSpinner: boolean = false;
-  constructor(private customerService: CustomerService,
+  constructor(private customerService: SupplierService,
     public dialogRef: MatDialogRef<AddSupplierComponent>,
     private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public supplierId: any

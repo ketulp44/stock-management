@@ -7,19 +7,25 @@ const BASE_URL :string = environment.BASE_URL;
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class SupplierService {
+
   
   constructor(private http: HttpClient) { }
    saveOrUpdateSupplier(supplier:any):Observable<any>{
       return this.http.post(`${BASE_URL}suppliers`,supplier);
    }
    getSuppliers():Observable<any []>{
-      return this.http.get<any []>(`${BASE_URL}suppliers`);
+      return this.http.get<any []>(`${BASE_URL}suppliers/all`);
    }
    getSupplier(id:number):Observable<any []>{
-      return this.http.get<any []>(`${BASE_URL}suppliers/findById/${id}`);
+     console.log(id);
+      return this.http.get<any []>(`${BASE_URL}suppliers/${id}`);
    }
-   deleteSupplier(id:number):Observable<any>{
-      return this.http.get<any>(`${BASE_URL}suppliers/deleteById/${id}`);
+   deleteSupplier(id:any):Observable<any>{
+    var supplier = { 
+      SupplierID:id, 
+      IsActive:0 
+   };
+      return this.http.post<any>(`${BASE_URL}suppliers`,supplier);
    }
 }
