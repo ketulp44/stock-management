@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS "customers";
 CREATE TABLE "customers" (
 	"cu_id" SERIAL,	
 	"cu_name" VARCHAR(200) NOT NULL,
+	"contact_number" VARCHAR(50) NULL DEFAULT NULL,
 	"is_active" SMALLINT NOT NULL DEFAULT 1,
 	"created_dt_time" TIMESTAMP DEFAULT current_timestamp,
 	"updated_dt_time" TIMESTAMP DEFAULT current_timestamp,
@@ -88,6 +89,7 @@ CREATE TABLE "users" (
 	"password" VARCHAR(500) NOT NULL,
 	"email" VARCHAR(200) NOT NULL,
 	"role" VARCHAR(200) NOT NULL,
+	"is_enabled" SMALLINT NOT NULL DEFAULT 1,
 	"is_active" SMALLINT NOT NULL DEFAULT 1,
 	"created_dt_time" TIMESTAMP  DEFAULT current_timestamp,
 	"updated_dt_time" TIMESTAMP  DEFAULT current_timestamp,

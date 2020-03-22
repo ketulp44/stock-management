@@ -13,12 +13,12 @@ export class AuthenticationService {
     
     public async Login(userInfo: LoginDTO) {
         try {
-         const user:User = await this.UserRepository.findOne({where : {email:userInfo.user_name , password:userInfo.password}});    
+         const user:User = await this.UserRepository.findOne({where : {email:userInfo.username , password:userInfo.password}});    
          if(!isNullOrUndefined(user))
          {
-          if(user.is_enabled == 1)
+          if(user.IsEnabled == 1)
          {
-              const token = this.createJwtToken({email : user.email , name : user.full_name });
+              const token = this.createJwtToken({email : user.email , name : user.username });
               return {Token : token}; 
 
          } else {

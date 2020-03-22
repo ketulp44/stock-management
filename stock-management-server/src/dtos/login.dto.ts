@@ -1,4 +1,4 @@
 export class LoginDTO {
-    public user_name :string;
+    public username :string;
     public password : string;
 }

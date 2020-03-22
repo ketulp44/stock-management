@@ -1,37 +1,31 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('user_mst')
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn({ name: 'user_id' })
   user_id: number;
 
+  @Column({ name: 'user_name' })
+  username: string;
+
   @Column({ name: 'password' })
   password: string;
-
-  @Column({ name: 'full_name' })
-  full_name: string;
 
   @Column({ name: 'email' })
   email: string;
 
-  @Column({ name: 'role_id' })
-  role_id: number;
+  @Column({ name: 'role' })
+  role: string;
 
   @Column({ name: 'is_enabled' })
-  is_enabled: number;
+  IsEnabled: number;
 
-  @Column({ name: 'is_enabled', default: '1' })
-  is_active: number;
+  @Column({ name: 'is_active' })
+  IsActive: number;
 
-  @Column({ name: 'entry_by' })
-  entry_by: number;
+  @Column({ name: 'created_dt_time', default: new Date() })
+  CreatedDateTime: Date
 
-  @Column({ name: 'entry_dt_time' })
-  entry_dt_time: Date;
-
-  @Column({ name: 'updated_by' })
-  updated_by: number;
-
-  @Column({ name: 'update_dt_time' })
-  update_dt_time: Date;
+  @Column({ name: 'updated_dt_time', default: new Date() })
+  UpdateDateTime: Date;
 }

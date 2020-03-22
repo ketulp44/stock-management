@@ -8,6 +8,9 @@ export class Customer {
   @Column({ name: 'cu_name' })
   CustomerName: string;
 
+  @Column({ name: 'contact_number' })
+  ContactNumber: string;
+
   @Column({ name: 'is_active' })
   IsActive: number;
 
