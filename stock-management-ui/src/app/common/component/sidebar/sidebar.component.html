@@ -1,58 +1,23 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{'hide-sidebar' : !isMenuOpen}">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="assets/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="assets/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a  [routerLink]="['./../customers']" class="nav-link active">
-              <i class="nav-icon fa fa-tachometer"></i>
-              <p>
-                Customers
-              </p>
-            </a>
-            
-          </li>
-          <li class="nav-item has-treeview menu-open">
-            <a  [routerLink]="['./../suppliers']" class="nav-link active">
-              <i class="nav-icon fa fa-tachometer"></i>
-              <p>
-                Suppliers
-              </p>
-            </a>
-            
-          </li>
-          <li class="nav-item has-treeview menu-open">
-            <a  [routerLink]="['./../inward']" class="nav-link active">
-              <i class="nav-icon fa fa-tachometer"></i>
-              <p>
-                Inward
-              </p>
-            </a>
-            
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+<mat-sidenav-container [hasBackdrop]="true" autosize>
+  <mat-sidenav class="dino-side-nav" #sidenav mode="push" [opened]="false" position="start"
+      [fixedInViewport]="true" [fixedTopGap]="0" [fixedBottomGap]="0">
+      <header>Menu</header>
+      <mat-nav-list>
+          <mat-list-item routerLinkActive="active-link">
+              <a matLine href="javascript:void(0);" class="nav-link  yellow-box" 
+              [routerLink]="['./../customers']">
+                  <i class="material-icons">public</i> Customers</a>
+          </mat-list-item>
+          <mat-list-item routerLinkActive="active-link">
+            <a matLine href="javascript:void(0);" class="nav-link  yellow-box" 
+            [routerLink]="['./../suppliers']">
+                <i class="material-icons">public</i> Suppliers</a>
+        </mat-list-item>
+        <mat-list-item routerLinkActive="active-link">
+          <a matLine href="javascript:void(0);" class="nav-link  yellow-box" 
+          [routerLink]="['./../inward']">
+              <i class="material-icons">public</i> Inward-stock</a>
+      </mat-list-item>
+      </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

@@ -9,7 +9,7 @@ import {MatTableModule} from '@angular/material/table'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSortModule } from '@angular/material';
+import { MatSortModule, MatTooltipModule } from '@angular/material';
 
 
 @NgModule({
@@ -23,7 +23,8 @@ import { MatSortModule } from '@angular/material';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   entryComponents: [],
   exports: [],

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class ToggleMenuService {
   constructor() { }
 
   toggleMenu(){
-    this.isMenuOpenSubject.next(!this.isMenuOpenSubject.getValue());
+    this.isMenuOpenSubject.next(true);
   }
 
 }

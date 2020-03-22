@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToggleMenuService} from './../../service/toggle-menu.service'
 @Component({
   selector: 'app-sidebar',
@@ -8,10 +8,15 @@ import { ToggleMenuService} from './../../service/toggle-menu.service'
 export class SidebarComponent implements OnInit {
   isMenuOpen: Boolean = true;
   constructor(private toggleService :ToggleMenuService) { }
-
+  @ViewChild('sidenav',{static:true}) sideNav;
   ngOnInit() {
     this.toggleService.isMenuOpenObservable.subscribe((val)=>{
       this.isMenuOpen = val;
+      console.log('toggle called');
+      console.log(this.sideNav);
+      
+      
+      this.sideNav.toggle();
     });
   }
 

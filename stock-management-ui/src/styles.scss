@@ -45,4 +45,48 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 table.mat-table thead {
   background: #00796b;
+  outline: 1px ridge #4b8c8a;
+  outline-offset: 0px;
+}
+
+.mat-header-cell {
+  color: white !important;
+  text-align: center;
+}
+
+.mat-tooltip {
+  margin: 7px !important;
+  &.down-side{
+      margin: 14px 0 0 !important;
+      position: relative;
+      overflow: visible !important; 
+      &::before{
+          content: "";
+          position: absolute;
+          top: -3px;
+          left: 0;
+          right: 0;
+          margin: auto;
+          height: 5px;
+          width: 5px;
+          background: #0a4841;
+          z-index: 999999;
+          transform: rotate(45deg);
+      }
+  }
+  background: #0a4841 !important;
+}
+
+.mat-sort-header-container{
+  justify-content: center;
+  .mat-sort-header-arrow{
+      color: #fff;
+  }
+}
+
+.mat-cell {
+}
+
+.mat-sidenav {
+  width: 215px;
 }
