@@ -24,8 +24,8 @@ import { LoginComponent } from './login/login.component';
 import { InwardFormComponent } from './inward/inward-form/inward-form.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatNativeDateModule, MatDatepickerModule, MatSelectModule } from '@angular/material';
-
-
+import { AddCommodityComponent } from './commodity/add-commodity/add-commodity.component';
+import { AddSubCommodityComponent } from './commodity/add-sub-commodity/add-sub-commodity.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +34,9 @@ import { MatNativeDateModule, MatDatepickerModule, MatSelectModule } from '@angu
     ContactValidatorDirective,
     LoaderComponent,
     AddCustomerComponent,
-    InwardFormComponent
+    InwardFormComponent,
+    AddCommodityComponent,
+    AddSubCommodityComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,15 @@ import { MatNativeDateModule, MatDatepickerModule, MatSelectModule } from '@angu
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddSupplierComponent,AddCustomerComponent,InwardFormComponent,LoaderComponent,DeleteAlertComponent]
+  entryComponents:[
+    AddSupplierComponent,
+    AddCustomerComponent,
+    LoaderComponent,
+    DeleteAlertComponent, 
+    AddCommodityComponent, 
+    AddSubCommodityComponent,
+    InwardFormComponent,
+    DeleteAlertComponent
+  ]
 })
 export class AppModule { }

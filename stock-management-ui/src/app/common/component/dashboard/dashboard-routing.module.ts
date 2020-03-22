@@ -31,6 +31,14 @@ const routes: Routes = [
       path: '',
       loadChildren: () => import('./../../../inward/inward.module').then(m => m.InwardModule)
     }]
+    },
+    {
+      path: 'commodities',
+      component: DashboardComponent,
+      children: [{
+        path: '',
+        loadChildren: () => import('./../../../commodity/commodity.module').then(m => m.CommodityModule)
+      }]
 
   },
   {
