@@ -1,3 +1,4 @@
+import { InwardService } from './../service/inward.service';
 import { Component, OnInit } from '@angular/core';
 import { SearchPipe } from 'src/app/common/pipes/search.pipe';
 import { CommonUtilService } from 'src/app/common/service/common-util/common-util.service';
@@ -11,22 +12,23 @@ export class InwardFormComponent implements OnInit {
 
   suppliers: any[] = [{ id: 1, name: 'ketul' }, { id: 2, name: 'harsh' }, { id: 3, name: 'kadam' }, { id: 4, name: 'narendra' }, { id: 5, name: 'parth' }];
   selectedSupplier = { id: 1, name: 'ketul' };
-  inwardStock:any= {}
+  inwardStock: any = {};
   searchSupplier = '';
   filteredSuppliers = [];
   filteredCommodties: any[] = [];
   commodities: any[] = [];
-  searchCommodity='';
+  searchCommodity = '';
   selectedCommodity: any;
   subCommodities: any;
   filteredSubCommodities: any[] = [];
   selectedSubCommodity: any;
-  searchSubCommodity='';
-  intputStockTypes:any [] = [];
-  qualityTypes:any[]=[];
+  searchSubCommodity = '';
+  intputStockTypes: any[] = [];
+  qualityTypes: any[] = [];
   constructor(
     private searchPipe: SearchPipe,
-    private commonService: CommonUtilService
+    private commonService: CommonUtilService,
+    private inwardStockService: InwardService
   ) { }
 
   ngOnInit() {
@@ -42,7 +44,7 @@ export class InwardFormComponent implements OnInit {
     this.commonService.getCommodities().subscribe((data) => {
       this.commodities = data;
       this.filteredCommodties = this.commodities;
-    })
+    });
   }
   getSubCommodities(id) {
     this.commonService.getSubCommodities(id).subscribe((data) => {
@@ -50,25 +52,26 @@ export class InwardFormComponent implements OnInit {
       this.filteredSubCommodities = this.subCommodities;
     });
   }
-  getInputStockStates(){
-    this.commonService.getInputStockType().subscribe((data)=>{
-      this.intputStockTypes=data;
-      
-    })
+  getInputStockStates() {
+    this.commonService.getInputStockType().subscribe((data) => {
+      this.intputStockTypes = data;
+
+    });
   }
-  getQualityTypes(){
-    this.commonService.getQualityTypes().subscribe((data)=>{
+  getQualityTypes() {
+    this.commonService.getQualityTypes().subscribe((data) => {
       console.log(data);
       this.qualityTypes = data;
-    })
+    });
   }
   onChangeCommodity(event) {
     this.getSubCommodities(event.CommodityID);
   }
-  onClickSave(){
-
+  onClickSave() {
+      debugger;
+      console.log(this.inwardStock);
   }
-  onCilckCancel(){
+  onClickCancel() {
 
   }
   commodityFilter(event) {
