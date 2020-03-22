@@ -21,8 +21,11 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
 import { LoginComponent } from './login/login.component';
-
-
+import { InwardFormComponent } from './inward/inward-form/inward-form.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatNativeDateModule, MatDatepickerModule, MatSelectModule } from '@angular/material';
+import { AddCommodityComponent } from './commodity/add-commodity/add-commodity.component';
+import { AddSubCommodityComponent } from './commodity/add-sub-commodity/add-sub-commodity.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +33,10 @@ import { LoginComponent } from './login/login.component';
     AddSupplierComponent,
     ContactValidatorDirective,
     LoaderComponent,
-    AddCustomerComponent
+    AddCustomerComponent,
+    InwardFormComponent,
+    AddCommodityComponent,
+    AddSubCommodityComponent
   ],
   imports: [
     BrowserModule,
@@ -47,12 +53,25 @@ import { LoginComponent } from './login/login.component';
     MatPaginatorModule,
     SharedModule,
     MatTableModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxMatSelectSearchModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddSupplierComponent,AddCustomerComponent,LoaderComponent,DeleteAlertComponent]
+  entryComponents:[
+    AddSupplierComponent,
+    AddCustomerComponent,
+    LoaderComponent,
+    DeleteAlertComponent, 
+    AddCommodityComponent, 
+    AddSubCommodityComponent,
+    InwardFormComponent,
+    DeleteAlertComponent
+  ]
 })
 export class AppModule { }

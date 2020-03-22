@@ -90,3 +90,12 @@ table.mat-table thead {
 .mat-sidenav {
   width: 215px;
 }
+.mat-elevation-z8 {
+  overflow: auto;
+}
+.mat-dialog-container{
+  height: inherit !important;
+}
+.form-control-label{
+  margin-left: 16px;
+}
