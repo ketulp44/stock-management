@@ -21,8 +21,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
 import { LoginComponent } from './login/login.component';
-
-
+import { AddCommodityComponent } from './commodity/add-commodity/add-commodity.component';
+import { AddSubCommodityComponent } from './commodity/add-sub-commodity/add-sub-commodity.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +30,9 @@ import { LoginComponent } from './login/login.component';
     AddSupplierComponent,
     ContactValidatorDirective,
     LoaderComponent,
-    AddCustomerComponent
+    AddCustomerComponent,
+    AddCommodityComponent,
+    AddSubCommodityComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,6 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddSupplierComponent,AddCustomerComponent,LoaderComponent,DeleteAlertComponent]
+  entryComponents:[AddSupplierComponent,AddCustomerComponent,LoaderComponent,DeleteAlertComponent, AddCommodityComponent, AddSubCommodityComponent]
 })
 export class AppModule { }
