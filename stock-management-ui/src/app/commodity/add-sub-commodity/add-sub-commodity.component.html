@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h5 class="modal-title">Add SubCommodity</h5>
+    <button type="button" class="close" (click)="closeDialog()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body scroll-dialog">
+    <form class="col mt-2" #subCommodityForm="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" [(ngModel)]="subCommodity.SubCommodityName" #subCommodityName="ngModel" name="subCommodityName" class="form-control"
+                id="subCommodityName" placeholder="SubCommodity Name" maxlength="50" required />
+            <div *ngIf="subCommodityName.invalid && (subCommodityName.dirty || subCommodityName.touched)" class="alert alert-danger">
+                <small *ngIf="subCommodityName.errors.required" class="form-text text-muted">SubCommodity Name is
+                    required.</small>
+                <small *ngIf="subCommodityName.errors.maxlength" class="form-text text-muted">SubCommodity Name must be at
+                    most 50
+                    characters long.</small>
+            </div>
+        </div>
+        
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeDialog()">Close</button>
+    <button type="button" class="btn btn-primary" (click)="onSaveOrUpdate()"
+        [disabled]="!subCommodityForm.form.valid">Submit</button>
+</div>
+<app-loader class="example-margin" [color]="color" [mode]="mode" [value]="value" [backdropEnabled]="true"
+    [positionGloballyCenter]="true" [displayProgressSpinner]="displayProgressSpinner">
+</app-loader>
