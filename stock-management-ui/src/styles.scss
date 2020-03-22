@@ -46,3 +46,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 table.mat-table thead {
   background: #00796b;
 }
+.mat-elevation-z8 {
+  overflow: auto;
+}
+.mat-dialog-container{
+  height: inherit !important;
+}
+.form-control-label{
+  margin-left: 16px;
+}

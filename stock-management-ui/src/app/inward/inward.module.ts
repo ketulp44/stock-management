@@ -8,13 +8,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../common/shared.module';
-import { MatButtonModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatPaginatorModule, MatTableModule } from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import { InwardStockListComponent } from './inward-stock-list/inward-stock-list.component';
 
 
 @NgModule({
-  declarations: [InwardFormComponent],
+  declarations: [ InwardStockListComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,7 +27,9 @@ import {MatNativeDateModule} from '@angular/material';
     MatButtonModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule,
   ]
 })
 export class InwardModule { }
