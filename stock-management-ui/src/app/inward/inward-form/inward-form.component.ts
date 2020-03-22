@@ -1,7 +1,9 @@
 import { InwardService } from './../service/inward.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { SearchPipe } from 'src/app/common/pipes/search.pipe';
 import { CommonUtilService } from 'src/app/common/service/common-util/common-util.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-inward-form',
@@ -29,7 +31,10 @@ export class InwardFormComponent implements OnInit {
   constructor(
     private searchPipe: SearchPipe,
     private commonService: CommonUtilService,
-    private inwardStockService: InwardService
+    private inwardStockService: InwardService,
+    public dialogRef: MatDialogRef<InwardFormComponent>,
+    private toastr: ToastrService,
+    @Inject(MAT_DIALOG_DATA) public inwardStockId: any
   ) { }
 
   ngOnInit() {
@@ -58,6 +63,8 @@ export class InwardFormComponent implements OnInit {
     this.commonService.getSubCommodities(id).subscribe((data) => {
       this.subCommodities = data;
       this.filteredSubCommodities = this.subCommodities;
+      console.log(this.filteredSubCommodities);
+      
     });
   }
   getInputStockStates() {
@@ -71,13 +78,22 @@ export class InwardFormComponent implements OnInit {
     });
   }
   onChangeCommodity(event) {
-    this.getSubCommodities(event.CommodityID);
+    this.getSubCommodities(event);
   }
   onClickSave() {
-
+    console.log(this.inwardStock);
+    
+    this.inwardStockService.saveInwardStocks(this.inwardStock).subscribe((data)=>{
+      console.log(data);
+      
+    },err=>console.log(err)
+    );
   }
   onCilckCancel() {
 
+  }
+  closeDialog(){
+    this.dialogRef.close();
   }
   commodityFilter(event) {
     this.filteredCommodties = this.searchPipe.transform(this.commodities, this.searchCommodity);

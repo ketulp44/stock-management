@@ -1,125 +1,155 @@
-<div class="container-fluid d-unset">
-    <div class="card p-3 m-4">
+<div class="modal-container">
+    <div class="modal-header">
+        <h5 class="modal-title">Add Inward Stock</h5>
+        <button type="button" class="close" (click)="closeDialog()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
         <form>
-            <h2>Add Inward Stock</h2>
-            <div class="formgroup">
-                <label class="form-control-label">Supplier : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-select [(ngModel)]="inwardStock.selectedSupplier" name="selectedSupplier"
-                        placeholder="Supplier" #singleSelect>
-                        <mat-option>
-                            <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchSupplier"
-                                (ngModelChange)="applyFilter($event)" name="supplierFilter"></ngx-mat-select-search>
-                        </mat-option>
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label">Supplier : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-select [(ngModel)]="inwardStock.SupplierId" name="selectedSupplier" placeholder="Supplier"
+                            #singleSelect>
+                            <mat-option>
+                                <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchSupplier"
+                                    (ngModelChange)="applyFilter($event)" name="supplierFilter">
+                                </ngx-mat-select-search>
+                            </mat-option>
 
-                        <mat-option *ngFor="let supplier of filteredSuppliers" [value]="supplier">
-                            {{supplier.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="formgroup">
-                <label class="form-control-label">Commodity : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-select [(ngModel)]="inwardStock.selectedCommodity" name="selectedCommodity"
-                        (ngModelChange)="onChangeCommodity($event)" placeholder="Commodity" #singleSelect>
-                        <mat-option>
-                            <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchCommodity"
-                                (ngModelChange)="commodityFilter($event)" name="supplierFilter"></ngx-mat-select-search>
-                        </mat-option>
+                            <mat-option *ngFor="let supplier of filteredSuppliers" [value]="supplier.id">
+                                {{supplier.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Commodity : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-select [(ngModel)]="inwardStock.CommodityId" name="selectedCommodity"
+                            (ngModelChange)="onChangeCommodity($event)" placeholder="Commodity" #singleSelect>
+                            <mat-option>
+                                <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchCommodity"
+                                    (ngModelChange)="commodityFilter($event)" name="supplierFilter">
+                                </ngx-mat-select-search>
+                            </mat-option>
 
-                        <mat-option *ngFor="let commodity of filteredCommodties" [value]="commodity">
-                            {{commodity.CommodityName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                            <mat-option *ngFor="let commodity of filteredCommodties" [value]="commodity.CommodityID">
+                                {{commodity.CommodityName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <div *ngIf="inwardStock.CommodityId" class="form-row">
+                        <label class="form-control-label">SubCommodity : </label>
+                        <mat-form-field class="cstm-form-ctrl">
+                            <mat-select [(ngModel)]="inwardStock.SubCommodityId" name="selectedSubCommodity"
+                                placeholder="SubCommodity" #singleSelect>
+                                <mat-option>
+                                    <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchSubCommodity"
+                                        (ngModelChange)="subCommodityFilter($event)" name="supplierFilter">
+                                    </ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option *ngFor="let subCommodity of filteredSubCommodities"
+                                    [value]="subCommodity.SubCommodityID">
+                                    {{subCommodity.SubCommodityName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="inwardStock.selectedCommodity" class="formgroup">
-                <label class="form-control-label">SubCommodity : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-select [(ngModel)]="inwardStock.selectedSubCommodity" name="selectedSubCommodity"
-                        placeholder="SubCommodity" #singleSelect>
-                        <mat-option>
-                            <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchSubCommodity"
-                                (ngModelChange)="subCommodityFilter($event)" name="supplierFilter">
-                            </ngx-mat-select-search>
-                        </mat-option>
-                        <mat-option *ngFor="let subCommodity of filteredSubCommodities" [value]="subCommodity">
-                            {{subCommodity.SubCommodityName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label">Stock Type : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-select [(ngModel)]="inwardStock.ProcessType" name="selectedInputStockType"
+                            placeholder="Input Stock Type" #singleSelect>
+                            <mat-option *ngFor="let stockType of intputStockTypes" [value]="stockType.value">
+                                {{stockType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Quality Type : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-select [(ngModel)]="inwardStock.QualityType" name="selectedQualityType"
+                            placeholder="Quality Type" #singleSelect>
+                            <mat-option *ngFor="let qualityType of qualityTypes" [value]="qualityType.value">
+                                {{qualityType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Package Size : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Package Size</mat-label>
+                        <input type="number" matInput placeholder="Package Size" name="packageSize"
+                            [(ngModel)]="inwardStock.PackageSize" value="10">
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="formgroup">
-                <label class="form-control-label">Stock Type : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-select [(ngModel)]="inwardStock.selectedInputStockType" name="selectedInputStockType"
-                        placeholder="Input Stock Type" #singleSelect>
-                        <mat-option *ngFor="let stockType of intputStockTypes" [value]="stockType.value">
-                            {{stockType.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label"> Unit : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Package Unit</mat-label>
+                        <input type="number" matInput placeholder="Package Unit" name="packageUnit"
+                            [(ngModel)]="inwardStock.PackageUnit" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">No Of Bags : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>No Of Bags</mat-label>
+                        <input type="number" matInput placeholder="No Of Bags" name="noOfBags"
+                            [(ngModel)]="inwardStock.NoOfBags" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col"></div>
             </div>
-            <div class="formgroup">
-                <label class="form-control-label">Quality Type : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-select [(ngModel)]="inwardStock.selectedQualityType" name="selectedQualityType"
-                        placeholder="Quality Type" #singleSelect>
-                        <mat-option *ngFor="let qualityType of qualityTypes" [value]="qualityType.value">
-                            {{qualityType.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label">Stock Location : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Stock Location</mat-label>
+                        <input type="text" matInput placeholder="Stock Location" name="stockLocation"
+                            [(ngModel)]="inwardStock.StockLocation" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Price : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Price</mat-label>
+                        <input type="number" matInput placeholder="Price" name="price"
+                            [(ngModel)]="inwardStock.StockPrice" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Incoming Date : </label>
+                    <mat-form-field class="form-control-label">
+                        <mat-label>Incoming Date</mat-label>
+                        <input matInput [matDatepicker]="picker" name="incommingDate" matInput [max]="maxDate"
+                            [(ngModel)]="inwardStock.IncomingDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="formgroup">
-                <label class="form-control-label">Package Size : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-label>Package Size</mat-label>
-                    <input type="number" matInput placeholder="Package Size" name="packageSize" [(ngModel)]="inwardStock.packageSize" value="10">
-                </mat-form-field>
-            </div>
-            <div class="formgroup">
-                <label class="form-control-label">Package Unit : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-label>Package Unit</mat-label>
-                    <input type="number" matInput placeholder="Package Unit" name="packageUnit" [(ngModel)]="inwardStock.packageUnit" value="10">
-                </mat-form-field>
-            </div>
-            <div class="formgroup">
-                <label class="form-control-label">No Of Bags : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-label>No Of Bags</mat-label>
-                    <input type="number" matInput placeholder="No Of Bags" name="noOfBags" [(ngModel)]="inwardStock.noOfBags" value="10">
-                </mat-form-field>
-            </div>
-            <div class="formgroup">
-                <label class="form-control-label">Stock Location : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-label>Stock Location</mat-label>
-                    <input type="text" matInput placeholder="Stock Location" name="stockLocation" [(ngModel)]="inwardStock.stockLocation" value="10">
-                </mat-form-field>
-            </div>
-            <div class="form-group">
-                <label class="form-control-label">Price : </label>
-                <mat-form-field class="cstm-form-ctrl">
-                    <mat-label>Price</mat-label>
-                    <input type="number" matInput placeholder="Price" name="price" [(ngModel)]="inwardStock.price" value="10">
-                </mat-form-field>
-            </div>
-            <div class="form-group">
-                <label class="form-control-label">Incoming Date : </label>
-                <mat-form-field class="form-control-label">
-                    <mat-label>Incoming Date</mat-label>
-                    <input matInput [matDatepicker]="picker" name="incommingDate" matInput [max]="maxDate" [(ngModel)]="inwardStock.incommingDate">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-            </div>
-            <div class="d-flex pull-right">
+            <!-- <div class="d-flex pull-right">
                 <button mat-raised-button color="primary" class="mx-2" (click)="onClickSave()">save</button>
                 <button mat-raised-button color="primary" class="mx-2" (click)="onCilckCancel()">cancel</button>
-            </div>
+            </div> -->
         </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDialog()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onSaveOrUpdate()">Submit</button>
     </div>
 </div>
