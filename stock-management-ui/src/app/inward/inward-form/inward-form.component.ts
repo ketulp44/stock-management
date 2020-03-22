@@ -12,7 +12,7 @@ export class InwardFormComponent implements OnInit {
 
   suppliers: any[] = [{ id: 1, name: 'ketul' }, { id: 2, name: 'harsh' }, { id: 3, name: 'kadam' }, { id: 4, name: 'narendra' }, { id: 5, name: 'parth' }];
   selectedSupplier = { id: 1, name: 'ketul' };
-  inwardStock: any = {};
+  inwardStock: any = {}
   searchSupplier = '';
   filteredSuppliers = [];
   filteredCommodties: any[] = [];
@@ -25,6 +25,7 @@ export class InwardFormComponent implements OnInit {
   searchSubCommodity = '';
   intputStockTypes: any[] = [];
   qualityTypes: any[] = [];
+  maxDate: Date;
   constructor(
     private searchPipe: SearchPipe,
     private commonService: CommonUtilService,
@@ -36,6 +37,13 @@ export class InwardFormComponent implements OnInit {
     this.getCommoidities();
     this.getInputStockStates();
     this.getQualityTypes();
+    this.setMaxDate();
+  }
+  setMaxDate() {
+    let today = new Date();
+    this.maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    console.log(this.maxDate);
+
   }
   getSuppliers() {
     this.filteredSuppliers = this.suppliers;
@@ -55,12 +63,10 @@ export class InwardFormComponent implements OnInit {
   getInputStockStates() {
     this.commonService.getInputStockType().subscribe((data) => {
       this.intputStockTypes = data;
-
-    });
+    })
   }
   getQualityTypes() {
     this.commonService.getQualityTypes().subscribe((data) => {
-      console.log(data);
       this.qualityTypes = data;
     });
   }
@@ -68,10 +74,9 @@ export class InwardFormComponent implements OnInit {
     this.getSubCommodities(event.CommodityID);
   }
   onClickSave() {
-      debugger;
-      console.log(this.inwardStock);
+
   }
-  onClickCancel() {
+  onCilckCancel() {
 
   }
   commodityFilter(event) {
