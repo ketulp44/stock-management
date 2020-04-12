@@ -5,7 +5,12 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { MatTooltipModule,MatIconModule } from '@angular/material';
+import {
+  MatTooltipModule, MatIconModule, MatSidenavModule,
+  MatExpansionModule, MatListModule, MatButtonToggleModule,
+  MatRippleModule,
+} from '@angular/material';
+
 
 
 @NgModule({
@@ -19,9 +24,14 @@ import { MatTooltipModule,MatIconModule } from '@angular/material';
     DashboardRoutingModule,
     MatButtonModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    MatExpansionModule,
+    MatListModule,
+    MatButtonToggleModule,
+    MatRippleModule,
   ],
-  bootstrap:[],
-  exports:[]
+  bootstrap: [],
+  exports: []
 })
 export class DashboardModule { }

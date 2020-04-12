@@ -14,9 +14,9 @@ export class HeaderComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.toggleService.isMenuOpenObservable.subscribe((val) => {
-      this.isMenuOpen = val;
-    });
+    // this.toggleService.isMenuOpenObservable.subscribe((val) => {
+    //   this.isMenuOpen = val;
+    // });
   }
 
   toggleMenu(event) {

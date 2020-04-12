@@ -7,6 +7,11 @@ export class CommodityController {
 
     constructor(private readonly commodityService: CommodityService) { }
 
+    @Get('with-sub-commodities')
+    public async getCommoditiesWithSubCommodities() {
+        return await this.commodityService.getCommoditiesWithSubCommodities();
+    }
+
     @Get('all')
     public async getCommodities() {
         return await this.commodityService.getCommodities();

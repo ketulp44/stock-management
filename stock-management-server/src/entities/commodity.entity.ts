@@ -1,3 +1,4 @@
+import { SubCommodity } from 'src/entities/sub-commodity.entity';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('commodity')
@@ -16,5 +17,7 @@ export class Commodity {
 
   @Column({ name: 'updated_dt_time', default: new Date() })
   UpdateDateTime: Date;
-  
+
+  SubCommodities: SubCommodity[];
+
 }

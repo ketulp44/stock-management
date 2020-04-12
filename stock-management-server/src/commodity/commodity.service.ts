@@ -1,3 +1,4 @@
+import { SubCommodity } from '../entities/sub-commodity.entity';
 import { Commodity } from './../entities/commodity.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -17,6 +18,12 @@ export class CommodityService {
 
     public async getCommodityById(id: number) {
         return await this.CommodityRepository.findOne(id);
+    }
+
+    public async getCommoditiesWithSubCommodities() {
+        return await this.CommodityRepository.createQueryBuilder('commodity')
+        .leftJoinAndMapMany('commodity.SubCommodities',SubCommodity,'sub_commodity',"commodity.CommodityID = sub_commodity.CommodityId")
+        .getMany();
     }
 
     public async Save(commodity: Commodity) {

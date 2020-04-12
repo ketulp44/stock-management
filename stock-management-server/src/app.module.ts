@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { CustomerModule } from './customer/customer.module';
 import { CommodityModule } from './commodity/commodity.module';
 import { SubCommodityModule } from './sub-commodity/sub-commodity.module';
+import { InwardStockModule } from './inward-stock/inward-stock.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { SubCommodityModule } from './sub-commodity/sub-commodity.module';
   UsersModule,
   CustomerModule,
   CommodityModule,
-  SubCommodityModule],
+  SubCommodityModule,
+  InwardStockModule],
   controllers: [AppController],
   providers: [AppService],
 })
