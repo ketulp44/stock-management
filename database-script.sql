@@ -58,7 +58,7 @@ CREATE TABLE "inward_stocks" (
 	"no_of_bags" INTEGER NOT NULL,
 	"stock_location" VARCHAR(200) NULL,
 	"price" DECIMAL(22,12) NOT NULL,
-	"incm_date" TIMESTAMP NOT NULL,
+	"incm_date_time" TIMESTAMP NOT NULL,
 	"is_active" SMALLINT NOT NULL DEFAULT 1,
 	"created_dt_time" TIMESTAMP DEFAULT current_timestamp,
 	"updated_dt_time" TIMESTAMP DEFAULT current_timestamp,
@@ -96,6 +96,29 @@ CREATE TABLE "users" (
 
 	PRIMARY KEY ("user_id")
 );
+
+DROP TABLE IF EXISTS "processed_current_stock_details";
+CREATE TABLE "processed_current_stock_details" (
+	"pcsd_id" SERIAL,
+	"inward_stock_id" INTEGER NOT NULL,
+	"quantity" INTEGER NOT NULL,
+	"incoming_date_time" TIMESTAMP NOT NULL,
+	"created_dt_time" TIMESTAMP DEFAULT current_timestamp,
+	"updated_dt_time" TIMESTAMP DEFAULT current_timestamp,
+	PRIMARY KEY ("pcsd_id")
+);
+
+DROP TABLE IF EXISTS "unprocessed_current_stock_details";
+CREATE TABLE "unprocessed_current_stock_details" (
+	"unpcsd_id" SERIAL,
+	"inward_stock_id" INTEGER NOT NULL,
+	"quantity" INTEGER NOT NULL,
+	"incoming_date_time" TIMESTAMP NOT NULL,
+	"created_dt_time" TIMESTAMP DEFAULT current_timestamp,
+	"updated_dt_time" TIMESTAMP DEFAULT current_timestamp,
+	PRIMARY KEY ("unpcsd_id")
+);
+
 
 
 
