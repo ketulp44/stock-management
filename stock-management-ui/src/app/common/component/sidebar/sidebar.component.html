@@ -1,23 +1,28 @@
 <mat-sidenav-container [hasBackdrop]="true" autosize>
-  <mat-sidenav class="dino-side-nav" #sidenav mode="push" [opened]="false" position="start"
-      [fixedInViewport]="true" [fixedTopGap]="0" [fixedBottomGap]="0">
-      <header>Menu</header>
-      <mat-nav-list>
-          <mat-list-item routerLinkActive="active-link">
-              <a matLine href="javascript:void(0);" class="nav-link  yellow-box" 
-              [routerLink]="['./../customers']">
-                  <i class="material-icons">public</i> Customers</a>
-          </mat-list-item>
-          <mat-list-item routerLinkActive="active-link">
-            <a matLine href="javascript:void(0);" class="nav-link  yellow-box" 
-            [routerLink]="['./../suppliers']">
-                <i class="material-icons">public</i> Suppliers</a>
-        </mat-list-item>
-        <mat-list-item routerLinkActive="active-link">
-          <a matLine href="javascript:void(0);" class="nav-link  yellow-box" 
-          [routerLink]="['./../inward']">
-              <i class="material-icons">public</i> Inward-stock</a>
+  <mat-sidenav class="dino-side-nav" #sidenav mode="push" [opened]="false" position="start" [fixedInViewport]="true"
+    [fixedTopGap]="0" [fixedBottomGap]="0">
+    <header style="text-align: center;">Menu</header>
+    <mat-nav-list>
+      <mat-list-item routerLinkActive="active-link">
+        <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../customers']">
+          <i class="material-icons">public</i> Customers</a>
       </mat-list-item>
-      </mat-nav-list>
+      <mat-list-item routerLinkActive="active-link">
+        <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../suppliers']">
+          <i class="material-icons">public</i> Suppliers</a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active-link">
+        <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../commodities']">
+          <i class="material-icons">public</i>Commodities</a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active-link">
+        <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../inward']">
+          <i class="material-icons">public</i> Inward-stock</a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active-link">
+        <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../currentstocks']">
+          <i class="material-icons">public</i> Current -stocks</a>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-sidenav>
 </mat-sidenav-container>

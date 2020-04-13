@@ -4,6 +4,8 @@ import { SearchPipe } from 'src/app/common/pipes/search.pipe';
 import { CommonUtilService } from 'src/app/common/service/common-util/common-util.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { LoaderService } from 'src/app/common/service/loader.service';
+
 
 @Component({
   selector: 'app-inward-form',
@@ -34,15 +36,30 @@ export class InwardFormComponent implements OnInit {
     private inwardStockService: InwardService,
     public dialogRef: MatDialogRef<InwardFormComponent>,
     private toastr: ToastrService,
+    public loaderService:LoaderService,
     @Inject(MAT_DIALOG_DATA) public inwardStockId: any
   ) { }
 
   ngOnInit() {
+    console.log(this.inwardStockId.dataKey);
+    if(this.inwardStockId.dataKey){
+      this.getStockDetail(this.inwardStockId.dataKey);
+    }
     this.getSuppliers();
     this.getCommoidities();
     this.getInputStockStates();
     this.getQualityTypes();
     this.setMaxDate();
+  }
+  getStockDetail(id){
+    this.loaderService.showLoader();
+    this.inwardStockService.getInwardStockById(id).subscribe((data)=>{
+      console.log(data);
+      this.inwardStock=data;
+      this.loaderService.hideLoader();
+    },(err)=>{
+      this.loaderService.hideLoader();
+    })
   }
   setMaxDate() {
     let today = new Date();
@@ -82,19 +99,21 @@ export class InwardFormComponent implements OnInit {
   }
   onClickSave() {
     console.log(this.inwardStock);
-    
+    this.loaderService.showLoader();
     this.inwardStockService.saveInwardStocks(this.inwardStock).subscribe((data)=>{
-      console.log(data);
-      
-    },err=>console.log(err)
+      this.toastr.success('Stock added sucessfully', 'Success');
+      this.dialogRef.close('success');
+      this.loaderService.hideLoader();
+    },(err)=>{
+      this.loaderService.hideLoader();
+      this.toastr.error(err,'Error');
+    }
     );
   }
   onCilckCancel() {
-
-  }
-  closeDialog(){
     this.dialogRef.close();
   }
+  
   commodityFilter(event) {
     this.filteredCommodties = this.searchPipe.transform(this.commodities, this.searchCommodity);
   }

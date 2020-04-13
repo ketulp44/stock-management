@@ -120,3 +120,11 @@ table.mat-table thead {
    text-align: center;
    color: #027f7b;
 }
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  text-align: center !important;
+  padding: 0;
+  border-width: 1px;
+  border-style: solid ridge;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}

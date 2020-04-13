@@ -31,14 +31,23 @@ const routes: Routes = [
       path: '',
       loadChildren: () => import('./../../../inward/inward.module').then(m => m.InwardModule)
     }]
-    },
-    {
-      path: 'commodities',
-      component: DashboardComponent,
-      children: [{
-        path: '',
-        loadChildren: () => import('./../../../commodity/commodity.module').then(m => m.CommodityModule)
-      }]
+  },
+  {
+    path: 'commodities',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./../../../commodity/commodity.module').then(m => m.CommodityModule)
+    }]
+
+  },
+  {
+    path: 'currentstocks',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./../../../current-stock/current-stock.module').then(m => m.CurrentStockModule)
+    }]
 
   },
   {

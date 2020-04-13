@@ -1,3 +1,4 @@
+@import "src/scss/color.scss";
 .modal-container {
   position: relative;
   display: block;
@@ -11,12 +12,12 @@
   max-height: inherit;
 }
 .modal-footer {
-  
   bottom: 0px;
   width: 100%;
   max-width: initial;
   padding-right: 24px;
 }
-.modal-header{
-    background-color: #175249;
+.modal-header {
+  color: white;
+  background-color: $header-dark;
 }
