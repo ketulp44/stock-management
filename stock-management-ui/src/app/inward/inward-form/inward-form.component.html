@@ -76,8 +76,8 @@
                     </mat-form-field>
                 </div>
                 <div class="col">
-                    <label class="form-control-label">Quality Type : </label>
-                    <mat-form-field class="cstm-form-ctrl">
+                    <label class="form-control-label" *ngIf="inwardStock.ProcessType=='PROCESSED'">Quality Type : </label>
+                    <mat-form-field *ngIf="inwardStock.ProcessType=='PROCESSED'" class="cstm-form-ctrl">
                         <mat-select [(ngModel)]="inwardStock.QualityType" name="selectedQualityType"
                             placeholder="Quality Type" #singleSelect>
                             <mat-option *ngFor="let qualityType of qualityTypes" [value]="qualityType.value">
@@ -149,7 +149,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeDialog()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onSaveOrUpdate()">Submit</button>
+        <button type="button" class="btn btn-secondary" (click)="onCilckCancel()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onClickSave()">Submit</button>
     </div>
 </div>

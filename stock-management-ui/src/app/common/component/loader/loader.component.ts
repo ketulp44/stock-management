@@ -16,7 +16,7 @@ export class LoaderComponent implements OnInit {
   @Input() value?: number;
   @Input() backdropEnabled = true;
   @Input() positionGloballyCenter = true;
-  @Input() displayProgressSpinner: boolean;
+  @Input() displayProgressSpinner: boolean = true;
 
   @ViewChild('progressSpinnerRef',{static:false})
   private progressSpinnerRef: TemplateRef<any>;

@@ -3,6 +3,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 import { ToastrService } from 'ngx-toastr';
 import { InwardService } from '../service/inward.service';
 import { InwardFormComponent } from '../inward-form/inward-form.component';
+import { LoaderService } from 'src/app/common/service/loader.service';
 export interface CommodityDetail{
   CommodityID:number;
   CommodityName:string;
@@ -32,12 +33,13 @@ export interface InwardStock {
   styleUrls: ['./inward-stock-list.component.scss']
 })
 export class InwardStockListComponent implements OnInit {
+  displayProgressSpinner: boolean = false;
   displayedColumns: string[] = ['id', 'CommodityName', 'SubCommodityName','ProcessType','QualityType','StockLocation','StockPrice','IncomingDate', 'color'];
   dataSource: MatTableDataSource<InwardStock>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor(private dialog: MatDialog,
-    private toastr: ToastrService, private inwardStockService: InwardService) {
+    private toastr: ToastrService, private inwardStockService: InwardService,public loaderService:LoaderService) {
   }
   ngOnInit() {
     console.log('init');
@@ -46,12 +48,15 @@ export class InwardStockListComponent implements OnInit {
   }
   getInwardStocks(){
     console.log('get inward stocks');
-    
+    this.loaderService.showLoader();
     this.inwardStockService.getInwardStocks().subscribe((data:any)=>{
       console.log(data);
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.loaderService.hideLoader();
+    },(err)=>{
+      this.loaderService.hideLoader();
     });
 
   }

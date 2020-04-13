@@ -32,7 +32,6 @@ import { AddSubCommodityComponent } from './commodity/add-sub-commodity/add-sub-
     LoginComponent,
     AddSupplierComponent,
     ContactValidatorDirective,
-    LoaderComponent,
     AddCustomerComponent,
     InwardFormComponent,
     AddCommodityComponent,
