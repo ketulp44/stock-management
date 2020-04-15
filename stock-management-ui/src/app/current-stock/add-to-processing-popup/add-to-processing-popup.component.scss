@@ -1,0 +1,10 @@
+@import "src/scss/color.scss";
+.alert{
+    width: fit-content;
+    padding: 5px !important;
+    margin-left: 16px !important;
+}
+.modal-header {
+    color: white;
+    background-color: $header-dark;
+}

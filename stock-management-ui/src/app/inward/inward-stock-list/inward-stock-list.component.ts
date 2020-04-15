@@ -69,7 +69,6 @@ export class InwardStockListComponent implements OnInit {
     }
   }
   onClickAddStock(id?){
-    console.log('id ', id);
     let dialogRef = this.dialog.open(InwardFormComponent, {
       height: 'auto',
       width: '80%',
