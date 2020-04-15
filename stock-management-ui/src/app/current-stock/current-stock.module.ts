@@ -8,6 +8,7 @@ import { SharedModule } from '../common/shared.module';
 import { InwardRoutingModule } from '../inward/inward-routing.module';
 import { MatSelectModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AddToProcessingPopupComponent } from './add-to-processing-popup/add-to-processing-popup.component';
 
 
 @NgModule({

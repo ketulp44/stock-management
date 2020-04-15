@@ -26,16 +26,20 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatNativeDateModule, MatDatepickerModule, MatSelectModule } from '@angular/material';
 import { AddCommodityComponent } from './commodity/add-commodity/add-commodity.component';
 import { AddSubCommodityComponent } from './commodity/add-sub-commodity/add-sub-commodity.component';
+import { AddToProcessingPopupComponent } from './current-stock/add-to-processing-popup/add-to-processing-popup.component';
+import { MaxValidatorDirective } from './common/directive/max-validator.directive';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AddSupplierComponent,
     ContactValidatorDirective,
+    MaxValidatorDirective,
     AddCustomerComponent,
     InwardFormComponent,
     AddCommodityComponent,
-    AddSubCommodityComponent
+    AddSubCommodityComponent,
+    AddToProcessingPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +74,8 @@ import { AddSubCommodityComponent } from './commodity/add-sub-commodity/add-sub-
     AddCommodityComponent, 
     AddSubCommodityComponent,
     InwardFormComponent,
-    DeleteAlertComponent
+    DeleteAlertComponent,
+    AddToProcessingPopupComponent
   ]
 })
 export class AppModule { }

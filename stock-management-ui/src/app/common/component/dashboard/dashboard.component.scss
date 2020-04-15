@@ -52,4 +52,19 @@
   min-height: inherit;
   max-height: inherit;
   }
-  
+  .sidebar-heading{
+    font-weight: 500;
+    color:grey
+  }
+  .vertical-center{
+    vertical-align: center;
+  }
+  mat-list-item a:focus{
+    outline: none;
+  }
+  .navbar-white{
+    background-color: white;
+  }
+  .nav-link{
+    background-color: white;
+  }

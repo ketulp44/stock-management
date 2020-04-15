@@ -6,6 +6,7 @@ import { MatSidenavModule, MatButtonToggleModule } from '@angular/material';
 import { LoaderComponent } from './component/loader/loader.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatProgressSpinnerModule } from '@angular/material';
+import { MaxValidatorDirective } from './directive/max-validator.directive';
 
 
 
