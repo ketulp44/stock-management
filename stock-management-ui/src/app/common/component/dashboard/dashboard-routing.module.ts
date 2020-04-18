@@ -51,6 +51,14 @@ const routes: Routes = [
 
   },
   {
+    path: 'processing',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./../../../processing/processing.module').then(m => m.ProcessingModule)
+    }]
+  },
+  {
     path: '',
     redirectTo: 'customers',
     pathMatch: 'full'

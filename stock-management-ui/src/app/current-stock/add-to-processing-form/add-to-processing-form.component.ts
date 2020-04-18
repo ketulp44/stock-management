@@ -99,6 +99,7 @@ export class AddToProcessingFormComponent implements OnInit {
     let dialogRef = this.dialog.open(AddToProcessingPopupComponent, {
       height: 'auto',
       width: '80%',
+      maxWidth: '500px',
       maxHeight:'80%',
       data: {
         dataKey: stock
