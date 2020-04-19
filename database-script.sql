@@ -68,13 +68,11 @@ CREATE TABLE "inward_stocks" (
 DROP TABLE IF EXISTS "current_stocks";
 CREATE TABLE "current_stocks" (
 	"cs_id" SERIAL,
-	"s_id" INTEGER NOT NULL,
 	"c_id" INTEGER NOT NULL,
+	"sc_id" INTEGER NOT NULL,
 	"process_type" VARCHAR(200) NOT NULL,
-	"quantity_type" VARCHAR(200) NOT NULL,
-	"package_size" VARCHAR(200) NOT NULL,
-	"package_unit" VARCHAR(200) NOT NULL,
-	"no_of_bags" INTEGER NOT NULL,
+	"quality_type" VARCHAR(200) NULL DEFAULT NULL,
+	"quantity_in_kg" DECIMAL(22,2) NOT NULL,
 	"price" DECIMAL(22,2) NOT NULL,
 	"is_active" SMALLINT NOT NULL DEFAULT 1,
 	"created_dt_time" TIMESTAMP DEFAULT current_timestamp,
@@ -120,11 +118,85 @@ CREATE TABLE "unprocessed_current_stock_details" (
 );
 
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS stock_consolidation;
+CREATE OR REPLACE PROCEDURE stock_consolidation()
+LANGUAGE plpgsql    
+AS $$
+BEGIN
+   
+TRUNCATE current_stocks;
+
+-- current stock entry unprocessed
+INSERT INTO current_stocks 
+ ( 
+  sc_id,
+  c_id,
+  process_type,
+  quantity_in_kg,
+  price,
+  is_active,
+  created_dt_time,
+  updated_dt_time
+)
+SELECT 
+ins.sc_id,
+ins.c_id,
+ins.process_type,
+SUM(ucsd.quantity) AS quantity_in_kg,
+0 AS price,
+1 AS is_active,
+CURRENT_TIMESTAMP,
+CURRENT_TIMESTAMP
+FROM 
+unprocessed_current_stock_details ucsd 
+INNER JOIN inward_stocks ins ON ucsd.inward_stock_id = ins.ins_id
+GROUP BY 
+ins.sc_id,
+ins.c_id,
+ins.process_type;
 
 
-INSERT INTO "unjhastockmanagement"."suppliers" ("s_name") VALUES ('KADAM2');
+-- process current stock entry
+INSERT INTO current_stocks 
+ ( 
+  sc_id,
+  c_id,
+  process_type,
+  quantity_in_kg,
+  quality_type,
+  price,
+  is_active,
+  created_dt_time,
+  updated_dt_time
+)
+SELECT 
+ins.sc_id,
+ins.c_id,
+ins.process_type,
+SUM(ucsd.quantity) AS quantity_in_kg,
+ins.quantity_type,
+0 AS price,
+1 AS is_active,
+CURRENT_TIMESTAMP,
+CURRENT_TIMESTAMP
+FROM 
+processed_current_stock_details ucsd 
+INNER JOIN inward_stocks ins ON ucsd.inward_stock_id = ins.ins_id
+GROUP BY 
+ins.sc_id,
+ins.c_id,
+ins.process_type,
+ins.quantity_type;
 
-SELECT * from suppliers AS s WHERE s.s_id  IN ('2');
+--SELECT * FROM current_stocks;
+END;
+$$;
 
 
-SELECT "suppliers"."s_id" AS "suppliers_s_id", "suppliers"."s_name" AS "suppliers_s_name", "suppliers"."is_active" AS "Suppliers_is_active", "Suppliers"."created_dt_time" AS "Suppliers_created_dt_time", "Suppliers"."updated_dt_time" AS "Suppliers_updated_dt_time" FROM "unjhastockmanagement"."suppliers" "Suppliers" WHERE "Suppliers"."s_id" IN ("2");
+/**
+SELECT 'DROP FUNCTION ' || oid::regprocedure
+FROM   pg_proc
+WHERE  proname = 'submit_currenstock'  -- name without schema-qualification
+AND    pg_function_is_visible(oid);
+*/
