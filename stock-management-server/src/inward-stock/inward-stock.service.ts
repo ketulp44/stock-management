@@ -53,9 +53,9 @@ export class InwardStockService {
         inwardStock.UpdateDateTime = new Date();
         const result = await this.InwardStockRepository.insert(inwardStock);
 
-        if (inwardStock.ProcessType == ProcessType.processed) {
+        if (inwardStock.ProcessType.toLowerCase() == ProcessType.processed) {
             await this.SaveProcessStockDetails(inwardStock);
-        } else if (inwardStock.ProcessType == ProcessType.unprocessed) {
+        } else if (inwardStock.ProcessType.toLowerCase() == ProcessType.unprocessed) {
             await this.SaveUnProcessStockDetails(inwardStock);
         }
         return result;
@@ -64,9 +64,9 @@ export class InwardStockService {
     public async UpdateInwardStock(inwardStock: InwardStock) {
         inwardStock.UpdateDateTime = new Date();
         const result = await this.InwardStockRepository.update(inwardStock.InwardStockId, inwardStock);
-        if (inwardStock.ProcessType == ProcessType.processed) {
+        if (inwardStock.ProcessType.toLowerCase() == ProcessType.processed) {
             await this.SaveProcessStockDetails(inwardStock);
-        } else if (inwardStock.ProcessType == ProcessType.unprocessed) {
+        } else if (inwardStock.ProcessType.toLowerCase() == ProcessType.unprocessed) {
             await this.SaveUnProcessStockDetails(inwardStock);
         }
         return result;
