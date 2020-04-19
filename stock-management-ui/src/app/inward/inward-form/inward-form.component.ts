@@ -16,7 +16,7 @@ export class InwardFormComponent implements OnInit {
 
   suppliers: any[] = [{ id: 1, name: 'ketul' }, { id: 2, name: 'harsh' }, { id: 3, name: 'kadam' }, { id: 4, name: 'narendra' }, { id: 5, name: 'parth' }];
   selectedSupplier = { id: 1, name: 'ketul' };
-  inwardStock: any = {}
+  inwardStock: any = {};
   searchSupplier = '';
   filteredSuppliers = [];
   filteredCommodties: any[] = [];
@@ -29,6 +29,7 @@ export class InwardFormComponent implements OnInit {
   searchSubCommodity = '';
   intputStockTypes: any[] = [];
   qualityTypes: any[] = [];
+  Units = ['kg', 'gram', 'quintal', 'ton'];
   maxDate: Date;
   constructor(
     private searchPipe: SearchPipe,
@@ -36,13 +37,13 @@ export class InwardFormComponent implements OnInit {
     private inwardStockService: InwardService,
     public dialogRef: MatDialogRef<InwardFormComponent>,
     private toastr: ToastrService,
-    public loaderService:LoaderService,
+    public loaderService: LoaderService,
     @Inject(MAT_DIALOG_DATA) public inwardStockId: any
   ) { }
 
   ngOnInit() {
     console.log(this.inwardStockId.dataKey);
-    if(this.inwardStockId.dataKey){
+    if (this.inwardStockId.dataKey) {
       this.getStockDetail(this.inwardStockId.dataKey);
     }
     this.getSuppliers();
@@ -51,13 +52,13 @@ export class InwardFormComponent implements OnInit {
     this.getQualityTypes();
     this.setMaxDate();
   }
-  getStockDetail(id){
+  getStockDetail(id) {
     this.loaderService.showLoader();
-    this.inwardStockService.getInwardStockById(id).subscribe((data)=>{
+    this.inwardStockService.getInwardStockById(id).subscribe((data) => {
       console.log(data);
-      this.inwardStock=data;
+      this.inwardStock = data;
       this.loaderService.hideLoader();
-    },(err)=>{
+    }, (err) => {
       this.loaderService.hideLoader();
     })
   }
@@ -81,7 +82,7 @@ export class InwardFormComponent implements OnInit {
       this.subCommodities = data;
       this.filteredSubCommodities = this.subCommodities;
       console.log(this.filteredSubCommodities);
-      
+
     });
   }
   getInputStockStates() {
@@ -100,20 +101,20 @@ export class InwardFormComponent implements OnInit {
   onClickSave() {
     console.log(this.inwardStock);
     this.loaderService.showLoader();
-    this.inwardStockService.saveInwardStocks(this.inwardStock).subscribe((data)=>{
+    this.inwardStockService.saveInwardStocks(this.inwardStock).subscribe((data) => {
       this.toastr.success('Stock added sucessfully', 'Success');
       this.dialogRef.close('success');
       this.loaderService.hideLoader();
-    },(err)=>{
+    }, (err) => {
       this.loaderService.hideLoader();
-      this.toastr.error(err,'Error');
+      this.toastr.error(err, 'Error');
     }
     );
   }
   onCilckCancel() {
     this.dialogRef.close();
   }
-  
+
   commodityFilter(event) {
     this.filteredCommodties = this.searchPipe.transform(this.commodities, this.searchCommodity);
   }
