@@ -1,13 +1,14 @@
+import { CurrentStockService } from './../currentstock/currentstock.service';
 import { ProcessType } from './../enums/process-type.enum';
 import { NotProcessedCurrentStockDetailsEntity } from './../entities/not-processed-stock-details.entity';
 import { ProcessedCurrentStockDetailsEntity } from './../entities/processd-stock-details.entity';
 import { isNullOrUndefined } from 'util';
 import { WeightUnits } from './../enums/weight.enum';
-import { CurrentStockEntity } from './../entities/currenstock.entity';
+//import { CurrentStockEntity } from '../entities/current-stock.entity';
 import { SubCommodity } from 'src/entities/sub-commodity.entity';
 import { Commodity } from './../entities/commodity.entity';
 import { InwardStock } from './../entities/inward-stock.entity';
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -18,6 +19,7 @@ export class InwardStockService {
         //private readonly CurrentStockRepository: Repository<CurrentStockEntity>,
         @InjectRepository(ProcessedCurrentStockDetailsEntity) private readonly ProcessedCurrentStockRepository: Repository<ProcessedCurrentStockDetailsEntity>,
         @InjectRepository(NotProcessedCurrentStockDetailsEntity) private readonly unProcessedCurrentStockRepository: Repository<NotProcessedCurrentStockDetailsEntity>,
+        private readonly currentStockService: CurrentStockService,
     ) {
 
     }
@@ -38,14 +40,21 @@ export class InwardStockService {
     }
 
     public async Save(inwardStock: InwardStock) {
-        let result;
-        if (Number(inwardStock.InwardStockId) > 0) {
-            result = await this.UpdateInwardStock(inwardStock);
+        try {
+            let result;
+            if (Number(inwardStock.InwardStockId) > 0) {
+                result = await this.UpdateInwardStock(inwardStock);
 
-        } else {
-            result = await this.createNewInwardStock(inwardStock);
+            } else {
+                result = await this.createNewInwardStock(inwardStock);
+            }
+
+            await this.currentStockService.CurrentStockEntry();
+
+            return result;
+        } catch (err) {
+            throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return result;
     }
 
     public async createNewInwardStock(inwardStock: InwardStock) {
