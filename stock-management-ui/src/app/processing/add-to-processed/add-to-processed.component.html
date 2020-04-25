@@ -1,0 +1,97 @@
+<div class="modal-container">
+    <div class="modal-header">
+        <h5 class="modal-title">Mark As Processed</h5>
+        <button type="button" class="close" (click)="onCilckCancel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+           
+
+            <div class="form-row">
+                <div class="col">
+                    <span class="form-control-label">Total Weight :</span>
+                    <span>{{detail.weight}}</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label"> No1 Quantity : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label> No1 Quantity</mat-label>
+                        <input type="number" matInput placeholder=" No1 Quantity" name="no1Quantity"
+                            [(ngModel)]="detail.no1Quantity" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Price : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Price</mat-label>
+                        <input type="number" matInput placeholder="Price" name="no1QuantityPrice"
+                            [(ngModel)]="detail.no1QuantityPrice" value="10">
+                    </mat-form-field>
+                </div>
+                
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label"> No2 Quantity : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label> No2 Quantity</mat-label>
+                        <input type="number" matInput placeholder=" No2 Quantity" name="no2Quantity"
+                            [(ngModel)]="detail.PackageUnit" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Price : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Price</mat-label>
+                        <input type="number" matInput placeholder="Price" name="no2QuantityPrice"
+                            [(ngModel)]="detail.no2QuantityPrice" value="10">
+                    </mat-form-field>
+                </div>
+                
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label"> No3 Quantity : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label> No3 Quantity</mat-label>
+                        <input type="number" matInput placeholder=" No3 Quantity" name="no3Quantity"
+                            [(ngModel)]="detail.no3Quantity" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Price : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Price</mat-label>
+                        <input type="number" matInput placeholder="Price" name="no3QuantityPrice"
+                            [(ngModel)]="detail.no3QuantityPrice" value="10">
+                    </mat-form-field>
+                </div>
+                
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label">Wastage Quantity : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label> Wastage Quantity</mat-label>
+                        <input type="number" matInput placeholder=" Wastage Quantity" name="wastageQuantity"
+                            [(ngModel)]="detail.wastageQuantity" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    
+                </div>
+                
+            </div>
+           
+           
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="onCilckCancel()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onClickSave()">Submit</button>
+    </div>
+</div>

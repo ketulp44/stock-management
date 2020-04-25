@@ -15,6 +15,7 @@ export class ProcessingService {
       commodity:'Jiru',
       subCommodity:'Aus',
       weight: 100,
+      avgPrice: 100,
       supplierList : [
         {
           supplierId: 1,

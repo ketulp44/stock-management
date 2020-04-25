@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, QueryList, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { ProcessingService } from '../service/processing.service';
-import { MatTableDataSource, MatSort, MatPaginator, MatTable } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatTable, MatDialog } from '@angular/material';
 import { LoaderService } from 'src/app/common/service/loader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AddToProcessedComponent } from '../add-to-processed/add-to-processed.component';
 
 export interface ProcessingStock{
   id:number,
@@ -41,6 +42,7 @@ export class ProcessingListComponent implements OnInit {
   constructor(
     private processingService:ProcessingService,
     public loaderService:LoaderService,
+    private dialog: MatDialog,
     private cd: ChangeDetectorRef
     ) { 
 
@@ -84,5 +86,18 @@ export class ProcessingListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  onClickMarkAsProcessed(id){
+    let dialogRef = this.dialog.open(AddToProcessedComponent, {
+      height: 'auto',
+      width: '80%',
+      maxHeight:'80%',
+      data: {
+        dataKey: id
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getStockInProcessing();
+    });
   }
 }
