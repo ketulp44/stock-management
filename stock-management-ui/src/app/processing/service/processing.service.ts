@@ -30,7 +30,8 @@ export class ProcessingService {
       ]
     },
     {
-      id: 1,
+      id: 2,
+      avgPrice:200,
       commodity:'Variyali',
       subCommodity:'Mehsani',
       weight: 100,

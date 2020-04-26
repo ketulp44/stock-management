@@ -9,6 +9,7 @@ import { InwardStockController } from './inward-stock.controller';
 import { ProcessedCurrentStockDetailsEntity } from './../entities/processd-stock-details.entity';
 import { CurrentStockModule } from 'src/currentstock/currentstock.module';
 import { CurrentStockEntity } from 'src/entities/current-stock.entity';
+import { StockInProcessingDetails } from 'src/entities/stock-in-processing-details.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature(
@@ -17,7 +18,8 @@ import { CurrentStockEntity } from 'src/entities/current-stock.entity';
       Commodity,
       ProcessedCurrentStockDetailsEntity,
       NotProcessedCurrentStockDetailsEntity,
-      CurrentStockEntity
+      CurrentStockEntity,
+      StockInProcessingDetails
     ]
   )],
   providers: [InwardStockService,CurrentStockService],

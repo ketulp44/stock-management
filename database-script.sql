@@ -200,3 +200,18 @@ FROM   pg_proc
 WHERE  proname = 'submit_currenstock'  -- name without schema-qualification
 AND    pg_function_is_visible(oid);
 */
+DROP TABLE IF EXISTS unjhastockmanagement."stock_in_processing_details";
+create table unjhastockmanagement."stock_in_processing_details"
+(
+"id" SERIAL,
+"inward_stock_id" integer not null,
+"s_id" integer not null,
+"c_id" integer not null,
+"sc_id" integer not null,
+"quantity" integer ,
+"unprocessed_current_stock_id" integer not null,
+"is_active" smallint default 0,
+"incoming_date" timestamp default current_timestamp,
+"created_date" timestamp default current_timestamp,
+"updated_date" timestamp default current_timestamp
+);

@@ -7,7 +7,7 @@
     </div>
     <div class="modal-body">
         <form>
-           
+
 
             <div class="form-row">
                 <div class="col">
@@ -15,62 +15,48 @@
                     <span>{{detail.weight}}</span>
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row thin-border">
                 <div class="col">
-                    <label class="form-control-label"> No1 Quantity : </label>
+                    <label class="form-control-label">Quality Type : </label>
                     <mat-form-field class="cstm-form-ctrl">
-                        <mat-label> No1 Quantity</mat-label>
-                        <input type="number" matInput placeholder=" No1 Quantity" name="no1Quantity"
-                            [(ngModel)]="detail.no1Quantity" value="10">
+                        <mat-select [(ngModel)]="selectedQuality.qualityType" name="selectedQualityType"
+                            placeholder="Quality Type" #singleSelect>
+                            <!-- <mat-option value=""> Select Quality</mat-option> -->
+                            <mat-option *ngFor="let qualityType of qualityTypes" [value]="qualityType.value">
+                                {{qualityType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Weight : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Weight</mat-label>
+                        <input type="number" matInput placeholder="Weight" name="weight"
+                        appMaxValidator="{{remainingWeight}}"  [(ngModel)]="selectedQuality.weight" value="10">
                     </mat-form-field>
                 </div>
                 <div class="col">
                     <label class="form-control-label">Price : </label>
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label>Price</mat-label>
-                        <input type="number" matInput placeholder="Price" name="no1QuantityPrice"
-                            [(ngModel)]="detail.no1QuantityPrice" value="10">
+                        <input type="number" matInput placeholder="Price" name="price"
+                            [(ngModel)]="selectedQuality.price" value="10">
                     </mat-form-field>
                 </div>
-                
+                <div class="col-md-2 ver-center">
+                    <div class="ml-auto mr-2 mb-1">
+                        <button mat-raised-button color="primary" class="ml-auto mr-2" (click)="onClickAddQuality()"
+                        [disabled]="!selectedQuality.price || !selectedQuality.weight || !selectedQuality.qualityType" >Add</button>
+                    </div>
+                </div>
             </div>
-            <div class="form-row">
-                <div class="col">
-                    <label class="form-control-label"> No2 Quantity : </label>
-                    <mat-form-field class="cstm-form-ctrl">
-                        <mat-label> No2 Quantity</mat-label>
-                        <input type="number" matInput placeholder=" No2 Quantity" name="no2Quantity"
-                            [(ngModel)]="detail.PackageUnit" value="10">
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <label class="form-control-label">Price : </label>
-                    <mat-form-field class="cstm-form-ctrl">
-                        <mat-label>Price</mat-label>
-                        <input type="number" matInput placeholder="Price" name="no2QuantityPrice"
-                            [(ngModel)]="detail.no2QuantityPrice" value="10">
-                    </mat-form-field>
-                </div>
-                
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <label class="form-control-label"> No3 Quantity : </label>
-                    <mat-form-field class="cstm-form-ctrl">
-                        <mat-label> No3 Quantity</mat-label>
-                        <input type="number" matInput placeholder=" No3 Quantity" name="no3Quantity"
-                            [(ngModel)]="detail.no3Quantity" value="10">
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <label class="form-control-label">Price : </label>
-                    <mat-form-field class="cstm-form-ctrl">
-                        <mat-label>Price</mat-label>
-                        <input type="number" matInput placeholder="Price" name="no3QuantityPrice"
-                            [(ngModel)]="detail.no3QuantityPrice" value="10">
-                    </mat-form-field>
-                </div>
-                
+            <div class="form-row thin-border" *ngIf="qualityWiseWeights.length > 0">
+                <span *ngFor="let quality of qualityWiseWeights" class="selected-item">{{quality.qualityType}} : {{quality.weight}} {{quality.price}}
+                    <button mat-icon-button matTooltip="Edit" (click)="onClickRemoveQuality(quality)">
+                        <i class="material-icons">close</i>
+                    </button>
+                </span>
             </div>
             <div class="form-row">
                 <div class="col">
@@ -78,7 +64,7 @@
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label> Wastage Quantity</mat-label>
                         <input type="number" matInput placeholder=" Wastage Quantity" name="wastageQuantity"
-                            [(ngModel)]="detail.wastageQuantity" value="10">
+                        appMaxValidator="{{remainingWeight}}"  [(ngModel)]="detail.wastageQuantity" required>
                     </mat-form-field>
                 </div>
                 <div class="col">

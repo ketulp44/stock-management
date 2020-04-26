@@ -21,3 +21,20 @@
   color: white;
   background-color: $header-dark;
 }
+.ver-center{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.thin-border{
+    border: 1px solid grey;
+    margin-top: 2rem;
+}
+.selected-item{
+    padding-left: 5px;
+    margin: 5px;
+    border: 1px solid #939699;
+    border-radius: 5px;
+    background-color: #87bc87;
+}

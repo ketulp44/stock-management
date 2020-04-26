@@ -13,6 +13,10 @@ import { LoaderService } from 'src/app/common/service/loader.service';
 })
 export class AddToProcessedComponent implements OnInit {
   detail:any={};
+  qualityTypes:any[] =[]; 
+  qualityWiseWeights:any[]=[];
+  selectedQuality : any = {};
+  remainingWeight : number = 0;
   constructor(private searchPipe: SearchPipe,
     private commonService: CommonUtilService,
     private inwardStockService: InwardService,
@@ -25,6 +29,8 @@ export class AddToProcessedComponent implements OnInit {
     console.log(this.details.dataKey);
     if(this.details.dataKey){
       this.detail = this.details.dataKey;
+      this.remainingWeight = this.detail.weight;
+      this.getQualityTypes();
     }
   }
   onCilckCancel(){
@@ -32,5 +38,49 @@ export class AddToProcessedComponent implements OnInit {
   }
   onClickSave(){
     this.dialogRef.close(this.detail);
+  }
+  onClickAddQuality(){
+    this.qualityWiseWeights.push(this.selectedQuality);
+    this.removeFromRemaingWeight(this.selectedQuality.weight)
+    this.selectedQuality = {};
+    this.setQualityTypes();
+  }
+  onClickRemoveQuality(quality){
+    let index:number = this.findIndex(this.qualityWiseWeights,'qualityType',quality.qualityType);
+    
+    if(index >= 0){
+      this.addToRemainingWeight(this.qualityWiseWeights[index].weight);
+      this.qualityWiseWeights.splice(index,1);
+      this.setQualityTypes();
+    }
+    
+  }
+  findIndex(list:any[],field:string,val:any):number{
+    return list.findIndex((value)=>{
+      return value[field]==val;
+    })
+  }
+  setQualityTypes(){
+    this.commonService.getQualityTypes().subscribe((data) => {
+      this.qualityTypes = data.filter((val)=>{
+        return val.id != 1 && this.findIndex(this.qualityWiseWeights,'qualityType',val.value)<0;
+      });
+    });
+  }
+  getQualityTypes() {
+    this.commonService.getQualityTypes().subscribe((data) => {
+      this.qualityTypes = data.filter((val)=>{
+        return val.id != 1;
+      });
+    });
+  }
+  addToRemainingWeight(weight:number){
+    this.remainingWeight +=weight;
+  }
+  removeFromRemaingWeight(weight:number){
+    this.remainingWeight-=weight;
+  }
+  calculatePerKgPrice(){
+    
   }
 }
