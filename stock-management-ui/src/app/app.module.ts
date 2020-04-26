@@ -28,6 +28,7 @@ import { AddCommodityComponent } from './commodity/add-commodity/add-commodity.c
 import { AddSubCommodityComponent } from './commodity/add-sub-commodity/add-sub-commodity.component';
 import { AddToProcessingPopupComponent } from './current-stock/add-to-processing-popup/add-to-processing-popup.component';
 import { MaxValidatorDirective } from './common/directive/max-validator.directive';
+import { AddToProcessedComponent } from './processing/add-to-processed/add-to-processed.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { MaxValidatorDirective } from './common/directive/max-validator.directiv
     InwardFormComponent,
     AddCommodityComponent,
     AddSubCommodityComponent,
-    AddToProcessingPopupComponent
+    AddToProcessingPopupComponent,
+    AddToProcessedComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,8 @@ import { MaxValidatorDirective } from './common/directive/max-validator.directiv
     AddSubCommodityComponent,
     InwardFormComponent,
     DeleteAlertComponent,
-    AddToProcessingPopupComponent
+    AddToProcessingPopupComponent,
+    AddToProcessedComponent
   ]
 })
 export class AppModule { }

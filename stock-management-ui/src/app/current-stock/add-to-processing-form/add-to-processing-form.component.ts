@@ -41,7 +41,6 @@ export class AddToProcessingFormComponent implements OnInit {
 
   ngOnInit() {
     this.getCommoidities();
-    this.getStock();
   }
   getCommoidities() {
     this.commonService.getCommodities().subscribe((data) => {
@@ -59,6 +58,7 @@ export class AddToProcessingFormComponent implements OnInit {
   }
   onChangeCommodity(event) {
     this.getSubCommodities(event);
+    // this.getStock();
   }
 
   onChangeSubCommodity(event) {
@@ -66,7 +66,7 @@ export class AddToProcessingFormComponent implements OnInit {
   }
 
   getStock(){
-    this.currentStockService.getUnprocessedStock().subscribe((data)=>{
+    this.currentStockService.getUnprocessedStock(this.processingDetail.CommodityId,this.processingDetail.SubCommodityId).subscribe((data:any[])=>{
       console.log(data);
       this.stock = data;      
       this.dataSource = new MatTableDataSource(data);
@@ -150,5 +150,12 @@ export class AddToProcessingFormComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  OnCliCkAddStockToProcessing(){
+    console.log(this.processingStock.data);
+    this.currentStockService.saveToProcessingStock(this.processingStock.data).subscribe((data)=>{
+      console.log(data);
+      
+    });
   }
 }

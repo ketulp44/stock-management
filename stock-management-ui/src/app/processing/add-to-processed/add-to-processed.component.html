@@ -1,0 +1,83 @@
+<div class="modal-container">
+    <div class="modal-header">
+        <h5 class="modal-title">Mark As Processed</h5>
+        <button type="button" class="close" (click)="onCilckCancel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+
+
+            <div class="form-row">
+                <div class="col">
+                    <span class="form-control-label">Total Weight :</span>
+                    <span>{{detail.weight}}</span>
+                </div>
+            </div>
+            <div class="form-row thin-border">
+                <div class="col">
+                    <label class="form-control-label">Quality Type : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-select [(ngModel)]="selectedQuality.qualityType" name="selectedQualityType"
+                            placeholder="Quality Type" #singleSelect>
+                            <!-- <mat-option value=""> Select Quality</mat-option> -->
+                            <mat-option *ngFor="let qualityType of qualityTypes" [value]="qualityType.value">
+                                {{qualityType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Weight : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Weight</mat-label>
+                        <input type="number" matInput placeholder="Weight" name="weight"
+                        appMaxValidator="{{remainingWeight}}"  [(ngModel)]="selectedQuality.weight" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Price : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label>Price</mat-label>
+                        <input type="number" matInput placeholder="Price" name="price"
+                            [(ngModel)]="selectedQuality.price" value="10">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-2 ver-center">
+                    <div class="ml-auto mr-2 mb-1">
+                        <button mat-raised-button color="primary" class="ml-auto mr-2" (click)="onClickAddQuality()"
+                        [disabled]="!selectedQuality.price || !selectedQuality.weight || !selectedQuality.qualityType" >Add</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row thin-border" *ngIf="qualityWiseWeights.length > 0">
+                <span *ngFor="let quality of qualityWiseWeights" class="selected-item">{{quality.qualityType}} : {{quality.weight}} {{quality.price}}
+                    <button mat-icon-button matTooltip="Edit" (click)="onClickRemoveQuality(quality)">
+                        <i class="material-icons">close</i>
+                    </button>
+                </span>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label class="form-control-label">Wastage Quantity : </label>
+                    <mat-form-field class="cstm-form-ctrl">
+                        <mat-label> Wastage Quantity</mat-label>
+                        <input type="number" matInput placeholder=" Wastage Quantity" name="wastageQuantity"
+                        appMaxValidator="{{remainingWeight}}"  [(ngModel)]="detail.wastageQuantity" required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    
+                </div>
+                
+            </div>
+           
+           
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="onCilckCancel()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onClickSave()">Submit</button>
+    </div>
+</div>

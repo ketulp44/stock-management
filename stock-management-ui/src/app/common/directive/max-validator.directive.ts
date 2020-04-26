@@ -13,7 +13,7 @@ export class MaxValidatorDirective implements Validator{
   @Input('appMaxValidator') max:number;
   constructor() { }
   validate(control: AbstractControl): { [key: string]: any } | null {
-    if(control.value){
+    if(control.value && (control.touched || control.dirty) ){
       return (control.value > this.max ) ? { 'max': true } : null;
     }
     return null;
