@@ -91,7 +91,7 @@
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label>Package Size</mat-label>
                         <input type="number" matInput placeholder="Package Size" name="packageSize"
-                            [(ngModel)]="inwardStock.PackageSize" value="10">
+                            [(ngModel)]="inwardStock.PackageSize" value="10">   
                     </mat-form-field>
                 </div>
             </div>
@@ -100,8 +100,14 @@
                     <label class="form-control-label"> Unit : </label>
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label>Package Unit</mat-label>
-                        <input type="number" matInput placeholder="Package Unit" name="packageUnit"
-                            [(ngModel)]="inwardStock.PackageUnit" value="10">
+                        <!-- <input type="number" matInput placeholder="Package Unit" name="packageUnit"
+                            [(ngModel)]="inwardStock.PackageUnit" value="10"> -->
+                        <mat-select [(ngModel)]="inwardStock.PackageUnit" name="packageUnit"
+                            placeholder="Package Unit" #singleSelect>
+                            <mat-option *ngFor="let unit of Units" [value]="unit">
+                                {{unit}}
+                            </mat-option>
+                        </mat-select>     
                     </mat-form-field>
                 </div>
                 <div class="col">

@@ -14,17 +14,11 @@ export class CurrentStockEntity {
   @Column({ name: 'process_type' })
   ProcessType: string;
 
-  @Column({ name: 'quantity_type' })
+  @Column({ name: 'quality_type' })
   QualityType: string;
 
-  @Column({ name: 'bag_size' })
-  BagSize: number;
-
-  @Column({ name: 'package_unit' })
-  PackageUnit: string;
-
-  @Column({ name: 'no_of_bags' })
-  NoOfBags: number;
+  @Column({ name: 'quantity_in_kg' })
+  QuantityInKg: number;
 
   @Column({ name: 'price' })
   StockPrice: number;
