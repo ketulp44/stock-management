@@ -54,6 +54,7 @@ export class ProcessingService {
 
 
   getStockInprocessing(){
-    return of(this.processingStock);
+    return this.http.get(`${BASE_URL}processing/all`)
+    
   }
 }

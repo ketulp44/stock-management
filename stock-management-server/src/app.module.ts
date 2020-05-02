@@ -11,6 +11,7 @@ import { CommodityModule } from './commodity/commodity.module';
 import { SubCommodityModule } from './sub-commodity/sub-commodity.module';
 import { InwardStockModule } from './inward-stock/inward-stock.module';
 import { CurrentStockModule } from './currentstock/currentstock.module';
+import { ProcessingModule } from './processing/processing.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { CurrentStockModule } from './currentstock/currentstock.module';
     CommodityModule,
     SubCommodityModule,
     InwardStockModule,
-    CurrentStockModule],
+    CurrentStockModule,
+    ProcessingModule],
   controllers: [AppController],
   providers: [AppService],
 })
