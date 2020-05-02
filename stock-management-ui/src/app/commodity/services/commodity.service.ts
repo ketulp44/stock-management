@@ -14,12 +14,8 @@ export class CommodityService {
   saveOrUpdateCommodity(commodity: any): Observable<any> {
     return this.http.post(`${BASE_URL}commodity`, commodity);
   }
-  saveOrUpdateSubCommodity(id: number): Observable<any> {
-    var subCommodity = { 
-      SubCommodityID:id, 
-      IsActive:0 
-   };
-    return this.http.post(`${BASE_URL}sub-commodity`, subCommodity);
+  saveOrUpdateSubCommodity(suCommodity:any): Observable<any> {
+    return this.http.post(`${BASE_URL}sub-commodity`, suCommodity);
   }
 
   getCommoditys(): Observable<any[]> {

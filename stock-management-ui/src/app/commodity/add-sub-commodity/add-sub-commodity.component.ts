@@ -22,12 +22,16 @@ export class AddSubCommodityComponent implements OnInit {
 
   ngOnInit() {
   
-    if(this.subCommodityId.dataKey) {
-      this.commodityService.getSubCommodity(this.subCommodityId.dataKey).subscribe((data) => {
+    if(this.subCommodityId.dataKey.id) {
+      this.commodityService.getSubCommodity(this.subCommodityId.dataKey.id).subscribe((data) => {
       this.subCommodity = data;
+      
       }, (error) => {
         this.toastr.error(error,'Error')
       })
+    }
+    else{
+      this.subCommodity.CommodityId= this.subCommodityId.dataKey.CommodityId
     }
   }
 
