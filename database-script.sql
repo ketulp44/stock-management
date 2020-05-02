@@ -215,3 +215,22 @@ create table unjhastockmanagement."stock_in_processing_details"
 "created_date" timestamp default current_timestamp,
 "updated_date" timestamp default current_timestamp
 );
+
+
+create table unjhastockmanagement."outward_stocks"
+(
+"id" SERIAL,
+"c_id" integer not null,
+"cu_id" integer not null,
+"sc_id" integer not null,
+"quality_type" VARCHAR(200) NULL DEFAULT NULL,
+"package_size" INTEGER NOT NULL,
+"package_unit" VARCHAR(200) NOT NULL,
+"no_of_bags" INTEGER NOT NULL,
+"stock_location" VARCHAR(200) NULL,
+"price" DECIMAL(22,12) NOT NULL,
+"incm_date_time" TIMESTAMP NOT NULL,
+"is_active" SMALLINT NOT NULL DEFAULT 1,
+"created_dt_time" TIMESTAMP DEFAULT current_timestamp,
+"updated_dt_time" TIMESTAMP DEFAULT current_timestamp,
+);
