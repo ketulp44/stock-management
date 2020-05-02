@@ -57,4 +57,7 @@ export class ProcessingService {
     return this.http.get(`${BASE_URL}processing/all`)
     
   }
+  markStockAsProcessed(details:any){
+    return this.http.post(`${BASE_URL}processing/markprocessed`,details);
+  }
 }

@@ -5,6 +5,7 @@ import { InwardService } from 'src/app/inward/service/inward.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/common/service/loader.service';
+import { ProcessingService } from '../service/processing.service';
 
 @Component({
   selector: 'app-add-to-processed',
@@ -20,7 +21,7 @@ export class AddToProcessedComponent implements OnInit {
   estimatedPrice:number = 0;
   constructor(private searchPipe: SearchPipe,
     private commonService: CommonUtilService,
-    private inwardStockService: InwardService,
+    private processingService: ProcessingService,
     public dialogRef: MatDialogRef<AddToProcessedComponent>,
     private toastr: ToastrService,
     public loaderService:LoaderService,
@@ -38,7 +39,24 @@ export class AddToProcessedComponent implements OnInit {
     this.dialogRef.close();
   }
   onClickSave(){
-    this.dialogRef.close(this.detail);
+    this.detail.qualityWiseWeight = this.qualityWiseWeights;
+    let obj:any = {}; 
+    Object.assign(obj,this.detail);
+    delete obj.supplierList;
+    this.loaderService.showLoader();
+    this.processingService.markStockAsProcessed(obj).subscribe((data)=>{
+      this.dialogRef.close(this.detail);
+      this.toastr.success('Stock successfully added to processed', 'Success');
+    },
+    (err)=>{
+      console.log(err);
+      
+      this.loaderService.hideLoader();
+      this.toastr.error(err,'Error')
+    });
+    
+    
+    
   }
   onClickAddQuality(){
     this.qualityWiseWeights.push(this.selectedQuality);

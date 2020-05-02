@@ -16,7 +16,7 @@ export class StockInProcessingDetails{
     public quantity:number;
     @Column({name :'unprocessed_current_stock_id'})
     public unprocessedCurrentStockId:number;
-    @Column({name :'is_active',default:0})
+    @Column({name :'is_active',default:1})
     public isActive:number;
     @Column({name :'incoming_date', default: new Date()})
     public incomingDate:Date;

@@ -5,6 +5,7 @@ import { Repository, EntityManager, getManager, getConnection, QueryFailedError 
 import { StockInProcessingDetails } from 'src/entities/stock-in-processing-details.entity';
 import { ProcessingStockDto } from 'src/dtos/processing-stock.dto';
 import { NotProcessedCurrentStockDetailsEntity } from 'src/entities/not-processed-stock-details.entity';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Injectable()
 export class CurrentStockService {
@@ -58,6 +59,22 @@ export class CurrentStockService {
      }
      async addToProcessing(details:ProcessingStockDto []){
          try{
+             details.forEach(async(detail)=>{
+                let unprocStock:NotProcessedCurrentStockDetailsEntity = await this.unProcessedCurrentStockRepository.findOne(detail.id);
+                if(unprocStock.QuantityInKg == detail.quantity){
+                    console.log('*****delete');
+                    
+                    await this.unProcessedCurrentStockRepository.delete(detail.id)
+                }
+                else if(unprocStock.QuantityInKg > detail.quantity ) {
+                    unprocStock.QuantityInKg = unprocStock.QuantityInKg - detail.quantity;
+                    console.log('update************');
+                    console.log(unprocStock);
+                    
+                    
+                    await this.unProcessedCurrentStockRepository.update(detail.id,unprocStock);
+                }
+             })
             await this.inProcessingRepo.save(details.map((detail)=> this.convertProcessingDtoToStockInProcessingDetails(detail)));
          }catch (err) {
             throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
