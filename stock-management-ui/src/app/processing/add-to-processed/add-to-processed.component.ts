@@ -17,6 +17,7 @@ export class AddToProcessedComponent implements OnInit {
   qualityWiseWeights:any[]=[];
   selectedQuality : any = {};
   remainingWeight : number = 0;
+  estimatedPrice:number = 0;
   constructor(private searchPipe: SearchPipe,
     private commonService: CommonUtilService,
     private inwardStockService: InwardService,
@@ -44,6 +45,7 @@ export class AddToProcessedComponent implements OnInit {
     this.removeFromRemaingWeight(this.selectedQuality.weight)
     this.selectedQuality = {};
     this.setQualityTypes();
+    this.calculatePerKgPrice();
   }
   onClickRemoveQuality(quality){
     let index:number = this.findIndex(this.qualityWiseWeights,'qualityType',quality.qualityType);
@@ -52,6 +54,7 @@ export class AddToProcessedComponent implements OnInit {
       this.addToRemainingWeight(this.qualityWiseWeights[index].weight);
       this.qualityWiseWeights.splice(index,1);
       this.setQualityTypes();
+      this.calculatePerKgPrice();
     }
     
   }
@@ -81,6 +84,17 @@ export class AddToProcessedComponent implements OnInit {
     this.remainingWeight-=weight;
   }
   calculatePerKgPrice(){
-    
+    if(this.remainingWeight <this.detail.wastageQuantity ){
+      return;
+    }
+    let netQty = this.detail.weight - this.detail.wastageQuantity;
+    let otherQauPrice= 0;
+    if(this.qualityWiseWeights.length>0){
+      for(let item of this.qualityWiseWeights){
+        otherQauPrice += item.price * item.weight;
+        netQty -= item.weight;
+      }
+    }
+    this.estimatedPrice = ((this.detail.avgPrice*this.detail.weight) - otherQauPrice)/netQty;
   }
 }
