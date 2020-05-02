@@ -12,6 +12,9 @@ export class ProcessedCurrentStockDetailsEntity {
     @Column({name :'quantity'})
     public QuantityInKg: number;
 
+    @Column({ name: 'quantity_type' })
+    QualityType: string;
+
     @Column({name :'incoming_date_time'})
     public IncomingDateTime: Date;
 
