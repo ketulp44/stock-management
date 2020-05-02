@@ -1,12 +1,13 @@
 <div class="container-fluid">
     <h2>Commodity & Sub-Commodity</h2>
-    <div class="d-flex pull-right">
-        <button mat-raised-button color="primary" (click)="onClickAddCommodity()">Add</button>
+    <div class='d-flex'>  
+        <div class="col text-right">
+            <button mat-raised-button color="primary" (click)="onClickAddCommodity()">Add</button>
+        </div>
     </div>
     <div class="mat-elevation-z8">
 
-        <table id="DataPreview" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
-            width="100%">
+        <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows >
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
@@ -30,43 +31,40 @@
             </ng-container>
             <ng-container matColumnDef="expandedDetail">
                 <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-                    <div class="example-element-detail"
-                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
-                        *ngIf="element.SubCommodities.length > 0">
-                        <mat-table class="subCommodityTable-table mat-elevation-z8" [dataSource]="element.SubCommodities">
-  
-                            <ng-container matColumnDef="id">
-                                <div *matHeaderCellDef>ID</div>
-                                <div *matCellDef="let elem">{{elem.SubCommodityID}}</div>
-                            </ng-container>
-                          
-                            <ng-container matColumnDef="name">
-                                <div *matHeaderCellDef>SubCommodityName</div>
-                                <div class="description-cell"
-                                          *matCellDef="let elem">{{elem.SubCommodityName}}</div>
-                            </ng-container>
-                          
-                            <ng-container matColumnDef="color">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
-                                <td mat-cell *matCellDef="let row">
-                                    <i class="fa fa-edit mx-2" (click)="onClickAddSubCommodity(row.SubCommodityID)"></i>
-                                    <i class="fa fa-trash mx-2" (click)="onClickRemoveSubCommodity(row.SubCommodityID)"></i>
-                                </td>
-                            </ng-container>
-                                            
-                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                            
-                            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-                            
-                        </mat-table>
-                        
+                    <div class="example-element-detail" *ngIf="element.SubCommodities.data?.length > 0"
+                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="inner-table mat-elevation-z8" *ngIf="expandedElement">
+                            <table #innerTables class="innerTable" mat-table [dataSource]="element.SubCommodities">
+                                <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.SubCommodityID}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="name">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.SubCommodityName}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="color">
+                                    <th  mat-header-cell mat-sort-header  *matHeaderCellDef > Actions </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <button mat-icon-button matTooltip="Edit" (click)="onClickAddSubCommodity(row.SubCommodityID)">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                        <button mat-icon-button matTooltip="delete" (click)="onClickRemoveSubCommodity(row.SubCommodityID)">
+                                            <i class="material-icons">delete</i>
+                                        </button> 
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: innerDisplayedColumns;"></tr>
+                            </table>
+                        </div>
                     </div>
                 </td>
-            </ng-container> 
+            </ng-container>
+            
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
-                [class.example-expanded-row]="expandedElement === row" (click)="expandedElement = row">
-            </tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;" [class.example-element-row]="element.SubCommodities.data?.length"
+            [class.example-expanded-row]="expandedElement === element" (click)="toggleRow(element)"></tr>
             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 
         </table>

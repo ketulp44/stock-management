@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +12,12 @@ import { AddSubCommodityComponent } from '../add-sub-commodity/add-sub-commodity
 export interface Commodity {
   id: string;
   CommodityName: string;
+  SubCommodities:SubCommodity [] | MatTableDataSource<SubCommodity>
+}
+export interface  SubCommodity{
+  SubCommodityID: number;
+  SubCommodityName:string;
+  
 }
 @Component({
   selector: 'app-manage-commodity',
@@ -30,9 +36,11 @@ export interface Commodity {
 export class ManageCommodityComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'color'];
   dataSource: MatTableDataSource<Commodity>;
-  expandedElement: MatTableDataSource<Commodity>;
+  expandedElement: Commodity | null;
+  innerDisplayedColumns: string[] = ['id','name','color']
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private dialog: MatDialog, private toastr: ToastrService, private CommodityService: CommodityService) {
+  constructor(private dialog: MatDialog, private toastr: ToastrService, private CommodityService: CommodityService,
+    private cd: ChangeDetectorRef) {
     // Assign the data to the data source for the table to render
   }
 
@@ -41,8 +49,18 @@ export class ManageCommodityComponent implements OnInit {
   }
   fetchCommodities() {
     this.CommodityService.getCommodityWithSubCommodities().subscribe((data) => {
+      
+      data = data.map((x:any)=>{
+        x.SubCommodities = new MatTableDataSource(x.SubCommodities);
+        console.log(x);
+        return x;
+      })
+      console.log(data);
       this.dataSource = new MatTableDataSource(data);
-      this.expandedElement = new MatTableDataSource(data);
+     console.log(this.dataSource);
+     
+      
+      // this.expandedElement = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     }, (err) => {
       console.log(err);
@@ -118,5 +136,13 @@ export class ManageCommodityComponent implements OnInit {
 dialogRef.afterClosed().subscribe(result => {
   console.log('Supplier Deleted successfully')
 });
+  }
+  toggleRow(element: Commodity) {
+    element.SubCommodities && (element.SubCommodities as MatTableDataSource<SubCommodity>).data.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
+    this.cd.detectChanges();
+    console.log(this.expandedElement);
+    
+    console.log('toggle');
+    
   }
 }

@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatTableModule} from '@angular/material/table'
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatPaginatorModule } from '@angular/material';
-import { MatIconModule } from '@angular/material/icon';
-
-
+import { MatSelectModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { CommodityRoutingModule } from './commodity-routing.module';
 import { ManageCommodityComponent } from './manage-commodity/manage-commodity.component';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../common/shared.module';
 
 
 
@@ -18,12 +14,17 @@ import { ManageCommodityComponent } from './manage-commodity/manage-commodity.co
   imports: [
     CommonModule,
     CommodityRoutingModule,
+    FormsModule,
+    SharedModule,
+    MatSelectModule,
     MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
+    NgxMatSelectSearchModule,
     MatButtonModule,
-    MatPaginatorModule,
-    MatIconModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class CommodityModule { }
