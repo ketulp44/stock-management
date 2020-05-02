@@ -79,12 +79,24 @@ export class ManageCommodityComponent implements OnInit {
       this.fetchCommodities();
     });
   }
-  onClickAddSubCommodity(id?: number) {
+  onClickAddSubCommodity(id:number){
     let dialogRef = this.dialog.open(AddSubCommodityComponent, {
       height: '500px',
       width: '600px',
       data: {
-        dataKey: id
+        dataKey: {CommodityId:id}
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchCommodities();
+    });
+  }
+  onClickEditSubCommodity(id?: number) {
+    let dialogRef = this.dialog.open(AddSubCommodityComponent, {
+      height: '500px',
+      width: '600px',
+      data: {
+        dataKey: {id:id}
       }
     });
     dialogRef.afterClosed().subscribe(result => {
