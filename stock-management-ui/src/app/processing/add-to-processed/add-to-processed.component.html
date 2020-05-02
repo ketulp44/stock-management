@@ -64,13 +64,16 @@
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label> Wastage Quantity</mat-label>
                         <input type="number" matInput placeholder=" Wastage Quantity" name="wastageQuantity"
-                        appMaxValidator="{{remainingWeight}}"  [(ngModel)]="detail.wastageQuantity" required>
+                        appMaxValidator="{{remainingWeight}}"  [(ngModel)]="detail.wastageQuantity" (ngModelChange)="calculatePerKgPrice()" required>
                     </mat-form-field>
                 </div>
                 <div class="col">
                     
                 </div>
                 
+            </div>
+            <div class="form-row">
+                <div class="col">estimated price :{{estimatedPrice}}</div>
             </div>
            
            
