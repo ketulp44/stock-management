@@ -3,6 +3,7 @@ import { ProcessingController } from './processing.controller';
 import { ProcessingService } from './processing.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StockInProcessingDetails } from 'src/entities/stock-in-processing-details.entity';
+import { ProcessedCurrentStockDetailsEntity } from 'src/entities/processd-stock-details.entity';
 
 
 @Module({
@@ -10,7 +11,8 @@ import { StockInProcessingDetails } from 'src/entities/stock-in-processing-detai
   providers: [ProcessingService],
   imports:[
     TypeOrmModule.forFeature([
-      StockInProcessingDetails
+      StockInProcessingDetails,
+      ProcessedCurrentStockDetailsEntity
     ])
   ]
 })
