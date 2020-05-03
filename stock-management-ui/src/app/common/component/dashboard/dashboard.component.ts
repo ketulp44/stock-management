@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     this.toggleService.isMenuOpenObservable.subscribe((val)=>{
       this.isMenuOpen = val;
     });
+    this.toggleService.toggleMenu();
   }
 
 }

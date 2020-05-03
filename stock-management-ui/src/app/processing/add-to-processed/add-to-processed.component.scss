@@ -1,0 +1,40 @@
+@import "src/scss/color.scss";
+.modal-container {
+  position: relative;
+  display: block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow: auto;
+  outline: 0;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  max-height: inherit;
+}
+.modal-footer {
+  bottom: 0px;
+  width: 100%;
+  max-width: initial;
+  padding-right: 24px;
+}
+.modal-header {
+  color: white;
+  background-color: $header-dark;
+}
+.ver-center{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.thin-border{
+    border: 1px solid grey;
+    margin-top: 2rem;
+}
+.selected-item{
+    padding-left: 5px;
+    margin: 5px;
+    border: 1px solid #939699;
+    border-radius: 5px;
+    background-color: #87bc87;
+}

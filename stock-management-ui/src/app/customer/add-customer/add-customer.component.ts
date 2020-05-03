@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../../suppliers/service/customer.service';
+import { CustomerService } from '../service/customer.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LoaderService } from 'src/app/common/service/loader.service';
 import { ToastrService } from 'ngx-toastr';
@@ -13,19 +13,19 @@ import { Inject } from '@angular/core';
 })
 export class AddCustomerComponent implements OnInit {
 
-  supplier: any = {};
+  customer: any = {};
   displayProgressSpinner: boolean = false;
   constructor(private customerService: CustomerService,
     public dialogRef: MatDialogRef<AddCustomerComponent>,
     private toastr: ToastrService,
-    @Inject(MAT_DIALOG_DATA) public supplierId: any
+    @Inject(MAT_DIALOG_DATA) public customerId: any
    ) { }
 
   ngOnInit() {
   
-    if(this.supplierId.dataKey) {
-      this.customerService.getSupplier(this.supplierId.dataKey).subscribe((data) => {
-      this.supplier = data;
+    if(this.customerId.dataKey) {
+      this.customerService.getCustomer(this.customerId.dataKey).subscribe((data) => {
+      this.customer = data;
       }, (error) => {
         this.toastr.error(error,'Error')
       })
@@ -34,7 +34,7 @@ export class AddCustomerComponent implements OnInit {
 
   onSaveOrUpdate() {
     this.showLoader()
-    this.customerService.saveOrUpdateSupplier(this.supplier).subscribe((data) => {
+    this.customerService.saveOrUpdateCustomer(this.customer).subscribe((data) => {
       this.hideLoader();
       this.dialogRef.close('success');
       this.toastr.success('Supplier added sucessfully', 'Success');

@@ -8,6 +8,8 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
   providedIn: 'root'
 })
 export class LoaderService {
+  private loaderSubject = new Subject<LoaderState>();
+  loaderState = this.loaderSubject.asObservable();
   constructor(
     private overlay: Overlay
   ) { }
@@ -23,6 +25,12 @@ export class LoaderService {
       .global()
       .centerHorizontally()
       .centerVertically();
+  }
+  showLoader() {
+    this.loaderSubject.next(<LoaderState>{show:true});
+  }
+  hideLoader() {
+    this.loaderSubject.next(<LoaderState>{show:false});
   }
 }
 export interface AppOverlayConfig extends OverlayConfig { }

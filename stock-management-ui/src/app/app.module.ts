@@ -21,16 +21,27 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
 import { LoginComponent } from './login/login.component';
-
-
+import { InwardFormComponent } from './inward/inward-form/inward-form.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatNativeDateModule, MatDatepickerModule, MatSelectModule } from '@angular/material';
+import { AddCommodityComponent } from './commodity/add-commodity/add-commodity.component';
+import { AddSubCommodityComponent } from './commodity/add-sub-commodity/add-sub-commodity.component';
+import { AddToProcessingPopupComponent } from './current-stock/add-to-processing-popup/add-to-processing-popup.component';
+import { MaxValidatorDirective } from './common/directive/max-validator.directive';
+import { AddToProcessedComponent } from './processing/add-to-processed/add-to-processed.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AddSupplierComponent,
     ContactValidatorDirective,
-    LoaderComponent,
-    AddCustomerComponent
+    MaxValidatorDirective,
+    AddCustomerComponent,
+    InwardFormComponent,
+    AddCommodityComponent,
+    AddSubCommodityComponent,
+    AddToProcessingPopupComponent,
+    AddToProcessedComponent
   ],
   imports: [
     BrowserModule,
@@ -47,12 +58,27 @@ import { LoginComponent } from './login/login.component';
     MatPaginatorModule,
     SharedModule,
     MatTableModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxMatSelectSearchModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[AddSupplierComponent,AddCustomerComponent,LoaderComponent,DeleteAlertComponent]
+  entryComponents:[
+    AddSupplierComponent,
+    AddCustomerComponent,
+    LoaderComponent,
+    DeleteAlertComponent, 
+    AddCommodityComponent, 
+    AddSubCommodityComponent,
+    InwardFormComponent,
+    DeleteAlertComponent,
+    AddToProcessingPopupComponent,
+    AddToProcessedComponent
+  ]
 })
 export class AppModule { }

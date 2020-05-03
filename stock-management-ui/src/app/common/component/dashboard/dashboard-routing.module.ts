@@ -11,7 +11,7 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [{
       path: '',
-      loadChildren: () => import('../../../suppliers/customers.module').then(m => m.CustomersModule)
+      loadChildren: () => import('../../../suppliers/suppliers.module').then(m => m.SuppliersModule)
     }]
 
   },
@@ -23,6 +23,40 @@ const routes: Routes = [
       loadChildren: () => import('./../../../customer/customer.module').then(m => m.CustomerModule)
     }]
 
+  },
+  {
+    path: 'inward',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./../../../inward/inward.module').then(m => m.InwardModule)
+    }]
+  },
+  {
+    path: 'commodities',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./../../../commodity/commodity.module').then(m => m.CommodityModule)
+    }]
+
+  },
+  {
+    path: 'currentstocks',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./../../../current-stock/current-stock.module').then(m => m.CurrentStockModule)
+    }]
+
+  },
+  {
+    path: 'processing',
+    component: DashboardComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./../../../processing/processing.module').then(m => m.ProcessingModule)
+    }]
   },
   {
     path: '',

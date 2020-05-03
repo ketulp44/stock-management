@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSortModule, MatTooltipModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [CustomerListComponent],
@@ -18,7 +20,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSortModule,
+    MatTooltipModule
   ],
   entryComponents:[]
 })

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <h2>Customers</h2>
     <div class="d-flex pull-right">
-        <button mat-raised-button color="primary" (click)="onClickAdd()">Add</button>
+        <button mat-raised-button color="primary" (click)="onClickAddCustomer()">Add</button>
     </div>
     <mat-form-field>
         <mat-label>Filter</mat-label>
@@ -12,28 +12,30 @@
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let row;let i = index"> {{paginator.pageIndex * paginator.pageSize + i + 1}} </td>
             </ng-container>
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="progress">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-                <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
+             <!-- Name Column -->
+            <ng-container matColumnDef="CustomerName">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                 <td mat-cell *matCellDef="let row"> {{row.CustomerName}} </td>
+            </ng-container>
+            <!-- ContactNo Column -->
+            <ng-container matColumnDef="ContactNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ContactNo </th>
+                <td mat-cell *matCellDef="let row"> {{row.ContactNumber}} </td>
             </ng-container>
 
             <!-- Color Column -->
             <ng-container matColumnDef="color">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
-                <td mat-cell *matCellDef="let row">
-                    <i class="fa fa-edit mx-2" (click)="onClickAddSuplier(supplier.SID)"></i>
-                    <i class="fa fa-trash mx-2" (click)="onClickRemoveSupplier(supplier.SID)"></i>
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>
+                <td mat-cell *matCellDef="let row" class="text-center">
+                   <button mat-icon-button matTooltip="Edit" (click)="onClickAddCustomer(row.CustomerID)">
+                        <i class="material-icons">edit</i>
+                  </button>
+                  <button mat-icon-button matTooltip="Edit" (click)="onClickRemoveCustomer(row.CustomerID)">
+                        <i class="material-icons">delete</i>
+                  </button>
                 </td>
             </ng-container>
 
@@ -42,6 +44,6 @@
             </tr>
         </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
 </div>

@@ -1,0 +1,137 @@
+<div class="container-fluid">
+<form>
+    <h2>Current Unprocessed Stock</h2>
+    <div class="form-row">
+        
+        <div class="col">
+            <label class="form-control-label">Commodity : </label>
+            <mat-form-field class="cstm-form-ctrl">
+                <mat-select [(ngModel)]="processingDetail.CommodityId" name="selectedCommodity"
+                    (ngModelChange)="onChangeCommodity($event)" placeholder="Commodity" #singleSelect>
+                    <mat-option>
+                        <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchCommodity"
+                            (ngModelChange)="commodityFilter($event)" name="supplierFilter">
+                        </ngx-mat-select-search>
+                    </mat-option>
+
+                    <mat-option *ngFor="let commodity of filteredCommodties" [value]="commodity.CommodityID">
+                        {{commodity.CommodityName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <div *ngIf="processingDetail.CommodityId">
+                <label class="form-control-label">SubCommodity : </label>
+                <mat-form-field class="cstm-form-ctrl">
+                    <mat-select [(ngModel)]="processingDetail.SubCommodityId" name="selectedSubCommodity"
+                    (ngModelChange)="onChangeSubCommodity($event)" placeholder="SubCommodity" #singleSelect>
+                        <mat-option>
+                            <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchSubCommodity"
+                                (ngModelChange)="subCommodityFilter($event)" name="supplierFilter">
+                            </ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option *ngFor="let subCommodity of filteredSubCommodities"
+                            [value]="subCommodity.SubCommodityID">
+                            {{subCommodity.SubCommodityName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class='d-flex' *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+        
+    </div>
+
+    <div class="mat-elevation-z8" *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let row;let i = index"> {{paginator.pageIndex * paginator.pageSize + i + 1}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="CommodityName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Commodity </th>
+                <td mat-cell *matCellDef="let row"> {{row.commodity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="SubCommodityName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Commodity </th>
+                <td mat-cell *matCellDef="let row"> {{row.subCommodity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Quantity">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+                <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="SupplierName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
+                <td mat-cell *matCellDef="let row"> {{row.supplierName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>
+                <td mat-cell *matCellDef="let row;let i = index" class="text-center">
+                    <button mat-icon-button matTooltip="Edit" (click)="onClickAddStock(row,i)" [disabled]="row.IsEditable==1">
+                        <i class="material-icons">add_circle</i>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>    
+    <h2 *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">Stock to be Added for processing</h2>
+    <div class="mat-elevation-z8" *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">
+        <table mat-table [dataSource]="processingStock" matSort #processingSort>
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let row;let i = index"> {{prcessingPaginator.pageIndex * prcessingPaginator.pageSize + i + 1}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="CommodityName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Commodity </th>
+                <td mat-cell *matCellDef="let row"> {{row.commodity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="SubCommodityName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Commodity </th>
+                <td mat-cell *matCellDef="let row"> {{row.subCommodity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Quantity">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+                <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="SupplierName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
+                <td mat-cell *matCellDef="let row"> {{row.supplierName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>
+                <td mat-cell *matCellDef="let row;let i = index" class="text-center">
+                    <button mat-icon-button matTooltip="Edit" (click)="onClickRemoveStock(row,i)" [disabled]="row.IsEditable==1">
+                        <i class="material-icons">remove_circle</i>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator #prcessingPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div> 
+    <div class="d-flex mt-2" *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">
+        <div class="col text-right">
+            <button mat-raised-button color="primary" class="ml-auto" [disabled]="processingStock?.data.length<=0" 
+            (click)="OnCliCkAddStockToProcessing()">Add To processing</button>
+        </div>
+    </div>
+
+</form>
+</div>
