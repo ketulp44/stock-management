@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <div class='d-flex'>
+    <div class='d-flex' *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">
         <div class="col-md-2">
             <mat-form-field>
                 <mat-label>Filter</mat-label>
@@ -51,7 +51,7 @@
         
     </div>
 
-    <div class="mat-elevation-z8">
+    <div class="mat-elevation-z8" *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">
         <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -88,8 +88,8 @@
         </table>
         <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>    
-    <h2>Stock to be Added for processing</h2>
-    <div class="mat-elevation-z8">
+    <h2 *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">Stock to be Added for processing</h2>
+    <div class="mat-elevation-z8" *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">
         <table mat-table [dataSource]="processingStock" matSort #processingSort>
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -126,9 +126,10 @@
         </table>
         <mat-paginator #prcessingPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div> 
-    <div class="d-flex mt-2">
+    <div class="d-flex mt-2" *ngIf="processingDetail.CommodityId && processingDetail.SubCommodityId">
         <div class="col text-right">
-            <button mat-raised-button color="primary" class="ml-auto" (click)="OnCliCkAddStockToProcessing()">Add To processing</button>
+            <button mat-raised-button color="primary" class="ml-auto" [disabled]="processingStock?.data.length<=0" 
+            (click)="OnCliCkAddStockToProcessing()">Add To processing</button>
         </div>
     </div>
 

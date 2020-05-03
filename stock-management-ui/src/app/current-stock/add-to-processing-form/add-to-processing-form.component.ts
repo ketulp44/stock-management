@@ -3,6 +3,9 @@ import { CommonUtilService } from 'src/app/common/service/common-util/common-uti
 import { CurrentStockService } from '../service/current-stock.service';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { AddToProcessingPopupComponent } from '../add-to-processing-popup/add-to-processing-popup.component';
+import { ToastrService } from 'ngx-toastr';
+import { LoaderService } from 'src/app/common/service/loader.service';
+import { Router } from '@angular/router';
 export interface Stock{
     id:number,
     supplierId:number,
@@ -37,6 +40,9 @@ export class AddToProcessingFormComponent implements OnInit {
     private commonService: CommonUtilService,
     private currentStockService:CurrentStockService,
     private dialog: MatDialog,
+    private toastr: ToastrService,
+    private router: Router,
+    public loaderService: LoaderService,
     ) { }
 
   ngOnInit() {
@@ -58,6 +64,7 @@ export class AddToProcessingFormComponent implements OnInit {
   }
   onChangeCommodity(event) {
     this.getSubCommodities(event);
+    this.processingDetail.SubCommodityId = null;
     // this.getStock();
   }
 
@@ -66,6 +73,7 @@ export class AddToProcessingFormComponent implements OnInit {
   }
 
   getStock(){
+    this.loaderService.showLoader();
     this.currentStockService.getUnprocessedStock(this.processingDetail.CommodityId,this.processingDetail.SubCommodityId).subscribe((data:any[])=>{
       console.log(data);
       this.stock = data;      
@@ -75,7 +83,10 @@ export class AddToProcessingFormComponent implements OnInit {
       this.processingStock = new MatTableDataSource([]);
       this.processingStock.paginator = this.processingPaginator;
       this.processingStock.sort = this.processingSort;
-      
+      this.loaderService.hideLoader();
+    },err=>{
+      this.loaderService.hideLoader();
+      this.toastr.error('err','Error');
     })
   }
 
@@ -152,10 +163,14 @@ export class AddToProcessingFormComponent implements OnInit {
     }
   }
   OnCliCkAddStockToProcessing(){
-    console.log(this.processingStock.data);
+    this.loaderService.showLoader();
     this.currentStockService.saveToProcessingStock(this.processingStock.data).subscribe((data)=>{
-      console.log(data);
-      
+      this.loaderService.hideLoader();
+      this.toastr.success('Successfully Added To Processing !','Success')
+          this.router.navigateByUrl('dashboard/processing');   
+    },(err)=>{
+      this.loaderService.hideLoader();
+      this.toastr.error(err,'Error');
     });
   }
 }
