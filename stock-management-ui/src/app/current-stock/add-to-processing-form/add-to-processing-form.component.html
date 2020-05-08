@@ -10,7 +10,7 @@
                     (ngModelChange)="onChangeCommodity($event)" placeholder="Commodity" #singleSelect>
                     <mat-option>
                         <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchCommodity"
-                            (ngModelChange)="commodityFilter($event)" name="supplierFilter">
+                             name="supplierFilter">
                         </ngx-mat-select-search>
                     </mat-option>
 
@@ -28,7 +28,7 @@
                     (ngModelChange)="onChangeSubCommodity($event)" placeholder="SubCommodity" #singleSelect>
                         <mat-option>
                             <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchSubCommodity"
-                                (ngModelChange)="subCommodityFilter($event)" name="supplierFilter">
+                                 name="supplierFilter">
                             </ngx-mat-select-search>
                         </mat-option>
                         <mat-option *ngFor="let subCommodity of filteredSubCommodities"
