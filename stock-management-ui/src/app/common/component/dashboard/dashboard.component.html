@@ -9,7 +9,7 @@
                 </li>
             </ul>
         </nav>
-        
+
         <mat-nav-list>
                 <mat-list-item routerLinkActive="active-link">
                     <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../customers']">
@@ -21,7 +21,7 @@
                     <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../suppliers']">
                         <i class="material-icons">people</i> Suppliers</a>
                 </mat-list-item>
-            
+
             <mat-list-item routerLinkActive="active-link">
                 <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../inward']">
                     <i class="material-icons">dashboard</i> Inward-stock</a>
@@ -37,6 +37,10 @@
             <mat-list-item routerLinkActive="active-link">
                 <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../processing']">
                     <i class="material-icons">dashboard</i> Processing</a>
+            </mat-list-item>
+            <mat-list-item routerLinkActive="active-link">
+                <a matLine href="javascript:void(0);" class="nav-link  yellow-box" [routerLink]="['./../currentstocks/processed']">
+                    <i class="material-icons">dashboard</i> Processed Stock</a>
             </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>
