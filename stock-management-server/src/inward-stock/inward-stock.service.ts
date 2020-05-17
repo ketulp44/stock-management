@@ -5,7 +5,7 @@ import { ProcessedCurrentStockDetailsEntity } from './../entities/processd-stock
 import { isNullOrUndefined } from 'util';
 import { WeightUnits } from './../enums/weight.enum';
 //import { CurrentStockEntity } from '../entities/current-stock.entity';
-import { SubCommodity } from 'src/entities/sub-commodity.entity';
+import { SubCommodity } from './../entities/sub-commodity.entity';
 import { Commodity } from './../entities/commodity.entity';
 import { InwardStock } from './../entities/inward-stock.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
@@ -88,6 +88,9 @@ export class InwardStockService {
             result.IncomingDateTime = inwardStock.IncomingDate;
             result.QuantityInKg = this.convertToKG(inwardStock.NoOfBags * inwardStock.PackageSize, inwardStock.PackageUnit);
             result.UpdateDateTime = new Date();
+            result.commodity=inwardStock.CommodityId;
+            result.subCommodity=inwardStock.SubCommodityId;
+            result.QualityType=inwardStock.QualityType;
             await this.ProcessedCurrentStockRepository.update(result.ProcessStockDetailsId, result);
 
         } else if (result && inwardStock.IsActive <= 0) {
@@ -99,6 +102,9 @@ export class InwardStockService {
             processStockDetailEntity.IncomingDateTime = inwardStock.IncomingDate;
             processStockDetailEntity.CreatedDateTime = new Date();
             processStockDetailEntity.UpdateDateTime = new Date();
+            processStockDetailEntity.QualityType = inwardStock.QualityType;
+            processStockDetailEntity.commodity= inwardStock.CommodityId;
+            processStockDetailEntity.subCommodity=inwardStock.SubCommodityId;
             processStockDetailEntity.QuantityInKg = this.convertToKG(inwardStock.NoOfBags * inwardStock.PackageSize, inwardStock.PackageUnit);
             await this.ProcessedCurrentStockRepository.insert(processStockDetailEntity);
         }
@@ -155,7 +161,7 @@ export class InwardStockService {
 
     //             if (!isNullOrUndefined(CurrentStockEntity)) {
     //                 currentStock.CurrentStockId = existCurrentStock.CurrentStockId;
-    //                 currentStock.BagSize = 
+    //                 currentStock.BagSize =
     //             }
 
     //         }

@@ -42,7 +42,6 @@ export class InwardFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.inwardStockId.dataKey);
     if (this.inwardStockId.dataKey) {
       this.getStockDetail(this.inwardStockId.dataKey);
     }
@@ -55,7 +54,6 @@ export class InwardFormComponent implements OnInit {
   getStockDetail(id) {
     this.loaderService.showLoader();
     this.inwardStockService.getInwardStockById(id).subscribe((data) => {
-      console.log(data);
       this.inwardStock = data;
       this.loaderService.hideLoader();
     }, (err) => {
@@ -65,7 +63,6 @@ export class InwardFormComponent implements OnInit {
   setMaxDate() {
     let today = new Date();
     this.maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate())
-    console.log(this.maxDate);
 
   }
   getSuppliers() {
@@ -81,8 +78,6 @@ export class InwardFormComponent implements OnInit {
     this.commonService.getSubCommodities(id).subscribe((data) => {
       this.subCommodities = data;
       this.filteredSubCommodities = this.subCommodities;
-      console.log(this.filteredSubCommodities);
-
     });
   }
   getInputStockStates() {
@@ -99,7 +94,6 @@ export class InwardFormComponent implements OnInit {
     this.getSubCommodities(event);
   }
   onClickSave() {
-    console.log(this.inwardStock);
     this.loaderService.showLoader();
     this.inwardStockService.saveInwardStocks(this.inwardStock).subscribe((data) => {
       this.toastr.success('Stock added sucessfully', 'Success');

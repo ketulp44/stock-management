@@ -17,7 +17,7 @@ export interface Commodity {
 export interface  SubCommodity{
   SubCommodityID: number;
   SubCommodityName:string;
-  
+
 }
 @Component({
   selector: 'app-manage-commodity',
@@ -49,21 +49,15 @@ export class ManageCommodityComponent implements OnInit {
   }
   fetchCommodities() {
     this.CommodityService.getCommodityWithSubCommodities().subscribe((data) => {
-      
+
       data = data.map((x:any)=>{
         x.SubCommodities = new MatTableDataSource(x.SubCommodities);
-        console.log(x);
         return x;
       })
-      console.log(data);
       this.dataSource = new MatTableDataSource(data);
-     console.log(this.dataSource);
-     
-      
       // this.expandedElement = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     }, (err) => {
-      console.log(err);
       this.toastr.error(err, 'Error')
     });
   }
@@ -137,12 +131,10 @@ export class ManageCommodityComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result.isConfirm == true){
         this.CommodityService.saveOrUpdateSubCommodity(id).subscribe((data)=>{
-          console.log(data);
-          
           this.fetchCommodities();
-        });        
+        });
       }
-      
+
     });
 
 dialogRef.afterClosed().subscribe(result => {
@@ -152,9 +144,5 @@ dialogRef.afterClosed().subscribe(result => {
   toggleRow(element: Commodity) {
     element.SubCommodities && (element.SubCommodities as MatTableDataSource<SubCommodity>).data.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
     this.cd.detectChanges();
-    console.log(this.expandedElement);
-    
-    console.log('toggle');
-    
   }
 }

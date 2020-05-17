@@ -44,7 +44,7 @@ export class ProcessingListComponent implements OnInit {
     public loaderService:LoaderService,
     private dialog: MatDialog,
     private cd: ChangeDetectorRef
-    ) { 
+    ) {
 
   }
 
@@ -57,17 +57,14 @@ export class ProcessingListComponent implements OnInit {
     this.processingService.getStockInprocessing().subscribe((data:any)=>{
       data = data.map((x:any)=>{
         x.supplierList = new MatTableDataSource(x.supplierList);
-        console.log(x);
         return x;
       })
-      console.log(data);
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.loaderService.hideLoader();
-      
+
     },(err)=>{
-      console.log(err);
       this.loaderService.hideLoader();
     })
   }
@@ -75,8 +72,6 @@ export class ProcessingListComponent implements OnInit {
   toggleRow(element: ProcessingStock) {
     element.supplierList && (element.supplierList as MatTableDataSource<SupplierWiseStock>).data.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
     this.cd.detectChanges();
-    console.log('toggle');
-    
   }
 
   applyFilter(event: Event) {

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { ProcessingService } from './processing.service';
-import { MarkAsProcessedDto } from 'src/dtos/mark-as-processed.dto';
+import { MarkAsProcessedDto } from './../dtos/mark-as-processed.dto';
 
 @Controller('processing')
 export class ProcessingController {

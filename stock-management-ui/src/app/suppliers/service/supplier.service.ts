@@ -18,7 +18,6 @@ export class SupplierService {
       return this.http.get<any[]>(`${BASE_URL}suppliers/all`);
    }
    getSupplier(id: number): Observable<any[]> {
-      console.log(id);
       return this.http.get<any[]>(`${BASE_URL}suppliers/${id}`);
    }
    deleteSupplier(id: any): Observable<any> {

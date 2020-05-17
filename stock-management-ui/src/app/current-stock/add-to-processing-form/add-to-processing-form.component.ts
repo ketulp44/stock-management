@@ -58,8 +58,6 @@ export class AddToProcessingFormComponent implements OnInit {
     this.commonService.getSubCommodities(id).subscribe((data) => {
       this.subCommodities = data;
       this.filteredSubCommodities = this.subCommodities;
-      console.log(this.filteredSubCommodities);
-      
     });
   }
   onChangeCommodity(event) {
@@ -75,8 +73,7 @@ export class AddToProcessingFormComponent implements OnInit {
   getStock(){
     this.loaderService.showLoader();
     this.currentStockService.getUnprocessedStock(this.processingDetail.CommodityId,this.processingDetail.SubCommodityId).subscribe((data:any[])=>{
-      console.log(data);
-      this.stock = data;      
+      this.stock = data;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -100,10 +97,6 @@ export class AddToProcessingFormComponent implements OnInit {
       this.processingStock.data.splice(index,1);
       this.processingStock._updateChangeSubscription();
       this.dataSource._updateChangeSubscription();
-      console.log(this.processingStock.data);
-      
-      console.log(this.dataSource.data);
-      
   }
 
   onClickAddStock(stock,index){
@@ -124,7 +117,6 @@ export class AddToProcessingFormComponent implements OnInit {
   }
 
   addToProcessingList(detail) {
-    console.log(detail);
     let index = this.findIndex(this.dataSource.data, detail.id);
     if (index >= 0) {
         let proIndex = this.findIndex(this.processingStock.data,detail.id);
@@ -167,7 +159,7 @@ export class AddToProcessingFormComponent implements OnInit {
     this.currentStockService.saveToProcessingStock(this.processingStock.data).subscribe((data)=>{
       this.loaderService.hideLoader();
       this.toastr.success('Successfully Added To Processing !','Success')
-          this.router.navigateByUrl('dashboard/processing');   
+          this.router.navigateByUrl('dashboard/processing');
     },(err)=>{
       this.loaderService.hideLoader();
       this.toastr.error(err,'Error');

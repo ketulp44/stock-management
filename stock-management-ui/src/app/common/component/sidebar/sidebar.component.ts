@@ -12,10 +12,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.toggleService.isMenuOpenObservable.subscribe((val)=>{
       this.isMenuOpen = val;
-      console.log('toggle called');
-      console.log(this.sideNav);
-      
-      
       this.sideNav.toggle();
     });
   }

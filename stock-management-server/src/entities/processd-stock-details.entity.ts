@@ -15,6 +15,12 @@ export class ProcessedCurrentStockDetailsEntity {
     @Column({ name: 'quantity_type' })
     QualityType: string;
 
+    @Column({name:'c_id'})
+    commodity: number;
+
+    @Column({name:'sc_id'})
+    subCommodity: number;
+
     @Column({name :'incoming_date_time'})
     public IncomingDateTime: Date;
 

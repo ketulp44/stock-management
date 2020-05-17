@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_URL:'http://0.0.0.0:3000/api/'
+  // BASE_URL:'https://unjha-stock-management-server.herokuapp.com/api/'
+  BASE_URL:'http://localhost:3000/api/'
 };
 
 /*
