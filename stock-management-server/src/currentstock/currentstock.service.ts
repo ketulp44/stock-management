@@ -36,7 +36,34 @@ export class CurrentStockService {
     }
 
     public async getCurrentStocks() {
-        return await this.currentStockEntity.find({ where: [{ IsActive: 1 }] });
+        return this.manager.query(`select
+        jsonb_build_object('id' , c.c_id ,'name',c.c_name ) as commodity,
+        jsonb_build_object('id',sc.sc_id ,'name',sc.sc_id ) as "subCommodity",
+        pcsd.quantity_type as quality,
+        pcsd.quantity as quantity,
+        pcsd.incoming_date_time as "incomingDateTime",
+        'PROCESSED' as type
+        from unjhastockmanagement.processed_current_stock_details pcsd
+        left join unjhastockmanagement.commodity c on c.c_id = pcsd.c_id
+        left join unjhastockmanagement.sub_commodity sc on sc.sc_id = pcsd.sc_id
+
+        union all
+
+        select
+        jsonb_build_object('id' , c.c_id ,'name',c.c_name ) as commodity,
+        jsonb_build_object('id',sc.sc_id ,'name',sc.sc_id ) as "subCommodity",
+        null as quality,
+        ucsd.quantity as quantity,
+        ucsd.incoming_date_time  as "incomingDateTime",
+        'UNPROCESSED' as type
+        from unjhastockmanagement.unprocessed_current_stock_details ucsd
+        left join unjhastockmanagement.inward_stocks i_s on i_s.ins_id = ucsd.inward_stock_id
+        left join unjhastockmanagement.commodity c on c.c_id = i_s.c_id
+        left join unjhastockmanagement.sub_commodity sc on sc.sc_id = i_s.sc_id
+        where i_s.is_active = 1
+        ;
+
+        `);
     }
      public async getUnprocessedStock(commodityId,SubCommodityId){
          return await this.manager.query(`select
