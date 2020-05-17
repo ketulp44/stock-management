@@ -4,6 +4,7 @@ import { MatTableDataSource, MatSort, MatPaginator, MatTable, MatDialog } from '
 import { LoaderService } from 'src/app/common/service/loader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AddToProcessedComponent } from '../add-to-processed/add-to-processed.component';
+import { Router } from '@angular/router';
 
 export interface ProcessingStock{
   id:number,
@@ -43,7 +44,8 @@ export class ProcessingListComponent implements OnInit {
     private processingService:ProcessingService,
     public loaderService:LoaderService,
     private dialog: MatDialog,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
     ) {
 
   }
@@ -92,7 +94,11 @@ export class ProcessingListComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.getStockInProcessing();
+      if(result){
+        this.router.navigateByUrl('dashboard/currentstocks/processed');
+      }else{
+        this.getStockInProcessing();
+      }
     });
   }
 }

@@ -77,9 +77,13 @@ export class CurrentStockService {
   ];
 
   constructor(private http: HttpClient) { }
-  
+
   getUnprocessedStock(commodityId,subCommodityId){
     return this.http.get(`${BASE_URL}current-stock/unprocessed/all/${commodityId}/${subCommodityId}`);
+  }
+
+  getProcessedCurrentStock(commodityId,subCommodityId){
+    return this.http.post(`${BASE_URL}current-stock/processed/all`,{commodityId: commodityId,subCommodityId:subCommodityId});
   }
 
   saveToProcessingStock(details:any[]){

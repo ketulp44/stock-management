@@ -17,6 +17,11 @@ export class CurrentStockController {
         return await this.currentStockService.getUnprocessedStock(commodityId,SubCommodityId);
     }
 
+    @Post('processed/all')
+    public async findProcessedStock(@Body() details:any ){
+        return await this.currentStockService.getProcessedStock(details.commodityId,details.subCommodityId);
+    }
+
     @Post('addtoprocessing')
     public async addToProcessing(@Body() details:ProcessingStockDto []){
         return await this.currentStockService.addToProcessing(details);

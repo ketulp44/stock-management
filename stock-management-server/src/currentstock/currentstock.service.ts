@@ -6,6 +6,7 @@ import { StockInProcessingDetails } from './../entities/stock-in-processing-deta
 import { ProcessingStockDto } from 'src/dtos/processing-stock.dto';
 import { NotProcessedCurrentStockDetailsEntity } from './../entities/not-processed-stock-details.entity';
 import { async } from 'rxjs/internal/scheduler/async';
+import { SubCommodity } from 'src/entities/sub-commodity.entity';
 
 @Injectable()
 export class CurrentStockService {
@@ -56,6 +57,30 @@ export class CurrentStockService {
          left join unjhastockmanagement.suppliers s on s.s_id = ins.s_id
          where ins.c_id = ${commodityId} and ins.sc_id = ${SubCommodityId} ;`);
      }
+
+     public async getProcessedStock(commodityId,SubCommodityId){
+        let condition:String =' ';
+        if(commodityId || SubCommodityId){
+            condition = 'where ';
+            if(commodityId && SubCommodityId){
+                condition = `${condition}c.c_id = ${commodityId} and sc.sc_id = ${SubCommodityId}`;
+            }
+            else if(commodityId && !SubCommodityId){
+                condition = `${condition}c.c_id = ${commodityId}`
+            }
+        }
+
+        return await this.manager.query(`select
+        jsonb_build_object('id' , c.c_id ,'name',c.c_name ) as commodity,
+        jsonb_build_object('id',sc.sc_id ,'name',sc.sc_id ) as "subCommodity",
+        pcsd.quantity_type as quality,
+        pcsd.quantity as quantity,
+        pcsd.incoming_date_time as "incomingDateTime"
+        from unjhastockmanagement.processed_current_stock_details pcsd
+        left join unjhastockmanagement.commodity c on c.c_id = pcsd.c_id
+        left join unjhastockmanagement.sub_commodity sc on sc.sc_id = pcsd.sc_id ${condition};`);
+    }
+
      async addToProcessing(details:ProcessingStockDto []){
          try{
              details.forEach(async(detail)=>{

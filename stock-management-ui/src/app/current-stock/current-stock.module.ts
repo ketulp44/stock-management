@@ -9,10 +9,11 @@ import { InwardRoutingModule } from '../inward/inward-routing.module';
 import { MatSelectModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AddToProcessingPopupComponent } from './add-to-processing-popup/add-to-processing-popup.component';
+import { ProcessedCurrentStockListComponent } from './processed-current-stock-list/processed-current-stock-list.component';
 
 
 @NgModule({
-  declarations: [AddToProcessingFormComponent],
+  declarations: [AddToProcessingFormComponent, ProcessedCurrentStockListComponent],
   imports: [
     CommonModule,
     CurrentStockRoutingModule,
