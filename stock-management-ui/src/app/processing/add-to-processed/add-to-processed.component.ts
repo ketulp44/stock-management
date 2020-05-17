@@ -14,7 +14,7 @@ import { ProcessingService } from '../service/processing.service';
 })
 export class AddToProcessedComponent implements OnInit {
   detail:any={};
-  qualityTypes:any[] =[]; 
+  qualityTypes:any[] =[];
   qualityWiseWeights:any[]=[];
   selectedQuality : any = {};
   remainingWeight : number = 0;
@@ -28,7 +28,6 @@ export class AddToProcessedComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public details: any) { }
 
   ngOnInit() {
-    console.log(this.details.dataKey);
     if(this.details.dataKey){
       this.detail = this.details.dataKey;
       this.remainingWeight = this.detail.weight;
@@ -40,7 +39,7 @@ export class AddToProcessedComponent implements OnInit {
   }
   onClickSave(){
     this.detail.qualityWiseWeight = this.qualityWiseWeights;
-    let obj:any = {}; 
+    let obj:any = {};
     Object.assign(obj,this.detail);
     delete obj.supplierList;
     this.loaderService.showLoader();
@@ -50,13 +49,13 @@ export class AddToProcessedComponent implements OnInit {
     },
     (err)=>{
       console.log(err);
-      
+
       this.loaderService.hideLoader();
       this.toastr.error(err,'Error')
     });
-    
-    
-    
+
+
+
   }
   onClickAddQuality(){
     this.qualityWiseWeights.push(this.selectedQuality);
@@ -67,14 +66,14 @@ export class AddToProcessedComponent implements OnInit {
   }
   onClickRemoveQuality(quality){
     let index:number = this.findIndex(this.qualityWiseWeights,'qualityType',quality.qualityType);
-    
+
     if(index >= 0){
       this.addToRemainingWeight(this.qualityWiseWeights[index].weight);
       this.qualityWiseWeights.splice(index,1);
       this.setQualityTypes();
       this.calculatePerKgPrice();
     }
-    
+
   }
   findIndex(list:any[],field:string,val:any):number{
     return list.findIndex((value)=>{

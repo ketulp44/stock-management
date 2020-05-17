@@ -12,7 +12,7 @@ CREATE TABLE "suppliers" (
 
 DROP TABLE IF EXISTS "customers";
 CREATE TABLE "customers" (
-	"cu_id" SERIAL,	
+	"cu_id" SERIAL,
 	"cu_name" VARCHAR(200) NOT NULL,
 	"contact_number" VARCHAR(50) NULL DEFAULT NULL,
 	"is_active" SMALLINT NOT NULL DEFAULT 1,
@@ -121,15 +121,15 @@ CREATE TABLE "unprocessed_current_stock_details" (
 DELIMITER //
 DROP PROCEDURE IF EXISTS stock_consolidation;
 CREATE OR REPLACE PROCEDURE stock_consolidation()
-LANGUAGE plpgsql    
+LANGUAGE plpgsql
 AS $$
 BEGIN
-   
+
 TRUNCATE current_stocks;
 
 -- current stock entry unprocessed
-INSERT INTO current_stocks 
- ( 
+INSERT INTO current_stocks
+ (
   sc_id,
   c_id,
   process_type,
@@ -139,7 +139,7 @@ INSERT INTO current_stocks
   created_dt_time,
   updated_dt_time
 )
-SELECT 
+SELECT
 ins.sc_id,
 ins.c_id,
 ins.process_type,
@@ -148,18 +148,18 @@ SUM(ucsd.quantity) AS quantity_in_kg,
 1 AS is_active,
 CURRENT_TIMESTAMP,
 CURRENT_TIMESTAMP
-FROM 
-unprocessed_current_stock_details ucsd 
+FROM
+unprocessed_current_stock_details ucsd
 INNER JOIN inward_stocks ins ON ucsd.inward_stock_id = ins.ins_id
-GROUP BY 
+GROUP BY
 ins.sc_id,
 ins.c_id,
 ins.process_type;
 
 
 -- process current stock entry
-INSERT INTO current_stocks 
- ( 
+INSERT INTO current_stocks
+ (
   sc_id,
   c_id,
   process_type,
@@ -170,7 +170,7 @@ INSERT INTO current_stocks
   created_dt_time,
   updated_dt_time
 )
-SELECT 
+SELECT
 ins.sc_id,
 ins.c_id,
 ins.process_type,
@@ -180,10 +180,10 @@ ins.quantity_type,
 1 AS is_active,
 CURRENT_TIMESTAMP,
 CURRENT_TIMESTAMP
-FROM 
-processed_current_stock_details ucsd 
+FROM
+processed_current_stock_details ucsd
 INNER JOIN inward_stocks ins ON ucsd.inward_stock_id = ins.ins_id
-GROUP BY 
+GROUP BY
 ins.sc_id,
 ins.c_id,
 ins.process_type,
@@ -234,3 +234,9 @@ create table unjhastockmanagement."outward_stocks"
 "created_dt_time" TIMESTAMP DEFAULT current_timestamp,
 "updated_dt_time" TIMESTAMP DEFAULT current_timestamp,
 );
+
+alter table unjhastockmanagement.processed_current_stock_details
+add column c_id int ,
+add column sc_id int ;
+
+alter table unjhastockmanagement.processed_current_stock_details alter column inward_stock_id drop not null;

@@ -42,15 +42,11 @@ export class InwardStockListComponent implements OnInit {
     private toastr: ToastrService, private inwardStockService: InwardService,public loaderService:LoaderService) {
   }
   ngOnInit() {
-    console.log('init');
-    
     this.getInwardStocks();
   }
   getInwardStocks(){
-    console.log('get inward stocks');
     this.loaderService.showLoader();
     this.inwardStockService.getInwardStocks().subscribe((data:any)=>{
-      console.log(data);
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -80,11 +76,9 @@ export class InwardStockListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.getInwardStocks();
     });
-    
+
   }
   onClickRemoveStock(id){
-    console.log('remove', id);
-    
   }
-  
+
 }

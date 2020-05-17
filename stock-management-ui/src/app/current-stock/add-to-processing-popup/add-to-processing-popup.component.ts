@@ -20,7 +20,6 @@ export class AddToProcessingPopupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.stockDetail.dataKey);
     this.details = this.stockDetail.dataKey;
   }
 

@@ -34,12 +34,11 @@ export class ManageSupplierComponent implements OnInit {
   }
    fetchSuppliers() {
       this.SupplierService.getSuppliers().subscribe((data) => {
-      
+
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
       }, (err) => {
-        console.log(err);
         this.toastr.error(err, 'Error')
       });
     }
@@ -49,16 +48,16 @@ export class ManageSupplierComponent implements OnInit {
           width: '600px',
           data: {
             header: 'Delete Alert',
-            message: 'Are you sure want to delete Supplier?' 
+            message: 'Are you sure want to delete Supplier?'
           }
         });
         dialogRef.afterClosed().subscribe(result => {
           if(result.isConfirm == true){
             this.SupplierService.deleteSupplier(id).subscribe(()=>{
               this.fetchSuppliers();
-            });        
+            });
           }
-          
+
         });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -85,5 +84,5 @@ export class ManageSupplierComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
 }
