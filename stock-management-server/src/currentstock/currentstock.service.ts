@@ -86,7 +86,7 @@ export class CurrentStockService {
      }
 
      public async getProcessedStock(commodityId,SubCommodityId){
-        let condition:String =' ';
+        let condition:string =' ';
         if(commodityId || SubCommodityId){
             condition = 'where ';
             if(commodityId && SubCommodityId){
@@ -98,8 +98,9 @@ export class CurrentStockService {
         }
 
         return await this.manager.query(`select
+        pcsd.pcsd_id as id,
         jsonb_build_object('id' , c.c_id ,'name',c.c_name ) as commodity,
-        jsonb_build_object('id',sc.sc_id ,'name',sc.sc_id ) as "subCommodity",
+        jsonb_build_object('id',sc.sc_id ,'name',sc.sc_name ) as "subCommodity",
         pcsd.quantity_type as quality,
         pcsd.quantity as quantity,
         pcsd.incoming_date_time as "incomingDateTime"

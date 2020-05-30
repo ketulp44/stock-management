@@ -14,7 +14,7 @@ import { LoaderService } from 'src/app/common/service/loader.service';
 })
 export class InwardFormComponent implements OnInit {
 
-  suppliers: any[] = [{ id: 1, name: 'ketul' }, { id: 2, name: 'harsh' }, { id: 3, name: 'kadam' }, { id: 4, name: 'narendra' }, { id: 5, name: 'parth' }];
+  suppliers: any[] = [];
   selectedSupplier = { id: 1, name: 'ketul' };
   inwardStock: any = {};
   searchSupplier = '';
@@ -66,7 +66,10 @@ export class InwardFormComponent implements OnInit {
 
   }
   getSuppliers() {
-    this.filteredSuppliers = this.suppliers;
+    this.commonService.getSuppliers().subscribe((data)=>{
+      this.suppliers = data;
+      this.filteredSuppliers = this.suppliers;
+    });
   }
   getCommoidities() {
     this.commonService.getCommodities().subscribe((data) => {
