@@ -240,3 +240,12 @@ add column c_id int ,
 add column sc_id int ;
 
 alter table unjhastockmanagement.processed_current_stock_details alter column inward_stock_id drop not null;
+
+DROP TABLE IF EXISTS unjhastockmanagement."dust_details";
+create table unjhastockmanagement."dust_details"
+(
+"id" SERIAL,
+c_id int,
+weight int,
+incomming_date timestamp default current_timestamp
+);

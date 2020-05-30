@@ -9,18 +9,18 @@
         <form>
             <div class="form-row">
                 <div class="col">
-                    <label class="form-control-label">Supplier : </label>
+                    <label class="form-control-label">Customer : </label>
                     <mat-form-field class="cstm-form-ctrl">
-                        <mat-select [(ngModel)]="inwardStock.SupplierId" name="selectedSupplier" placeholder="Supplier"
+                        <mat-select [(ngModel)]="soldStock.customerId" name="selectedSupplier" placeholder="Customer"
                             #singleSelect>
                             <mat-option>
-                                <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchSupplier"
+                                <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchCustomer"
                                     (ngModelChange)="applyFilter($event)" name="supplierFilter">
                                 </ngx-mat-select-search>
                             </mat-option>
 
-                            <mat-option *ngFor="let supplier of filteredSuppliers" [value]="supplier.SupplierID">
-                                {{supplier.SupplierName}}
+                            <mat-option *ngFor="let customer of fileterCustomers" [value]="customer.CustomerID">
+                                {{customer.CustomerName}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -28,7 +28,7 @@
                 <div class="col">
                     <label class="form-control-label">Commodity : </label>
                     <mat-form-field class="cstm-form-ctrl">
-                        <mat-select [(ngModel)]="inwardStock.CommodityId" name="selectedCommodity"
+                        <mat-select [(ngModel)]="soldStock.CommodityId" name="selectedCommodity"
                             (ngModelChange)="onChangeCommodity($event)" placeholder="Commodity" #singleSelect>
                             <mat-option>
                                 <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchCommodity"
@@ -43,10 +43,10 @@
                     </mat-form-field>
                 </div>
                 <div class="col">
-                    <div *ngIf="inwardStock.CommodityId" class="form-row">
+                    <div *ngIf="soldStock.CommodityId" class="form-row">
                         <label class="form-control-label">SubCommodity : </label>
                         <mat-form-field class="cstm-form-ctrl">
-                            <mat-select [(ngModel)]="inwardStock.SubCommodityId" name="selectedSubCommodity"
+                            <mat-select [(ngModel)]="soldStock.SubCommodityId" name="selectedSubCommodity"
                                 placeholder="SubCommodity" #singleSelect>
                                 <mat-option>
                                     <ngx-mat-select-search placeholderLabel="search" [(ngModel)]="searchSubCommodity"
@@ -67,7 +67,7 @@
                 <div class="col">
                     <label class="form-control-label">Stock Type : </label>
                     <mat-form-field class="cstm-form-ctrl">
-                        <mat-select [(ngModel)]="inwardStock.ProcessType" name="selectedInputStockType"
+                        <mat-select [(ngModel)]="soldStock.ProcessType" name="selectedInputStockType"
                             placeholder="Input Stock Type" #singleSelect>
                             <mat-option *ngFor="let stockType of intputStockTypes" [value]="stockType.value">
                                 {{stockType.name}}
@@ -76,9 +76,9 @@
                     </mat-form-field>
                 </div>
                 <div class="col">
-                    <label class="form-control-label" *ngIf="inwardStock.ProcessType=='PROCESSED'">Quality Type : </label>
-                    <mat-form-field *ngIf="inwardStock.ProcessType=='PROCESSED'" class="cstm-form-ctrl">
-                        <mat-select [(ngModel)]="inwardStock.QualityType" name="selectedQualityType"
+                    <label class="form-control-label" *ngIf="soldStock.ProcessType=='PROCESSED'">Quality Type : </label>
+                    <mat-form-field *ngIf="soldStock.ProcessType=='PROCESSED'" class="cstm-form-ctrl">
+                        <mat-select [(ngModel)]="soldStock.QualityType" name="selectedQualityType"
                             placeholder="Quality Type" #singleSelect>
                             <mat-option *ngFor="let qualityType of qualityTypes" [value]="qualityType.value">
                                 {{qualityType.name}}
@@ -91,7 +91,7 @@
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label>Package Size</mat-label>
                         <input type="number" matInput placeholder="Package Size" name="packageSize"
-                            [(ngModel)]="inwardStock.PackageSize" value="10">
+                            [(ngModel)]="soldStock.PackageSize" value="10">
                     </mat-form-field>
                 </div>
             </div>
@@ -100,9 +100,8 @@
                     <label class="form-control-label"> Unit : </label>
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label>Package Unit</mat-label>
-                        <!-- <input type="number" matInput placeholder="Package Unit" name="packageUnit"
-                            [(ngModel)]="inwardStock.PackageUnit" value="10"> -->
-                        <mat-select [(ngModel)]="inwardStock.PackageUnit" name="packageUnit"
+
+                        <mat-select [(ngModel)]="soldStock.PackageUnit" name="packageUnit"
                             placeholder="Package Unit" #singleSelect>
                             <mat-option *ngFor="let unit of Units" [value]="unit">
                                 {{unit}}
@@ -115,7 +114,7 @@
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label>No Of Bags</mat-label>
                         <input type="number" matInput placeholder="No Of Bags" name="noOfBags"
-                            [(ngModel)]="inwardStock.NoOfBags" value="10">
+                            [(ngModel)]="soldStock.NoOfBags" value="10">
                     </mat-form-field>
                 </div>
                 <div class="col"></div>
@@ -126,7 +125,7 @@
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label>Stock Location</mat-label>
                         <input type="text" matInput placeholder="Stock Location" name="stockLocation"
-                            [(ngModel)]="inwardStock.StockLocation" value="10">
+                            [(ngModel)]="soldStock.StockLocation" value="10">
                     </mat-form-field>
                 </div>
                 <div class="col">
@@ -134,7 +133,7 @@
                     <mat-form-field class="cstm-form-ctrl">
                         <mat-label>Price</mat-label>
                         <input type="number" matInput placeholder="Price" name="price"
-                            [(ngModel)]="inwardStock.StockPrice" value="10">
+                            [(ngModel)]="soldStock.StockPrice" value="10">
                     </mat-form-field>
                 </div>
                 <div class="col">
@@ -142,16 +141,13 @@
                     <mat-form-field class="form-control-label">
                         <mat-label>Incoming Date</mat-label>
                         <input matInput [matDatepicker]="picker" name="incommingDate" matInput [max]="maxDate"
-                            [(ngModel)]="inwardStock.IncomingDate">
+                            [(ngModel)]="soldStock.IncomingDate">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                 </div>
             </div>
-            <!-- <div class="d-flex pull-right">
-                <button mat-raised-button color="primary" class="mx-2" (click)="onClickSave()">save</button>
-                <button mat-raised-button color="primary" class="mx-2" (click)="onCilckCancel()">cancel</button>
-            </div> -->
+
         </form>
     </div>
     <div class="modal-footer">

@@ -82,16 +82,17 @@
                 <td mat-cell *matCellDef="let row"> {{row.incomingDateTime | date: 'dd-MM-yyyy'}} </td>
             </ng-container>
             <ng-container matColumnDef="color">
-                <th mat-header-cell *matHeaderCellDef class="text-center"> Actions </th>
+                <th mat-header-cell *matHeaderCellDef class="text-center action-cell"> Actions </th>
                 <td mat-cell *matCellDef="let row" class="text-center">
-                    <button mat-icon-button matTooltip="Edit" (click)="onClickAddStock(row.InwardStockId)"
+                    <!-- <button mat-icon-button matTooltip="Edit" (click)="onClickAddStock(row.InwardStockId)"
                         [disabled]="row.IsEditable==1">
                         <em class="material-icons">edit</em>
                     </button>
                     <button mat-icon-button matTooltip="Edit" (click)="onClickRemoveStock(row.InwardStockId)"
                         [disabled]="row.IsEditable==1">
                         <em class="material-icons">delete</em>
-                    </button>
+                    </button> -->
+                    <button mat-raised-button color="primary" class="ml-auto mr-2" (click)="onClickSell(row.id)">sell</button>
                 </td>
             </ng-container>
 

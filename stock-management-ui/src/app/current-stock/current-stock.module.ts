@@ -11,6 +11,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AddToProcessingPopupComponent } from './add-to-processing-popup/add-to-processing-popup.component';
 import { ProcessedCurrentStockListComponent } from './processed-current-stock-list/processed-current-stock-list.component';
 import { CurrentStockListComponent } from './current-stock-list/current-stock-list.component';
+import { SellFormComponent } from './sell-form/sell-form.component';
 
 
 @NgModule({

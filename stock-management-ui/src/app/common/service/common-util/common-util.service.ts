@@ -26,4 +26,10 @@ export class CommonUtilService {
   getQualityTypes(): Observable<any[]>{
     return of(QUALITY_TYPES);
   }
+  getCustomers():Observable<any []>{
+    return this.http.get<any []>(`${BASE_URL}customer/all`);
+  }
+  getSuppliers(): Observable<any[]> {
+    return this.http.get<any[]>(`${BASE_URL}suppliers/all`);
+ }
 }

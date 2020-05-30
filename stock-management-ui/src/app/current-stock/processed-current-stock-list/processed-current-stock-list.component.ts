@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CurrentStockService } from '../service/current-stock.service';
 import { Timestamp } from 'rxjs';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/common/service/loader.service';
 import { CommonUtilService } from 'src/app/common/service/common-util/common-util.service';
+import { SellFormComponent } from '../sell-form/sell-form.component';
 export interface CuurentProcessedStock {
   commodity: { id: number; name: string };
   subCommodity: { id: number; name: string };
@@ -37,7 +38,8 @@ export class ProcessedCurrentStockListComponent implements OnInit {
     private commonService: CommonUtilService,
     private currentStockService: CurrentStockService,
     private toastr: ToastrService,
-    public loaderService:LoaderService
+    public loaderService:LoaderService,
+    private dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -84,5 +86,19 @@ export class ProcessedCurrentStockListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  onClickSell(id?){
+    let dialogRef = this.dialog.open(SellFormComponent, {
+      height: 'auto',
+      width: '80%',
+      maxHeight:'80%',
+      data: {
+        dataKey: id
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getCurrentStock();
+    });
+
   }
 }

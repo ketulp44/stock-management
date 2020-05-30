@@ -40,14 +40,22 @@ export class ProcessingService {
     async MarkAsProcessed(details:MarkAsProcessedDto){
         try{
             details.qualityWiseWeight.forEach(async(quality)=>{
-                let  pcs:ProcessedCurrentStockDetailsEntity = new ProcessedCurrentStockDetailsEntity();
-                pcs.IncomingDateTime = new Date();
-                pcs.CreatedDateTime = new Date();
-                pcs.UpdateDateTime = new Date();
-                pcs.QuantityInKg = quality.weight;
-                pcs.QualityType = quality.qualityType;
-                pcs.commodity = details.commodity.id;
-                pcs.subCommodity = details.subCommodity.id;
+                let pcs: ProcessedCurrentStockDetailsEntity =await this.processedStockRepo.findOne({where:{commodity:details.commodity.id,subCommodity:details.subCommodity.id,QualityType:quality.qualityType}});
+                if(!pcs){
+                    pcs = new ProcessedCurrentStockDetailsEntity();
+                    pcs.IncomingDateTime = new Date();
+                    pcs.CreatedDateTime = new Date();
+                    pcs.UpdateDateTime = new Date();
+                    pcs.QuantityInKg = quality.weight;
+                    pcs.QualityType = quality.qualityType;
+                    pcs.commodity = details.commodity.id;
+                    pcs.subCommodity = details.subCommodity.id;
+                }
+                else{
+                    pcs.UpdateDateTime = new Date();
+                    pcs.QuantityInKg += quality.weight;
+                }
+
                 await this.processedStockRepo.save(pcs);
             })
             this.inProcessingRepo.update(details.processingIds,{isActive: 0});
