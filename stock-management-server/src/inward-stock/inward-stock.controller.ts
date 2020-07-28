@@ -1,6 +1,7 @@
 import { InwardStock } from './../entities/inward-stock.entity';
 import { InwardStockService } from './inward-stock.service';
 import { Controller, Body, Param, Get, Post } from '@nestjs/common';
+import { Transaction } from 'typeorm';
 
 @Controller('inward-stock')
 export class InwardStockController {

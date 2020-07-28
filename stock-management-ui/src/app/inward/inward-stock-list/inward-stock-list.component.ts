@@ -34,7 +34,7 @@ export interface InwardStock {
 })
 export class InwardStockListComponent implements OnInit {
   displayProgressSpinner: boolean = false;
-  displayedColumns: string[] = ['id', 'CommodityName', 'SubCommodityName','ProcessType','QualityType','StockLocation','StockPrice','IncomingDate', 'color'];
+  displayedColumns: string[] = ['id', 'CommodityName', 'SubCommodityName','ProcessType','QualityType','NoOfBags','PackageSize','Unit','StockLocation','StockPrice','IncomingDate', 'color'];
   dataSource: MatTableDataSource<InwardStock>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -65,6 +65,8 @@ export class InwardStockListComponent implements OnInit {
     }
   }
   onClickAddStock(id?){
+    console.log(id);
+
     let dialogRef = this.dialog.open(InwardFormComponent, {
       height: 'auto',
       width: '80%',

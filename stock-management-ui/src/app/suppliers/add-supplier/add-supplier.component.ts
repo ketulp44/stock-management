@@ -22,7 +22,7 @@ export class AddSupplierComponent implements OnInit {
    ) { }
 
   ngOnInit() {
-  
+
     if(this.supplierId.dataKey) {
       this.customerService.getSupplier(this.supplierId.dataKey).subscribe((data) => {
       this.supplier = data;
@@ -40,7 +40,7 @@ export class AddSupplierComponent implements OnInit {
       this.toastr.success('Supplier added sucessfully', 'Success');
     }, (error) => {
       this.hideLoader();
-      this.toastr.error(error,'Error')
+      this.toastr.error(error.error.error,'Error')
     })
   }
   closeDialog() {

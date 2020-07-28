@@ -1,5 +1,5 @@
 import { InwardService } from './../service/inward.service';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { SearchPipe } from 'src/app/common/pipes/search.pipe';
 import { CommonUtilService } from 'src/app/common/service/common-util/common-util.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -31,6 +31,7 @@ export class InwardFormComponent implements OnInit {
   qualityTypes: any[] = [];
   Units = ['kg', 'gram', 'quintal', 'ton'];
   maxDate: Date;
+  title:string='';
   constructor(
     private searchPipe: SearchPipe,
     private commonService: CommonUtilService,
@@ -38,12 +39,17 @@ export class InwardFormComponent implements OnInit {
     public dialogRef: MatDialogRef<InwardFormComponent>,
     private toastr: ToastrService,
     public loaderService: LoaderService,
+    private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public inwardStockId: any
   ) { }
 
   ngOnInit() {
     if (this.inwardStockId.dataKey) {
+      this.title = 'Update Inward Stock';
       this.getStockDetail(this.inwardStockId.dataKey);
+    }
+    else{
+      this.title = 'Add Inward Stock';
     }
     this.getSuppliers();
     this.getCommoidities();
@@ -53,8 +59,9 @@ export class InwardFormComponent implements OnInit {
   }
   getStockDetail(id) {
     this.loaderService.showLoader();
-    this.inwardStockService.getInwardStockById(id).subscribe((data) => {
+    this.inwardStockService.getInwardStockById(id).subscribe((data:any) => {
       this.inwardStock = data;
+      this.getSubCommodities(data.CommodityId);
       this.loaderService.hideLoader();
     }, (err) => {
       this.loaderService.hideLoader();
@@ -81,6 +88,10 @@ export class InwardFormComponent implements OnInit {
     this.commonService.getSubCommodities(id).subscribe((data) => {
       this.subCommodities = data;
       this.filteredSubCommodities = this.subCommodities;
+      console.log(this.inwardStock.SubCommodityId);
+
+      this.cd.detectChanges();
+
     });
   }
   getInputStockStates() {

@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from 'util';
 import { Suppliers } from './../entities/suppliers.entity';
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SupplierDTO } from '../dtos/supplier.dto';
@@ -32,11 +32,19 @@ export class SuppliersService {
     }
 
     public async createNewSupplier(supplier: Suppliers) {
+        let suppliers:Suppliers [] = await this.SupplierRepository.find({where: {SupplierName: supplier.SupplierName}});
+        if(suppliers && suppliers.length > 0){
+            throw new HttpException('Name already exist', HttpStatus.NOT_ACCEPTABLE);
+        }
         return await this.SupplierRepository.insert(supplier);
     }
 
     public async UpdateSupplier(supplier: Suppliers) {
+        let suppliers:Suppliers [] = await this.SupplierRepository.find({where: {SupplierName: supplier.SupplierName}});
         supplier.UpdateDateTime = new Date();
+        if(suppliers && suppliers.length>0){
+            throw new HttpException('Name already exist', HttpStatus.NOT_ACCEPTABLE);
+        }
         return await this.SupplierRepository.update(supplier.SupplierID, supplier);
     }
 

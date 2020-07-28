@@ -43,6 +43,18 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock Location </th>
                 <td mat-cell *matCellDef="let row"> {{row.StockLocation}} </td>
             </ng-container>
+            <ng-container matColumnDef="NoOfBags">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> No Of Bags </th>
+                <td mat-cell *matCellDef="let row"> {{row.NoOfBags}} </td>
+            </ng-container>
+            <ng-container matColumnDef="PackageSize">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Package Size </th>
+                <td mat-cell *matCellDef="let row"> {{row.PackageSize}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Unit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+                <td mat-cell *matCellDef="let row"> {{row.PackageUnit}} </td>
+            </ng-container>
             <ng-container matColumnDef="StockPrice">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock Price</th>
                 <td mat-cell *matCellDef="let row"> {{row.StockPrice}} </td>

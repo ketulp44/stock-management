@@ -10,7 +10,8 @@ import { Commodity } from './../entities/commodity.entity';
 import { InwardStock } from './../entities/inward-stock.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Transaction, getConnection } from 'typeorm';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Injectable()
 export class InwardStockService {
@@ -41,18 +42,23 @@ export class InwardStockService {
 
     public async Save(inwardStock: InwardStock) {
         try {
-            let result;
-            if (Number(inwardStock.InwardStockId) > 0) {
-                result = await this.UpdateInwardStock(inwardStock);
+            getConnection().transaction(async()=>{
+                let result;
+                if (Number(inwardStock.InwardStockId) > 0) {
+                    result = await this.UpdateInwardStock(inwardStock);
 
-            } else {
-                result = await this.createNewInwardStock(inwardStock);
-            }
+                } else {
+                    result = await this.createNewInwardStock(inwardStock);
+                }
 
-            await this.currentStockService.CurrentStockEntry();
+                await this.currentStockService.CurrentStockEntry();
 
-            return result;
+                return result;
+            });
+
+
         } catch (err) {
+
             throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -71,6 +77,8 @@ export class InwardStockService {
     }
 
     public async UpdateInwardStock(inwardStock: InwardStock) {
+        console.log(inwardStock);
+
         inwardStock.UpdateDateTime = new Date();
         const result = await this.InwardStockRepository.update(inwardStock.InwardStockId, inwardStock);
         if (inwardStock.ProcessType.toLowerCase() == ProcessType.processed) {
